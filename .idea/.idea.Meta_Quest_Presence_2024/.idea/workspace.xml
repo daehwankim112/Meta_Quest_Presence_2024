@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="493b1bbe-7997-46c7-8459-0557eeb3670e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneration.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneratorDebug.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneratorDebug.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Meta_Quest_Presence_2024/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Testing_Cai.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Testing_Cai.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MeshGeneration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MeshGeneratorDebug.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MeshGeneratorDebug.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714024471616</updated>
-      <workItem from="1714024479543" duration="3235000" />
+      <workItem from="1714024479543" duration="6754000" />
     </task>
     <servers />
   </component>

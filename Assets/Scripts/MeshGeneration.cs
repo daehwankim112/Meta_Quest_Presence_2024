@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class MeshGeneration
 {
-    public static void CreateTriangle()
+    public static void CreateTriangle(Material material)
     {
-        (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Triangle");
+        (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Triangle", material);
 
         // generate vertices
         Vector3[] vertices = new [] {
@@ -47,16 +45,16 @@ public static class MeshGeneration
         meshFilter.mesh = mesh;
     }
 
-    public static void CreateQuad(Vector3 topLeft, Vector3 topRight, Vector3 botLeft, Vector3 botRight)
+    public static void CreateQuad(QuadFace quadFace, Material material)
     {
-        (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Quad");
+        (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Quad", material);
         
         Vector3[] vertices = new [] {
             // creating vertices of quad. aligning them in shape of square
-            topLeft,
-            topRight,
-            botLeft,
-            botRight
+            quadFace.topLeft,
+            quadFace.topRight,
+            quadFace.botLeft,
+            quadFace.botRight
         };
         mesh.vertices = vertices;
         
@@ -93,18 +91,85 @@ public static class MeshGeneration
         meshFilter.mesh = mesh;
     }
 
-    public static void CreateCube(Vector3 position, Vector3 extents, Vector3 size)
+    public static void CreateCube(Vector3 position, Vector3 extents, Quaternion rotation, Material material)
     {
-        (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Quad");
+        QuadFace topFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(extents.x, extents.y, extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, -extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(extents.x, extents.y, -extents.z), position, rotation));
+        
+        QuadFace botFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(extents.x, -extents.y, extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, -extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(extents.x, -extents.y, -extents.z), position, rotation));
+        
+        QuadFace leftFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(-extents.x, extents.y, -extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(-extents.x, -extents.y, -extents.z), position, rotation));
+        
+        QuadFace rightFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(extents.x, extents.y, extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(extents.x, extents.y, -extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(extents.x, -extents.y, extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(extents.x, -extents.y, -extents.z), position, rotation));
+        
+        QuadFace frontFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(extents.x, extents.y, extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(extents.x, -extents.y, extents.z), position, rotation));
+        
+        QuadFace backFace = new QuadFace(
+            topLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, -extents.z), position, rotation),
+            topRight: PivotVector3(position + new Vector3(extents.x, extents.y, -extents.z), position, rotation),
+            botLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, -extents.z), position, rotation),
+            botRight: PivotVector3(position + new Vector3(extents.x, -extents.y, -extents.z), position, rotation));
+        
+        CreateQuad(topFace, material);
+        CreateQuad(botFace, material);
+        CreateQuad(leftFace, material);
+        CreateQuad(rightFace, material);
+        CreateQuad(frontFace, material);
+        CreateQuad(backFace, material);
     }
 
-    static (Mesh mesh, MeshFilter meshFilter) CreateMesh(string name)
+    static (Mesh mesh, MeshFilter meshFilter) CreateMesh(string name, Material material)
     {
         Mesh mesh = new Mesh();
         GameObject obj = new GameObject(name);
-        obj.AddComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
         MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
+        
+        meshRenderer.material = material;
 
         return (mesh, meshFilter);
+    }
+
+    public struct QuadFace
+    {
+        public Vector3 topLeft;
+        public Vector3 topRight;
+        public Vector3 botLeft;
+        public Vector3 botRight;
+
+        public QuadFace(Vector3 topLeft, Vector3 topRight, Vector3 botLeft, Vector3 botRight)
+        {
+            this.topLeft = topLeft;
+            this.topRight = topRight;
+            this.botLeft = botLeft;
+            this.botRight = botRight;
+        }
+    }
+    
+    static Vector3 PivotVector3(Vector3 point, Vector3 pivot, Quaternion rotation) 
+    {
+        Vector3 dir = point - pivot;
+        dir = Quaternion.Euler(rotation.eulerAngles) * dir;
+        point = dir + pivot;
+        return point;
     }
 }
