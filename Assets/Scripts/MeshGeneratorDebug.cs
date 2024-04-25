@@ -11,7 +11,12 @@ public class MeshGeneratorDebug : MonoBehaviour
     [SerializeField] Transform quadBotRight;
 
     [SerializeField] BoxCollider cube;
-    
+
+    void Start()
+    {
+        CreateCube();
+    }
+
     [MethodButton("Create Triangle", true)]
     void CreateTriangle()
     {

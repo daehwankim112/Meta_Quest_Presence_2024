@@ -45,9 +45,10 @@ public static class MeshGeneration
         meshFilter.mesh = mesh;
     }
 
-    public static void CreateQuad(QuadFace quadFace, Material material)
+    public static GameObject CreateQuad(QuadFace quadFace, Material material, bool addCollder = true)
     {
         (Mesh mesh, MeshFilter meshFilter) = CreateMesh("Quad", material);
+        GameObject obj = meshFilter.gameObject;
         
         Vector3[] vertices = new [] {
             // creating vertices of quad. aligning them in shape of square
@@ -89,9 +90,16 @@ public static class MeshGeneration
         mesh.triangles = triangles;
         
         meshFilter.mesh = mesh;
+
+        if (addCollder)
+        {
+            MeshCollider meshCollider = obj.AddComponent<MeshCollider>();
+        }
+
+        return obj;
     }
 
-    public static void CreateCube(Vector3 position, Vector3 extents, Quaternion rotation, Material material)
+    public static GameObject CreateCube(Vector3 position, Vector3 extents, Quaternion rotation, Material material)
     {
         QuadFace topFace = new QuadFace(
             topLeft: PivotVector3(position + new Vector3(-extents.x, extents.y, extents.z), position, rotation),
@@ -128,13 +136,18 @@ public static class MeshGeneration
             topRight: PivotVector3(position + new Vector3(extents.x, extents.y, -extents.z), position, rotation),
             botLeft: PivotVector3(position + new Vector3(-extents.x, -extents.y, -extents.z), position, rotation),
             botRight: PivotVector3(position + new Vector3(extents.x, -extents.y, -extents.z), position, rotation));
-        
-        CreateQuad(topFace, material);
-        CreateQuad(botFace, material);
-        CreateQuad(leftFace, material);
-        CreateQuad(rightFace, material);
-        CreateQuad(frontFace, material);
-        CreateQuad(backFace, material);
+
+        Transform cube = new GameObject("Cube").transform;
+        cube.position = position;
+        cube.rotation = rotation;
+        CreateQuad(topFace, material).transform.SetParent(cube);
+        CreateQuad(botFace, material).transform.SetParent(cube);
+        CreateQuad(leftFace, material).transform.SetParent(cube);
+        CreateQuad(rightFace, material).transform.SetParent(cube);
+        CreateQuad(frontFace, material).transform.SetParent(cube);
+        CreateQuad(backFace, material).transform.SetParent(cube);
+
+        return cube.gameObject;
     }
 
     static (Mesh mesh, MeshFilter meshFilter) CreateMesh(string name, Material material)
