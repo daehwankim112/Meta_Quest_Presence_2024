@@ -9,6 +9,13 @@ Library: C:\Unity\GitHub-Repos\Meta_Quest_Presence_2024\Temp\BurstOutput\tempbur
 --float-precision=Standard
 --target-framework=NetFramework
 --float-mode=Fast
+--assembly-defines=Assembly-CSharp;
+--assembly-defines=com.nuin.scriptableharmony;
+--assembly-defines=Meta.VoiceSDK.Mic.Common;
+--assembly-defines=Meta.VoiceSDK.Mic.Other;
+--assembly-defines=Meta.WitAi.Conduit;
+--assembly-defines=Meta.WitAi;
+--assembly-defines=Meta.WitAi.Lib;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
@@ -55,6 +62,13 @@ Library: C:\Unity\GitHub-Repos\Meta_Quest_Presence_2024\Temp\BurstOutput\tempbur
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
+--assembly-defines=Assembly-CSharp;
+--assembly-defines=com.nuin.scriptableharmony;
+--assembly-defines=Meta.VoiceSDK.Mic.Common;
+--assembly-defines=Meta.VoiceSDK.Mic.Other;
+--assembly-defines=Meta.WitAi.Conduit;
+--assembly-defines=Meta.WitAi;
+--assembly-defines=Meta.WitAi.Lib;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
