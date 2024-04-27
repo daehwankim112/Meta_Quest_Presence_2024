@@ -51,6 +51,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FoamAmount: 3.9
+    - _FoamCutoff: 6.46
+    - _FoamScale: 384.92
+    - _FoamSpeed: 0.001
     - _HeightFactor: 0.15
     - _HeightOffset: -0.4
     - _QueueControl: 0
@@ -59,5 +63,6 @@ Material:
     - _TideSpeed: 0.001
     - _WaveSize: 48.37
     m_Colors:
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _SurfaceColor: {r: 0.004763192, g: 0.7244353, b: 0.8415094, a: 0.60784316}
   m_BuildTextureStacks: []
