@@ -10521,7 +10521,7 @@ MonoBehaviour:
   _cameraRigRef: {fileID: 717253324}
   _processLateUpdates: 0
   _handedness: 1
-  _ovrHand: {fileID: 0}
+  _ovrHand: {fileID: 1086312617}
   _trackingToWorldTransformer: {fileID: 717253323}
   _handSkeletonProvider: {fileID: 3423398}
 --- !u!4 &1242396420
@@ -13500,7 +13500,7 @@ MonoBehaviour:
   _cameraRigRef: {fileID: 717253324}
   _processLateUpdates: 0
   _handedness: 0
-  _ovrHand: {fileID: 0}
+  _ovrHand: {fileID: 1253301570}
   _trackingToWorldTransformer: {fileID: 717253323}
   _handSkeletonProvider: {fileID: 3423398}
 --- !u!4 &1657401826
