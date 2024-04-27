@@ -12,6 +12,7 @@ public class NetworkConnect : MonoBehaviour
     private string joinCode;
     public TMPro.TMP_InputField joinCodeInputTextMeshPro;
     public TMPro.TextMeshProUGUI roomCodeTextMeshProUGUI;
+    public TMPro.TextMeshProUGUI DebugConsole;
 
     public int maxConnections = 20;
     public UnityTransport transport;
@@ -22,6 +23,7 @@ public class NetworkConnect : MonoBehaviour
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In" + AuthenticationService.Instance.PlayerId);
+            DebugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
@@ -31,13 +33,15 @@ public class NetworkConnect : MonoBehaviour
         try
         {
             Debug.Log("Host - Creating an allocation.");
+            DebugConsole.text += "Host - Creating an allocation.";
 
             // Once the allocation is created, you have ten seconds to BIND
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
             // newJoinCode will be used to join the relay server
-            string newJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            roomCodeTextMeshProUGUI.text = newJoinCode;
-            Debug.Log("newJoinCode" + newJoinCode);
+            joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            roomCodeTextMeshProUGUI.text = joinCode;
+            Debug.Log("newJoinCode" + joinCode);
+            DebugConsole.text += "newJoinCode" + joinCode;
             transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
 
             NetworkManager.Singleton.StartHost();
@@ -45,6 +49,7 @@ public class NetworkConnect : MonoBehaviour
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
+            DebugConsole.text += e.Message;
         }
     }
 
@@ -52,20 +57,28 @@ public class NetworkConnect : MonoBehaviour
     {
         try
         {
-            Debug.Log("Joining Relay with " + joinCode);
-            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(joinCode); 
+            Debug.Log("Joining Relay with " + joinCodeInputTextMeshPro.text);
+            DebugConsole.text += "Joining Relay with " + joinCodeInputTextMeshPro.text;
+            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(joinCodeInputTextMeshPro.text); 
             transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
 
             NetworkManager.Singleton.StartClient();
+
+            if (NetworkManager.Singleton.IsClient)
+            {
+                Debug.Log("Client - Connected to the server.");
+                DebugConsole.text += "Client - Connected to the server.";
+            }
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
+            DebugConsole.text += e.Message;
         }
     }
 
     public void ClientInput()
     {
-        joinCode = joinCodeInputTextMeshPro.text;
+        // joinCode = joinCodeInputTextMeshPro.text;
     }
 }
