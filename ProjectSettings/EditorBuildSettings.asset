@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing_Cai.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 1ce72d4b84599914f985a588811e5b9d
+  - enabled: 0
+    path: Assets/Scenes/Netcode_David_.unity
+    guid: a2e90fe713b44424aa25afedba6afb73
+  - enabled: 1
+    path: Assets/Scenes/Netcode_David.unity
+    guid: 35257de2278216c49a7e88a40ec98f58
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d1dc5f610c5ceaf46bf1d0da555d3cae,
       type: 2}
