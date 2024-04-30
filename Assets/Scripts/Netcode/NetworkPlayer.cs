@@ -1,11 +1,13 @@
 // David Kim 2024/4/26
-// Description: 
+// Description: Use Netcode to synchronize the player's head, hands, and root. This script is attached to the player's prefab.
 // Following the tutorial from https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+
+[HelpURL("https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw")]
 
 public class NetworkPlayer : NetworkBehaviour
 {

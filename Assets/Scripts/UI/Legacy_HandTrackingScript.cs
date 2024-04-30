@@ -7,6 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[HelpURL("https://developer.oculus.com/documentation/unity/unity-tutorial-basic-hand-tracking/")]
+
 public class Legacy_HandTrackingScript : MonoBehaviour
 {
     public Camera sceneCamera;

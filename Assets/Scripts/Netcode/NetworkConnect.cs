@@ -1,3 +1,7 @@
+// David Kim 2024/4/27
+// Description: Use Relay and Netcode to create a networked VR experience. This script is used to connect to the network and create or join a room. This script is used to connect to the network and create or join a room.
+// Following the tutorial from https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz and https://youtu.be/sPKS3vjwvpU?si=4zhDWuL8SApYPniC
+
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -6,6 +10,8 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using TMPro;
+
+[HelpURL("https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz")]
 
 public class NetworkConnect : MonoBehaviour
 {

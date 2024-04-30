@@ -1,5 +1,5 @@
 // David Kim 2024/4/26
-// Description: 
+// Description: This script disable the server authoritative for the client.
 // Following the tutorial from https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw
 
 using System.Collections;
