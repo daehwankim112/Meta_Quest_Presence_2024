@@ -10,18 +10,23 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using TMPro;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using System.Collections.Generic;
 
 [HelpURL("https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz")]
 
 public class NetworkConnect : MonoBehaviour
 {
     private string joinCode;
-    public TMPro.TMP_InputField joinCodeInputTextMeshPro;
-    public TMPro.TextMeshProUGUI roomCodeTextMeshProUGUI;
+    // public TMPro.TMP_InputField joinCodeInputTextMeshPro;
+    // public TMPro.TextMeshProUGUI roomCodeTextMeshProUGUI;
     public TMPro.TextMeshProUGUI DebugConsole;
 
     public int maxConnections = 20;
     public UnityTransport transport;
+
+    private Lobby currentLobbby;
 
     private async void Awake()
     {
@@ -43,12 +48,24 @@ public class NetworkConnect : MonoBehaviour
 
             // Once the allocation is created, you have ten seconds to BIND
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+
             // newJoinCode will be used to join the relay server
             joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            roomCodeTextMeshProUGUI.text = joinCode;
+            // roomCodeTextMeshProUGUI.text = joinCode;
             Debug.Log("newJoinCode" + joinCode);
             DebugConsole.text += "newJoinCode" + joinCode;
             transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
+
+            // Create a lobby
+            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
+            lobbyOptions.IsPrivate = false;
+            lobbyOptions.Data = new Dictionary<string, DataObject>();
+            DataObject dataObject = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
+            lobbyOptions.Data.Add("joinCode", dataObject);
+
+            currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", maxConnections);
+
+
 
             NetworkManager.Singleton.StartHost();
         }
@@ -63,9 +80,14 @@ public class NetworkConnect : MonoBehaviour
     {
         try
         {
-            Debug.Log("Joining Relay with " + joinCodeInputTextMeshPro.text);
-            DebugConsole.text += "Joining Relay with " + joinCodeInputTextMeshPro.text;
-            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(joinCodeInputTextMeshPro.text); 
+            // Join a lobby
+            currentLobbby = await Lobbies.Instance.QuickJoinLobbyAsync();
+            string relayJoinCode = currentLobbby.Data["joinCode"].Value;
+
+
+            Debug.Log("Joining Relay with " + relayJoinCode);
+            DebugConsole.text += "Joining Relay with " + relayJoinCode;
+            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
             transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
 
             NetworkManager.Singleton.StartClient();
