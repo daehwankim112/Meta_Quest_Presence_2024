@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NuiN.NExtensions;
@@ -6,14 +7,50 @@ using UnityEngine.InputSystem;
 
 public class MeshDestroyer : MonoBehaviour
 {
-    [SerializeField] LayerMask meshLayer;
+    [SerializeField] BoxCollider box;
+    [SerializeField] SerializedWaitForSeconds findRoomInterval;
 
-    [SerializeField] int resolution = 100;
-    [SerializeField] float distance = 15f;
+    [SerializeField] float destroyRadius = 0.25f;
+    
+    MeshFilter _sceneMesh;
+
+    IEnumerator Start()
+    {
+        findRoomInterval.Init();
+        var room = FindObjectOfType<OVRSceneRoom>();
+        while (room == null)
+        {
+            room = FindObjectOfType<OVRSceneRoom>();
+            yield return findRoomInterval.Wait;
+        }
+        
+        while (room.transform.childCount <= 0 || _sceneMesh == null)
+        {
+            yield return findRoomInterval.Wait;
+        }
+        
+        
+        foreach (Transform child in room.transform)
+        {
+            if (!child.TryGetComponent(out OVRSemanticClassification classification)) continue;
+            IReadOnlyList<string> labels = classification.Labels;
+            
+            if (labels.Contains("WALL_FACE") || labels.Contains("DOOR_FRAME") || labels.Contains("CEILING"))
+            {
+                BoxCollider boxCol = child.gameObject.AddComponent<BoxCollider>();
+                boxCol.size = boxCol.size.With(z: destroyRadius);
+                
+                DestroyInBox(_sceneMesh, boxCol);
+            }
+            
+            Destroy(child.gameObject);
+        }
+    }
 
     public void DestroyWalls(MeshFilter meshFilter)
     {
-        Mesh mesh = meshFilter.mesh;
+        _sceneMesh = meshFilter;
+        /*Mesh mesh = meshFilter.mesh;
 
         List<int> triangles = mesh.triangles.ToList();
         Vector3 position = new Vector3(0, transform.position.y, distance);
@@ -42,10 +79,10 @@ public class MeshDestroyer : MonoBehaviour
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
-        mesh.Optimize();
+        mesh.Optimize();*/
     }
 
-    int GetHitTriangle(Vector3 shootPoint, MeshFilter meshFilter)
+    /*int GetHitTriangle(Vector3 shootPoint, MeshFilter meshFilter)
     {
         if (!Physics.Raycast(shootPoint, VectorUtils.Direction(shootPoint, new Vector3(0, transform.position.y, 0)), out RaycastHit hit, 1000, meshLayer))
         {
@@ -57,14 +94,55 @@ public class MeshDestroyer : MonoBehaviour
         Vector3 localHitPoint = meshFilter.transform.InverseTransformPoint(hit.point);
         int closestTriangleIndex = GetClosestTriangleIndex(localHitPoint, mesh);
         return closestTriangleIndex;
-    }
-    
-    Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, float angle) 
+    }*/
+
+    static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, float angle) 
     {
         var dir  = point - pivot;
         dir = Quaternion.Euler(new Vector3(0, angle, 0)) * dir;
         point = dir + pivot;
         return point;
+    }
+    
+    static bool PointInBox (Vector3 point, BoxCollider box )
+    {
+        point = box.transform.InverseTransformPoint( point ) - box.center;
+		
+        float halfX = (box.size.x * 0.5f);
+        float halfY = (box.size.y * 0.5f);
+        float halfZ = (box.size.z * 0.5f);
+
+        return point.x < halfX && point.x > -halfX && 
+               point.y < halfY && point.y > -halfY && 
+               point.z < halfZ && point.z > -halfZ;
+    }
+
+    static void DestroyInBox(MeshFilter meshFilter, BoxCollider box)
+    {
+        Mesh mesh = meshFilter.mesh;
+        Vector3[] vertices = mesh.vertices;
+        List<int> triangles = mesh.triangles.ToList();
+
+        // Iterate through triangles in reverse order to avoid index shifting
+        for (int i = triangles.Count - 3; i >= 0; i -= 3)
+        {
+            Vector3 v0 = meshFilter.transform.TransformPoint(vertices[triangles[i]]);
+            Vector3 v1 = meshFilter.transform.TransformPoint(vertices[triangles[i + 1]]);
+            Vector3 v2 = meshFilter.transform.TransformPoint(vertices[triangles[i + 2]]);
+            
+            if (PointInBox(v0, box) || PointInBox(v1, box) || PointInBox(v2, box))
+            {
+                triangles.RemoveAt(i + 2);
+                triangles.RemoveAt(i + 1);
+                triangles.RemoveAt(i);
+            }
+        }
+
+        mesh.triangles = triangles.ToArray();
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+        mesh.Optimize();
     }
     
     static int GetClosestTriangleIndex(Vector3 point, Mesh mesh)
@@ -150,7 +228,7 @@ public class MeshDestroyer : MonoBehaviour
         return a + ab * vs + ac * ws;
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Vector3 position = new Vector3(0, transform.position.y, distance);
         float angle = 0;
@@ -163,5 +241,5 @@ public class MeshDestroyer : MonoBehaviour
             
             Gizmos.DrawLine(position, new Vector3(0, transform.position.y, 0));
         }
-    }
+    }*/
 }

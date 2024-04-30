@@ -61,7 +61,7 @@ Material:
     - _QueueOffset: 0
     - _SwirlSpeed: 0.75
     - _TideSpeed: 0.001
-    - _WaveSize: 48.37
+    - _WaveSize: 100
     m_Colors:
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.02745098}
     - _SurfaceColor: {r: 0.004763192, g: 0.7244353, b: 0.8415094, a: 0.60784316}
