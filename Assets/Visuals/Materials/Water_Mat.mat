@@ -55,11 +55,11 @@ Material:
     - _FoamCutoff: 6.46
     - _FoamScale: 76.42
     - _FoamSpeed: 0.001
-    - _HeightFactor: 0.15
+    - _HeightFactor: 0.0002
     - _HeightOffset: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 1
+    - _Scale: 10
     - _SwirlSpeed: 0.75
     - _TideSpeed: 0.001
     - _WaveSize: 100
