@@ -43,6 +43,9 @@ public class RoomWallsDestroyer : MonoBehaviour
             
             Destroy(child.gameObject);
         }
+        
+        Destroy(_sceneMesh.GetComponent<MeshCollider>());
+        _sceneMesh.gameObject.AddComponent<MeshCollider>();
     }
 
     public void CacheSceneMesh(MeshFilter meshFilter)
