@@ -18,23 +18,26 @@ using System.Collections.Generic;
 
 public class NetworkConnect : MonoBehaviour
 {
-    private string joinCode;
-    // public TMPro.TMP_InputField joinCodeInputTextMeshPro;
-    // public TMPro.TextMeshProUGUI roomCodeTextMeshProUGUI;
-    public TMPro.TextMeshProUGUI DebugConsole;
+    public static NetworkConnect instance;
+    
+    [SerializeField] TextMeshProUGUI debugConsole;
 
-    public int maxConnections = 20;
-    public UnityTransport transport;
+    [SerializeField] int maxConnections = 20;
+    [SerializeField] UnityTransport transport;
 
-    private Lobby currentLobbby;
+    Lobby _currentLobbby;
+    string _joinCode;
 
-    private async void Awake()
+    async void Awake()
     {
+        if (instance != null && instance != this) Destroy(gameObject);
+        else instance = this;
+        
         await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In" + AuthenticationService.Instance.PlayerId);
-            DebugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
+            debugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
@@ -44,69 +47,65 @@ public class NetworkConnect : MonoBehaviour
         try
         {
             Debug.Log("Host - Creating an allocation.");
-            DebugConsole.text += "Host - Creating an allocation.";
+            debugConsole.text += "Host - Creating an allocation.";
 
             // Once the allocation is created, you have ten seconds to BIND
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
 
             // newJoinCode will be used to join the relay server
-            joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            _joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             // roomCodeTextMeshProUGUI.text = joinCode;
-            Debug.Log("newJoinCode" + joinCode);
-            DebugConsole.text += "newJoinCode" + joinCode;
+            Debug.Log("newJoinCode" + _joinCode);
+            debugConsole.text += "newJoinCode" + _joinCode;
             transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
 
             // Create a lobby
             CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
             lobbyOptions.IsPrivate = false;
             lobbyOptions.Data = new Dictionary<string, DataObject>();
-            DataObject dataObject = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
+            DataObject dataObject = new DataObject(DataObject.VisibilityOptions.Public, _joinCode);
             lobbyOptions.Data.Add("joinCode", dataObject);
 
-            currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", maxConnections);
-
-
-
+            _currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", maxConnections, lobbyOptions);
+            
             NetworkManager.Singleton.StartHost();
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            DebugConsole.text += e.Message;
+            debugConsole.text += e.Message;
         }
     }
 
-    public async void Join()
+    public static async void Join(string relayJoinCode)
     {
         try
         {
             // Join a lobby
-            currentLobbby = await Lobbies.Instance.QuickJoinLobbyAsync();
-            string relayJoinCode = currentLobbby.Data["joinCode"].Value;
-
-
+            instance._currentLobbby = await Lobbies.Instance.JoinLobbyByCodeAsync(relayJoinCode);
+            
             Debug.Log("Joining Relay with " + relayJoinCode);
-            DebugConsole.text += "Joining Relay with " + relayJoinCode;
+            //debugConsole.text += "Joining Relay with " + relayJoinCode;
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
-            transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
-
+            instance.transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
+            
             NetworkManager.Singleton.StartClient();
 
             if (NetworkManager.Singleton.IsClient)
             {
                 Debug.Log("Client - Connected to the server.");
-                DebugConsole.text += "Client - Connected to the server.";
+                instance.debugConsole.text += "Client - Connected to the server.";
             }
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            DebugConsole.text += e.Message;
+            instance.debugConsole.text += e.Message;
         }
     }
 
-    public void ClientInput()
+    public static string GetJoinCode(Lobby lobby)
     {
-        // joinCode = joinCodeInputTextMeshPro.text;
+        return lobby.Data.TryGetValue("joinCode", out var joinCode) ? joinCode.Value : string.Empty;
     }
 }
