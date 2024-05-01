@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 
 public class MeshDestroyer : MonoBehaviour
 {
-    [SerializeField] BoxCollider box;
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
 
     [SerializeField] float destroyRadius = 0.25f;
