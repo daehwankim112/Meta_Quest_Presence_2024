@@ -40,12 +40,14 @@ public class RoomWallsDestroyer : MonoBehaviour
                 
                 DestroyInBox(_sceneMesh, boxCol);
             }
-            
-            Destroy(child.gameObject);
         }
         
+        Destroy(room.gameObject);
         Destroy(_sceneMesh.GetComponent<MeshCollider>());
         _sceneMesh.gameObject.AddComponent<MeshCollider>();
+
+        _sceneMesh = null;
+        findRoomInterval = null;
     }
 
     public void CacheSceneMesh(MeshFilter meshFilter)

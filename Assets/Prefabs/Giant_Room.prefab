@@ -513,7 +513,6 @@ GameObject:
   - component: {fileID: 7785437222039699049}
   - component: {fileID: 8893737796215803818}
   - component: {fileID: 2538812504712833661}
-  - component: {fileID: 788675371388414777}
   m_Layer: 0
   m_Name: Room Mesh
   m_TagString: Untagged
@@ -589,19 +588,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &788675371388414777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3627684712607018156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73337394578211e4a844fcb380ff5f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomMeshMaterial: {fileID: 2100000, guid: d9973e3340ce36e488bc36b131d1923a, type: 2}
 --- !u!1 &3731400296381782665
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +600,7 @@ GameObject:
   - component: {fileID: 1923648723061683807}
   - component: {fileID: 2844477972004422458}
   m_Layer: 0
-  m_Name: GiantRoom
+  m_Name: Giant_Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findRoomInterval:
-    seconds: 0.5
+    seconds: 1
   destroyRadius: 0.3
 --- !u!114 &2844477972004422458
 MonoBehaviour:
