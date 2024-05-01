@@ -81,9 +81,6 @@ public class NetworkConnect : MonoBehaviour
     {
         try
         {
-            // Join a lobby
-            instance._currentLobbby = await Lobbies.Instance.JoinLobbyByCodeAsync(relayJoinCode);
-            
             Debug.Log("Joining Relay with " + relayJoinCode);
             //debugConsole.text += "Joining Relay with " + relayJoinCode;
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
