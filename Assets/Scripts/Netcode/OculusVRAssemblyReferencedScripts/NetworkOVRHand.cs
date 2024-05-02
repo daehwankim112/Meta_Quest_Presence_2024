@@ -137,6 +137,7 @@ public class NetworkOVRHand : NetworkBehaviour,
     {
         if (OVRPlugin.GetHandState(step, (OVRPlugin.Hand)HandType, ref _handState) && IsOwner)
         {
+            // DebugPanel
             IsTracked = (_handState.Status & OVRPlugin.HandStatus.HandTracked) != 0;
             IsSystemGestureInProgress = (_handState.Status & OVRPlugin.HandStatus.SystemGestureInProgress) != 0;
             IsPointerPoseValid = (_handState.Status & OVRPlugin.HandStatus.InputStateValid) != 0;

@@ -17,6 +17,11 @@ public class OVRCameraRigReferencesForNetCode : MonoBehaviour
     public Transform leftHand;
     public Transform rightHand;
 
+    public OVRSkeleton leftOVRSkeleton;
+    public OVRHand leftOVRHand;
+    public OVRSkeleton rightOVRSkeleton;
+    public OVRHand rightOVRHand;
+
     private void Awake()
     {
         if (Singleton == null)
