@@ -7,13 +7,14 @@ using Unity.Services.Lobbies;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LobbiesUI : MonoBehaviour
+public class LobbyManagerUI : MonoBehaviour
 {
-    [SerializeField] VerticalLayoutGroup panel;
+    [SerializeField] GridLayoutGroup grid;
 
     [SerializeField] LobbyButton lobbyButtonPrefab;
     
     List<LobbyButton> _lobbies = new();
+
     
     async void Start()
     {
@@ -42,9 +43,8 @@ public class LobbiesUI : MonoBehaviour
 
             foreach (var lobby in foundLobbies.Results)
             {
-                LobbyButton lobbyButton = Instantiate(lobbyButtonPrefab, panel.transform);
+                LobbyButton lobbyButton = Instantiate(lobbyButtonPrefab, grid.transform);
                 lobbyButton.Initialize(NetworkConnect.GetJoinCode(lobby));
-                
                 _lobbies.Add(lobbyButton);
             }
 
