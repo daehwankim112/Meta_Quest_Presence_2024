@@ -9,11 +9,20 @@ public class RoomWallsDestroyer : MonoBehaviour
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
 
     [SerializeField] float destroyRadius = 0.25f;
+
+    [SerializeField] TMPro.TMP_Text debugText;
+    [SerializeField] OVRSceneManager sceneManager;
     
     MeshFilter _sceneMesh;
 
     IEnumerator Start()
     {
+        const string spatialPermission = "com.oculus.permission.USE_SCENE";
+        bool hasUserAuthorizedPermission = UnityEngine.Android.Permission.HasUserAuthorizedPermission(spatialPermission);
+
+        if (!hasUserAuthorizedPermission) debugText.text += "Please enable the permission in the Oculus app";
+        else debugText.text += "Permission granted";
+
         findRoomInterval.Init();
         var room = FindObjectOfType<OVRSceneRoom>();
         while (room == null)
@@ -21,13 +30,17 @@ public class RoomWallsDestroyer : MonoBehaviour
             room = FindObjectOfType<OVRSceneRoom>();
             yield return findRoomInterval.Wait;
         }
-        
+
+        yield return findRoomInterval.Wait;
+
+
         while (room.transform.childCount <= 0 || _sceneMesh == null)
         {
             yield return findRoomInterval.Wait;
         }
-        
-        
+
+        yield return findRoomInterval.Wait;
+
         foreach (Transform child in room.transform)
         {
             if (!child.TryGetComponent(out OVRSemanticClassification classification)) continue;
@@ -40,8 +53,9 @@ public class RoomWallsDestroyer : MonoBehaviour
                 
                 DestroyInBox(_sceneMesh, boxCol);
             }
+
         }
-        
+
         Destroy(room.gameObject);
         Destroy(_sceneMesh.GetComponent<MeshCollider>());
         _sceneMesh.gameObject.AddComponent<MeshCollider>();
@@ -52,6 +66,7 @@ public class RoomWallsDestroyer : MonoBehaviour
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
         _sceneMesh = meshFilter;
+        debugText.text += "Scene mesh cached";
     }
     
     static bool BoxContainsPoint (Vector3 point, BoxCollider box )
@@ -67,8 +82,9 @@ public class RoomWallsDestroyer : MonoBehaviour
                point.z < halfZ && point.z > -halfZ;
     }
 
-    static void DestroyInBox(MeshFilter meshFilter, BoxCollider box)
+    void DestroyInBox(MeshFilter meshFilter, BoxCollider box)
     {
+        debugText.text += "Destroying in box" + box.name;
         Mesh mesh = meshFilter.mesh;
         Vector3[] vertices = mesh.vertices;
         List<int> triangles = mesh.triangles.ToList();

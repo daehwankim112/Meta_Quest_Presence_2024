@@ -10,6 +10,7 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=com.nuin.scriptableharmony;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
@@ -19,6 +20,7 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --assembly-defines=Oculus.Interaction;
 --assembly-defines=Oculus.Interaction.OVR;
 --assembly-defines=Oculus.Interaction.OVR.Samples;
+--assembly-defines=Oculus.Platform;
 --assembly-defines=Oculus.VR;
 --assembly-defines=System.Configuration;
 --assembly-defines=System.Core;
@@ -34,6 +36,8 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Collections;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
+--assembly-defines=Unity.InputSystem;
+--assembly-defines=Unity.InputSystem.ForUI;
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Netcode.Components;
 --assembly-defines=Unity.Netcode.Runtime;
@@ -75,6 +79,7 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=com.nuin.scriptableharmony;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
@@ -84,6 +89,7 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --assembly-defines=Oculus.Interaction;
 --assembly-defines=Oculus.Interaction.OVR;
 --assembly-defines=Oculus.Interaction.OVR.Samples;
+--assembly-defines=Oculus.Platform;
 --assembly-defines=Oculus.VR;
 --assembly-defines=System.Configuration;
 --assembly-defines=System.Core;
@@ -99,6 +105,8 @@ Library: C:\Projects\UnityProjects\Quest_Quest_Presence_2024V1.0\Temp\BurstOutpu
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Collections;
 --assembly-defines=Unity.Collections.LowLevel.ILSupport;
+--assembly-defines=Unity.InputSystem;
+--assembly-defines=Unity.InputSystem.ForUI;
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Netcode.Components;
 --assembly-defines=Unity.Netcode.Runtime;
