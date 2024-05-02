@@ -26,7 +26,6 @@ public class NetworkConnect : MonoBehaviour
     [SerializeField] UnityTransport transport;
 
     Lobby _currentLobbby;
-    string _joinCode;
 
     async void Awake()
     {
@@ -42,38 +41,42 @@ public class NetworkConnect : MonoBehaviour
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
-    public async void Create()
+    public static async void Create(string lobbyName)
     {
         try
         {
             Debug.Log("Host - Creating an allocation.");
-            debugConsole.text += "Host - Creating an allocation.";
+            instance.debugConsole.text += "Host - Creating an allocation.";
 
             // Once the allocation is created, you have ten seconds to BIND
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-
-            // newJoinCode will be used to join the relay server
-            _joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            // roomCodeTextMeshProUGUI.text = joinCode;
-            Debug.Log("newJoinCode" + _joinCode);
-            debugConsole.text += "newJoinCode" + _joinCode;
-            transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(instance.maxConnections);
+            
+            instance.transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
 
             // Create a lobby
             CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
             lobbyOptions.IsPrivate = false;
             lobbyOptions.Data = new Dictionary<string, DataObject>();
-            DataObject dataObject = new DataObject(DataObject.VisibilityOptions.Public, _joinCode);
-            lobbyOptions.Data.Add("joinCode", dataObject);
+            
+            
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            Debug.Log("newJoinCode" + joinCode);
+            instance.debugConsole.text += "newJoinCode" + joinCode;
+            
+            DataObject joinCodeDataObj = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
+            lobbyOptions.Data.Add("joinCode", joinCodeDataObj);
 
-            _currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", maxConnections, lobbyOptions);
+            DataObject lobbyNameDataObj = new DataObject(DataObject.VisibilityOptions.Public, lobbyName);
+            lobbyOptions.Data.Add("lobbyName", lobbyNameDataObj);
+
+            instance._currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
             
             NetworkManager.Singleton.StartHost();
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            debugConsole.text += e.Message;
+            instance.debugConsole.text += e.Message;
         }
     }
 
@@ -104,5 +107,10 @@ public class NetworkConnect : MonoBehaviour
     public static string GetJoinCode(Lobby lobby)
     {
         return lobby.Data.TryGetValue("joinCode", out var joinCode) ? joinCode.Value : string.Empty;
+    }
+
+    public static string GetLobbyName(Lobby lobby)
+    {
+        return lobby.Data.TryGetValue("lobbyName", out var hostName) ? hostName.Value : string.Empty;
     }
 }

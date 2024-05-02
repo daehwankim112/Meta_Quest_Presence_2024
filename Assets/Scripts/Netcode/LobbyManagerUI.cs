@@ -1,21 +1,43 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LobbyManagerUI : MonoBehaviour
 {
+    const string DEFAULT_LOBBY_NAME = "New Lobby";
+    
+    [SerializeField] Button createLobbyButton;
+    [SerializeField] TMP_InputField lobbyNameInput;
+    
     [SerializeField] GridLayoutGroup grid;
 
     [SerializeField] LobbyButton lobbyButtonPrefab;
     
     List<LobbyButton> _lobbies = new();
 
-    
+    void OnEnable()
+    {
+        createLobbyButton.onClick.AddListener(CreateLobby);
+    }
+    void OnDisable()
+    {
+        createLobbyButton.onClick.RemoveAllListeners();
+    }
+
+    void CreateLobby()
+    {
+        string inputText = lobbyNameInput.text.Trim();
+        string lobbyName = inputText.Length > 0 ? inputText : DEFAULT_LOBBY_NAME;
+        NetworkConnect.Create(lobbyName);
+    }
+
     async void Start()
     {
         while (UnityServices.State != ServicesInitializationState.Initialized || !AuthenticationService.Instance.IsSignedIn)
@@ -44,7 +66,7 @@ public class LobbyManagerUI : MonoBehaviour
             foreach (var lobby in foundLobbies.Results)
             {
                 LobbyButton lobbyButton = Instantiate(lobbyButtonPrefab, grid.transform);
-                lobbyButton.Initialize(NetworkConnect.GetJoinCode(lobby));
+                lobbyButton.Initialize(lobby);
                 _lobbies.Add(lobbyButton);
             }
 
