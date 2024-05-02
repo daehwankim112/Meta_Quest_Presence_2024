@@ -1,3 +1,6 @@
+// David Kim 5/1/2024
+// Description: Network OVRHand using NetworkBehaviour
+
 /*
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  * All rights reserved.
@@ -24,6 +27,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Unity.Netcode;
+using System.Dynamic;
+using static OVRMesh;
 
 public class NetworkOVRHand : NetworkBehaviour,
     OVRInputModule.InputSource,
@@ -130,7 +135,7 @@ public class NetworkOVRHand : NetworkBehaviour,
 
     private void GetHandState(OVRPlugin.Step step)
     {
-        if (OVRPlugin.GetHandState(step, (OVRPlugin.Hand)HandType, ref _handState))
+        if (OVRPlugin.GetHandState(step, (OVRPlugin.Hand)HandType, ref _handState) && IsOwner)
         {
             IsTracked = (_handState.Status & OVRPlugin.HandStatus.HandTracked) != 0;
             IsSystemGestureInProgress = (_handState.Status & OVRPlugin.HandStatus.SystemGestureInProgress) != 0;
@@ -324,6 +329,16 @@ public class NetworkOVRHand : NetworkBehaviour,
         }
     }
 
+    private static object call(object o, string methodName, params object[] args)
+    {
+        var mi = o.GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        if (mi != null)
+        {
+            return mi.Invoke(o, args);
+        }
+        return null;
+    }
+
     public void OnValidate()
     {
         // Verify that all hand side based components on this object are using the same hand side.
@@ -332,17 +347,18 @@ public class NetworkOVRHand : NetworkBehaviour,
         {
             if (skeleton.GetSkeletonType().AsHandType() != (OVRHand.Hand)HandType)
             {
-                // skeleton.SetSkeletonType((OVRHand.Hand)HandType.AsSkeletonType());
+                call(skeleton, "SetSkeletonType", ((OVRHand.Hand)HandType).AsSkeletonType());
             }
         }
 
         var mesh = GetComponent<OVRMesh>();
         if (mesh != null)
         {
-            /*if (mesh.GetMeshType().AsHandType() != HandType)
+            MeshType meshType = (MeshType) call(mesh, "GetMeshType", null);
+            if (meshType.AsHandType() != (OVRHand.Hand)HandType)
             {
-                mesh.SetMeshType(HandType.AsMeshType());
-            }*/
+                call(mesh, "SetMeshType", ((OVRHand.Hand)HandType).AsMeshType());
+            }
         }
     }
 

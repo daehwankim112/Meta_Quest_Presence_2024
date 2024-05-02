@@ -81,8 +81,16 @@ public class NetworkConnect : MonoBehaviour
     {
         try
         {
+            // if you are a host, you cannot join a relay
+            if (NetworkManager.Singleton.IsHost)
+            {
+                Debug.Log("You are hosting! Cannot join a relay.");
+                instance.debugConsole.text += "You are hosting! Cannot join a relay.";
+                return;
+            }
+
             Debug.Log("Joining Relay with " + relayJoinCode);
-            //debugConsole.text += "Joining Relay with " + relayJoinCode;
+            instance.debugConsole.text += "Joining Relay with " + relayJoinCode;
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
             instance.transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
             
