@@ -2,6 +2,8 @@
 // Description: Use Relay and Netcode to create a networked VR experience. This script is used to connect to the network and create or join a room. This script is used to connect to the network and create or join a room.
 // Following the tutorial from https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz and https://youtu.be/sPKS3vjwvpU?si=4zhDWuL8SApYPniC
 
+using System;
+using System.Collections;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -19,13 +21,15 @@ using System.Collections.Generic;
 public class NetworkConnect : MonoBehaviour
 {
     public static NetworkConnect instance;
+
+    public static event Action LobbyDeleted;
     
     [SerializeField] TextMeshProUGUI debugConsole;
 
     [SerializeField] int maxConnections = 20;
     [SerializeField] UnityTransport transport;
 
-    Lobby _currentLobbby;
+    public Lobby CurrentLobby { get; private set; }
 
     async void Awake()
     {
@@ -69,9 +73,11 @@ public class NetworkConnect : MonoBehaviour
             DataObject lobbyNameDataObj = new DataObject(DataObject.VisibilityOptions.Public, lobbyName);
             lobbyOptions.Data.Add("lobbyName", lobbyNameDataObj);
 
-            instance._currentLobbby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
+            instance.CurrentLobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
             
             NetworkManager.Singleton.StartHost();
+
+            instance.StartCoroutine(UpdateLobby());
         }
         catch (RelayServiceException e)
         {
@@ -102,6 +108,25 @@ public class NetworkConnect : MonoBehaviour
             Debug.LogError(e.Message);
             instance.debugConsole.text += e.Message;
         }
+    }
+    
+    static IEnumerator UpdateLobby()
+    {
+        while (instance.CurrentLobby != null)
+        {
+            Lobbies.Instance.SendHeartbeatPingAsync(instance.CurrentLobby.Id);
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
+    public static void DeleteLobby()
+    {
+        if (instance.CurrentLobby == null) return;
+        
+        NetworkManager.Singleton.Shutdown();
+        Lobbies.Instance.DeleteLobbyAsync(instance.CurrentLobby.Id);
+        
+        LobbyDeleted?.Invoke();
     }
 
     public static string GetJoinCode(Lobby lobby)
