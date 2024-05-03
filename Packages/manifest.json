@@ -2,6 +2,7 @@
   "dependencies": {
     "com.meta.xr.sdk.all": "64.0.0",
     "com.meta.xr.sdk.interaction.ovr.samples": "64.0.0",
+    "com.nobi.roundedcorners": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git",
     "com.nuin.scriptableharmony": "https://github.com/NuiN99/Scriptable-Harmony-Package.git",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.ide.rider": "3.0.28",
@@ -11,6 +12,7 @@
     "com.unity.netcode.gameobjects": "1.8.1",
     "com.unity.postprocessing": "3.4.0",
     "com.unity.render-pipelines.universal": "14.0.11",
+    "com.unity.services.lobby": "1.2.0",
     "com.unity.services.relay": "1.0.5",
     "com.unity.shadergraph": "14.0.11",
     "com.unity.test-framework": "1.1.33",

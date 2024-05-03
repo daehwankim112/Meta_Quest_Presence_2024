@@ -2,6 +2,8 @@
 // Description: Use Relay and Netcode to create a networked VR experience. This script is used to connect to the network and create or join a room. This script is used to connect to the network and create or join a room.
 // Following the tutorial from https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz and https://youtu.be/sPKS3vjwvpU?si=4zhDWuL8SApYPniC
 
+using System;
+using System.Collections;
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Services.Authentication;
@@ -10,81 +12,141 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using TMPro;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [HelpURL("https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz")]
 
 public class NetworkConnect : MonoBehaviour
 {
-    private string joinCode;
-    public TMPro.TMP_InputField joinCodeInputTextMeshPro;
-    public TMPro.TextMeshProUGUI roomCodeTextMeshProUGUI;
-    public TMPro.TextMeshProUGUI DebugConsole;
+    public static NetworkConnect instance;
 
-    public int maxConnections = 20;
-    public UnityTransport transport;
+    public static event Action LobbyDeleted;
+    
+    [SerializeField] TextMeshProUGUI debugConsole;
 
-    private async void Awake()
+    [SerializeField] int maxConnections = 20;
+    [SerializeField] UnityTransport transport;
+
+    public Lobby CurrentLobby { get; private set; }
+
+    async void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In" + AuthenticationService.Instance.PlayerId);
-            DebugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
+            debugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
-    public async void Create()
+    public static async void Create(string lobbyName)
     {
         try
         {
             Debug.Log("Host - Creating an allocation.");
-            DebugConsole.text += "Host - Creating an allocation.";
+            instance.debugConsole.text += "Host - Creating an allocation.";
 
             // Once the allocation is created, you have ten seconds to BIND
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-            // newJoinCode will be used to join the relay server
-            joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            roomCodeTextMeshProUGUI.text = joinCode;
-            Debug.Log("newJoinCode" + joinCode);
-            DebugConsole.text += "newJoinCode" + joinCode;
-            transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(instance.maxConnections);
+            
+            instance.transport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
 
+            // Create a lobby
+            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
+            lobbyOptions.IsPrivate = false;
+            lobbyOptions.Data = new Dictionary<string, DataObject>();
+            
+            
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            Debug.Log("newJoinCode" + joinCode);
+            instance.debugConsole.text += "newJoinCode" + joinCode;
+            
+            DataObject joinCodeDataObj = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
+            lobbyOptions.Data.Add("joinCode", joinCodeDataObj);
+
+            DataObject lobbyNameDataObj = new DataObject(DataObject.VisibilityOptions.Public, lobbyName);
+            lobbyOptions.Data.Add("lobbyName", lobbyNameDataObj);
+
+            instance.CurrentLobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
+            
             NetworkManager.Singleton.StartHost();
+
+            instance.StartCoroutine(UpdateLobby());
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            DebugConsole.text += e.Message;
+            instance.debugConsole.text += e.Message;
         }
     }
 
-    public async void Join()
+    public static async void Join(string relayJoinCode)
     {
         try
         {
-            Debug.Log("Joining Relay with " + joinCodeInputTextMeshPro.text);
-            DebugConsole.text += "Joining Relay with " + joinCodeInputTextMeshPro.text;
-            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(joinCodeInputTextMeshPro.text); 
-            transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
-
+            Debug.Log("Joining Relay with " + relayJoinCode);
+            //debugConsole.text += "Joining Relay with " + relayJoinCode;
+            JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
+            instance.transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
+            
             NetworkManager.Singleton.StartClient();
 
             if (NetworkManager.Singleton.IsClient)
             {
                 Debug.Log("Client - Connected to the server.");
-                DebugConsole.text += "Client - Connected to the server.";
+                instance.debugConsole.text += "Client - Connected to the server.";
             }
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            DebugConsole.text += e.Message;
+            instance.debugConsole.text += e.Message;
+        }
+    }
+    
+    static IEnumerator UpdateLobby()
+    {
+        while (instance.CurrentLobby != null)
+        {
+            Lobbies.Instance.SendHeartbeatPingAsync(instance.CurrentLobby.Id);
+            yield return new WaitForSeconds(3f);
         }
     }
 
-    public void ClientInput()
+    public static void DeleteLobby()
     {
-        // joinCode = joinCodeInputTextMeshPro.text;
+        if (instance.CurrentLobby == null) return;
+        
+        NetworkManager.Singleton.Shutdown();
+        Lobbies.Instance.DeleteLobbyAsync(instance.CurrentLobby.Id);
+        
+        LobbyDeleted?.Invoke();
+    }
+
+    public static string GetJoinCode(Lobby lobby)
+    {
+        return lobby.Data.TryGetValue("joinCode", out var joinCode) ? joinCode.Value : string.Empty;
+    }
+
+    public static string GetLobbyName(Lobby lobby)
+    {
+        return lobby.Data.TryGetValue("lobbyName", out var hostName) ? hostName.Value : string.Empty;
+    }
+
+    public static int GetPlayerCount()
+    {
+        return instance.CurrentLobby == null ? 0 : NetworkManager.Singleton.ConnectedClientsList.Count;
     }
 }
