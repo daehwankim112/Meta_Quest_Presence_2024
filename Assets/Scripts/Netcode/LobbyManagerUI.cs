@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,31 +12,24 @@ public class LobbyManagerUI : MonoBehaviour
 {
     const string DEFAULT_LOBBY_NAME = "New Lobby";
 
-    [SerializeField] GameObject lobbiesPanel;
-    [SerializeField] GameObject lobbyPanel;
-    [SerializeField] TMP_Text lobbyNameText;
-    [SerializeField] Button exitLobbyButton;
-
-    [SerializeField] TMP_Text playerCountText;
-    [SerializeField] Button createLobbyButton;
-    [SerializeField] TMP_InputField lobbyNameInput;
-    
     [SerializeField] GridLayoutGroup grid;
-
+    [SerializeField] GameObject lobbiesPanel;
+    [SerializeField] Button createLobbyButton;
     [SerializeField] LobbyButton lobbyButtonPrefab;
+    [SerializeField] TMP_InputField lobbyNameInput;
     
     List<LobbyButton> _lobbies = new();
 
+    bool _destroyed;
+
     void OnEnable()
     {
-        exitLobbyButton.onClick.AddListener(ExitLobby);
         createLobbyButton.onClick.AddListener(CreateLobby);
         NetworkConnect.LobbyDeleted += ClearLobbies;
     }
     void OnDisable()
     {
         createLobbyButton.onClick.RemoveAllListeners();
-        exitLobbyButton.onClick.RemoveAllListeners();
         NetworkConnect.LobbyDeleted -= ClearLobbies;
     }
 
@@ -48,18 +38,6 @@ public class LobbyManagerUI : MonoBehaviour
         string inputText = lobbyNameInput.text.Trim();
         string lobbyName = inputText.Length > 0 ? inputText : DEFAULT_LOBBY_NAME;
         NetworkConnect.Create(lobbyName);
-        
-        lobbiesPanel.SetActive(false);
-        lobbyPanel.SetActive(true);
-        lobbyNameText.SetText(lobbyName);
-    }
-
-    void ExitLobby()
-    {
-        lobbiesPanel.SetActive(true);
-        lobbyPanel.SetActive(false);
-        
-        NetworkConnect.DeleteLobby();
     }
 
     async void Start()
@@ -76,7 +54,11 @@ public class LobbyManagerUI : MonoBehaviour
     {
         try
         {
+            if (_destroyed) return;
+            
             var foundLobbies = await Lobbies.Instance.QueryLobbiesAsync();
+            
+            if (_destroyed) return;
 
             if (!Application.isPlaying) return;
 
@@ -89,8 +71,6 @@ public class LobbyManagerUI : MonoBehaviour
                 _lobbies.Add(lobbyButton);
             }
             
-            UpdatePlayerCount();
-
             await Task.Delay(2000);
             PingLobbies();
         }
@@ -108,14 +88,10 @@ public class LobbyManagerUI : MonoBehaviour
         }
 
         _lobbies.Clear();
-
-        playerCountText.text = "Players: 1";
     }
 
-    void UpdatePlayerCount()
+    void OnDestroy()
     {
-        if (NetworkConnect.instance.CurrentLobby == null) return;
-        
-        playerCountText.text = $"Players: {NetworkManager.Singleton.ConnectedClientsList.Count}";
+        _destroyed = true;
     }
 }

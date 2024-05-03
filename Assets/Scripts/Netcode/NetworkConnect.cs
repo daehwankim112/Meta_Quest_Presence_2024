@@ -15,6 +15,7 @@ using TMPro;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [HelpURL("https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz")]
 
@@ -33,9 +34,14 @@ public class NetworkConnect : MonoBehaviour
 
     async void Awake()
     {
-        if (instance != null && instance != this) Destroy(gameObject);
-        else instance = this;
-        
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () =>
         {
@@ -137,5 +143,10 @@ public class NetworkConnect : MonoBehaviour
     public static string GetLobbyName(Lobby lobby)
     {
         return lobby.Data.TryGetValue("lobbyName", out var hostName) ? hostName.Value : string.Empty;
+    }
+
+    public static int GetPlayerCount()
+    {
+        return instance.CurrentLobby == null ? 0 : NetworkManager.Singleton.ConnectedClientsList.Count;
     }
 }
