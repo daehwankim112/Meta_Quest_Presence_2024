@@ -292,6 +292,7 @@ public class NetworkOVRSkeleton : NetworkBehaviour
     public bool IsDataValid { get; private set; }
     public bool IsDataHighConfidence { get; private set; }
     public IList<OVRBone> Bones { get; protected set; }
+    public NetworkVariable<IList<OVRBone>> NetworkBones { get; protected set; } = new NetworkVariable<IList<OVRBone>>(new List<OVRBone>(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public IList<OVRBone> BindPoses { get; private set; }
     public IList<OVRBoneCapsule> Capsules { get; private set; }
 
@@ -417,6 +418,15 @@ public class NetworkOVRSkeleton : NetworkBehaviour
             InitializeCapsules();
 
             IsInitialized = true;
+        }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            // NetworkBones.Value = Bones;
+            Bones = NetworkBones.Value;
         }
     }
 
@@ -668,8 +678,10 @@ public class NetworkOVRSkeleton : NetworkBehaviour
         {
             var boneTransform = _bones[i].Transform;
             if (boneTransform == null) continue;
+            if (NetworkBones.Value[i] == null) continue;
 
-            if (IsBodySkeleton(_skeletonType))
+            boneTransform = NetworkBones.Value[i].Transform;
+            /*if (IsBodySkeleton(_skeletonType))
             {
                 boneTransform.localPosition = data.BoneTranslations[i].FromFlippedZVector3f();
                 boneTransform.localRotation = data.BoneRotations[i].FromFlippedZQuatf();
@@ -686,7 +698,7 @@ public class NetworkOVRSkeleton : NetworkBehaviour
             else
             {
                 boneTransform.localRotation = data.BoneRotations[i].FromFlippedZQuatf();
-            }
+            }*/
         }
     }
 

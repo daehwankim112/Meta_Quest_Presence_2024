@@ -17,8 +17,8 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] private Transform head;
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
-    [SerializeField] private OVRSkeleton leftHandSkeleton;
-    [SerializeField] private OVRSkeleton rightHandSkeleton;
+    [SerializeField] private NetworkOVRSkeleton leftHandSkeleton;
+    [SerializeField] private NetworkOVRSkeleton rightHandSkeleton;
 
     [SerializeField] private Renderer[] meshToDisable;
 
@@ -41,6 +41,7 @@ public class NetworkPlayer : NetworkBehaviour
             foreach (var item in meshToDisable)
             {
                 item.enabled = false;
+                item.gameObject.SetActive(false);
             }
         }
 
@@ -93,28 +94,50 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (OVRCameraRigReferencesForNetCode.Singleton.leftHand)
         {
-            if (OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.gameObject.GetComponent<OVRHand>().IsDataValid)
+            if (OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.gameObject.TryGetComponent<NetworkOVRHand>(out NetworkOVRHand OVRhand) ? OVRhand.IsDataValid && OVRhand.IsTracked: false)
             {
                 // Scale the hand
                 // leftHandSkeleton.gameObject.GetComponent<OVRHand>().HandScale = OVRCameraRigReferencesForNetCode.Singleton.leftHandSkeleton.gameObject.GetComponent<OVRHand>().HandScale;
                 // Update position and location of the bones
-                for (int i = 0; i < OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.GetCurrentNumBones(); i++)
+                DebugPanel.Send("Left Hand CurrentStartBoneId: " + (int) OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.GetCurrentStartBoneId());
+                DebugPanel.Send("Left Hand CurrentEndBoneId: " + (int) OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.GetCurrentEndBoneId());
+                for (OVRSkeleton.BoneId i = OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.GetCurrentStartBoneId(); i < OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.GetCurrentEndBoneId(); i++)
                 {
-                    leftHandSkeleton.Bones[i].Transform = OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.Bones[i].Transform;
+                    try
+                    {
+                        leftHandSkeleton.NetworkBones.Value[(int)i].Transform = OVRCameraRigReferencesForNetCode.Singleton.leftOVRSkeleton.Bones[(int)i].Transform;
+                    }
+                    catch (Exception e)
+                    {
+                        DebugPanel.Send("Left Hand Error: " + e.Message);
+                    }
                 }
             }
 
         }
         if (OVRCameraRigReferencesForNetCode.Singleton.rightHand)
         {
-            if (OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.gameObject.GetComponent<OVRHand>().IsDataValid)
+            if (OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.gameObject.TryGetComponent<NetworkOVRHand>(out NetworkOVRHand OVRhand) ? OVRhand.IsDataValid && OVRhand.IsTracked : false)
             {
                 // Scale the hand
                 // rightHandSkeleton.gameObject.GetComponent<OVRHand>().HandScale = OVRCameraRigReferencesForNetCode.Singleton.rightHandSkeleton.gameObject.GetComponent<OVRHand>().HandScale;
                 // Update position and location of the bones
-                for (int i = 0; i < OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentNumBones(); i++)
+                /*for (int i = 0; i < OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentNumBones(); i++)
                 {
                     rightHandSkeleton.Bones[i].Transform = OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.Bones[i].Transform;
+                }*/
+                DebugPanel.Send("Right Hand CurrentStartBoneId: " + (int)OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentStartBoneId());
+                DebugPanel.Send("Right Hand CurrentEndBoneId: " + (int)OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentEndBoneId());
+                for (OVRSkeleton.BoneId i = OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentStartBoneId(); i < OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.GetCurrentEndBoneId(); i++)
+                {
+                    try
+                    {
+                        rightHandSkeleton.NetworkBones.Value[(int)i].Transform = OVRCameraRigReferencesForNetCode.Singleton.rightOVRSkeleton.Bones[(int)i].Transform;
+                    }
+                    catch (Exception e)
+                    {
+                        DebugPanel.Send("Right Hand Error: " + e.Message);
+                    }
                 }
             }
         }
