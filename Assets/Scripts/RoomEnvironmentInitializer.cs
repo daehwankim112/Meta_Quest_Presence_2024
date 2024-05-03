@@ -24,8 +24,8 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
 
     float _roomScale;
     MeshFilter _sceneMeshFilter;
-    
-    
+
+    [SerializeField] Transform sceneParent;
 
     IEnumerator Start()
     {
@@ -36,34 +36,39 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
         else DebugConsole.Success("com.oculus.permission.USE_SCENE Permission granted");
 
         findRoomInterval.Init();
-        
-        var room = FindObjectOfType<OVRSceneRoom>();
-        while (room == null)
+
+        while (sceneParent.childCount <= 0 || sceneParent.GetChild(0).childCount <= 0)
         {
-            yield return findRoomInterval.Wait;
-            room = FindObjectOfType<OVRSceneRoom>();
+            yield return null;
+        }
+        OVRSceneRoom room = sceneParent.GetChild(0).GetComponent<OVRSceneRoom>();
+
+        if (room != null)
+        {
+            DebugConsole.Success("Found Scene Room");
         }
 
-        yield return findRoomInterval.Wait;
-        
-        while (room.transform.childCount <= 0 || _sceneMeshFilter == null)
+        while (_sceneMeshFilter == null || _sceneMeshFilter.mesh.vertexCount <= 0)
         {
-            yield return findRoomInterval.Wait;
+            yield return null;
         }
 
+        DebugConsole.Success("Found Scene Mesh");
         yield return findRoomInterval.Wait;
-
+        
         DestroyWalls(room);
         RefreshSceneMeshCollider();
         PopulateTrees();
         
-        //Destroy(gameObject);
+        GameEvents.SceneMeshInitalized(_sceneMeshFilter);
     }
 
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
         _sceneMeshFilter = meshFilter;
         DebugConsole.Success("Scene mesh cached");
+        
+        meshFilter.transform.SetParent(transform);
     }
 
     void DestroyWalls(OVRSceneRoom room)
@@ -72,7 +77,6 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
         {
             float childMag = child.position.magnitude;
             if (childMag > _roomScale) _roomScale = childMag;
-            
             
             if (!child.TryGetComponent(out OVRSemanticClassification classification)) continue;
             IReadOnlyList<string> labels = classification.Labels;

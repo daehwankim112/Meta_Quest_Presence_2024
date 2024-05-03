@@ -30,6 +30,7 @@ public class DebugConsole : MonoBehaviour
             _ => Color.white
         };
 
+        textBox.text += $"[{Time.time:000.000}]\n";
         textBox.text += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{message}</color>\n";
     }
 }
