@@ -597,6 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8777689056966068175}
+  - component: {fileID: 3065583769220549521}
   - component: {fileID: 1923648723061683807}
   - component: {fileID: 2844477972004422458}
   m_Layer: 0
@@ -623,6 +624,27 @@ Transform:
   - {fileID: 7785437222039699049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3065583769220549521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731400296381782665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1267117896
+  InScenePlacedSourceGlobalObjectIdHash: 1702794273
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &1923648723061683807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,13 +660,14 @@ MonoBehaviour:
   findRoomInterval:
     seconds: 1
   destroyRadius: 0.3
-  debugText: {fileID: 0}
   sceneManager: {fileID: 3746934038750912637}
-  treePrefab: {fileID: 1569283702733097478, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
+  treePrefab: {fileID: 1272646332206331060, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
     type: 3}
-  treeScarcity: 100
+  treeScarcity: 75
+  minHeight: 0.3
   treeNoiseThreshold: 0
-  treeNormalThreshold: 0.1
+  treeNormalThreshold: 0.3
+  networkPrefabsList: {fileID: 11400000, guid: a03d58d37de7fff43a2d700ca0afe8ac, type: 2}
 --- !u!114 &2844477972004422458
 MonoBehaviour:
   m_ObjectHideFlags: 0

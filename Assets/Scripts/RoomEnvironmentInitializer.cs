@@ -14,8 +14,9 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
 
     [SerializeField] OVRSceneManager sceneManager;
 
-    [SerializeField] GameObject treePrefab;
+    [SerializeField] Tree treePrefab;
     [SerializeField] int treeScarcity;
+    [SerializeField] float minHeight = 0.3f;
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
@@ -98,16 +99,24 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
     {
         Mesh mesh = _sceneMeshFilter.mesh;
 
+        Vector2 randomNoisePosition = new Vector2(Random.Range(0, 10000), Random.Range(0, 10000));
+
+        var validPositions = new List<Vector3>();
+
         for (int i = 0; i < mesh.vertexCount; i += treeScarcity)
         {
             Vector3 vertice = _sceneMeshFilter.transform.TransformPoint(mesh.vertices[i]);
-            float normalY = mesh.normals[i].y;
-            DebugConsole.Log(normalY);
-            float noiseSample = Mathf.PerlinNoise(vertice.x, vertice.z);
-            if (noiseSample >= treeNoiseThreshold && normalY < treeNormalThreshold)
+            float normalY = Mathf.Abs(mesh.normals[i].y);
+            float noiseSample = Mathf.PerlinNoise(vertice.x + randomNoisePosition.x, vertice.z + randomNoisePosition.y);
+            if (noiseSample >= treeNoiseThreshold && normalY < treeNormalThreshold && vertice.y > minHeight && treePrefab.ValidPlacement(vertice))
             {
-                Instantiate(treePrefab, vertice, Quaternion.Euler(0, Random.Range(0f, 360f), 0f), _sceneMeshFilter.transform);
+                validPositions.Add(vertice);
             }
+        }
+
+        foreach (var position in validPositions)
+        {
+            Instantiate(treePrefab, position, Quaternion.Euler(0, Random.Range(0f, 360f), 0f), _sceneMeshFilter.transform);
         }
     }
 
