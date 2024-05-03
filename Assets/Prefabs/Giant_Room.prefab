@@ -638,6 +638,13 @@ MonoBehaviour:
   findRoomInterval:
     seconds: 1
   destroyRadius: 0.3
+  debugText: {fileID: 0}
+  sceneManager: {fileID: 3746934038750912637}
+  treePrefab: {fileID: 1569283702733097478, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
+    type: 3}
+  treeScarcity: 100
+  treeNoiseThreshold: 0
+  treeNormalThreshold: 0.1
 --- !u!114 &2844477972004422458
 MonoBehaviour:
   m_ObjectHideFlags: 0
