@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NuiN.NExtensions;
-using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class RoomEnvironmentInitializer : NetworkBehaviour
+public class RoomEnvironmentInitializer : MonoBehaviour
 {
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
 
