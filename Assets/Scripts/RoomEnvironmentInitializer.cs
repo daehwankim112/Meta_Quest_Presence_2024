@@ -102,7 +102,7 @@ public class RoomEnvironmentInitializer : NetworkBehaviour
         {
             Vector3 vertice = _sceneMeshFilter.transform.TransformPoint(mesh.vertices[i]);
             float normalY = mesh.normals[i].y;
-
+            DebugConsole.Log(normalY);
             float noiseSample = Mathf.PerlinNoise(vertice.x, vertice.z);
             if (noiseSample >= treeNoiseThreshold && normalY < treeNormalThreshold)
             {

@@ -1,46 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using TMPro;
 using UnityEngine;
 
 public class DebugConsole : MonoBehaviour
 {
-    [SerializeField] private TMPro.TMP_Text debugConsole;
+    [SerializeField] TMP_Text textBox;
 
-    private static event Action<string, LogType> OnDebugMessage;
-    public static void Log(string message)
-    {
-        OnDebugMessage?.Invoke(message, LogType.Log);
-    }
+    static event Action<object, LogType> OnDebugMessage;
+    public static void Log(object message) => OnDebugMessage?.Invoke(message, LogType.Log);
+    public static void Error(object message) => OnDebugMessage?.Invoke(message, LogType.Error);
+    public static void Warn(object message) => OnDebugMessage?.Invoke(message, LogType.Warning);
+    public static void Success(object message) => OnDebugMessage?.Invoke(message, LogType.Assert);
 
-    public static void Error(string message)
-    {
-        OnDebugMessage?.Invoke(message, LogType.Error);
-    }
-    
-    public static void Warn(string message)
-    {
-        OnDebugMessage?.Invoke(message, LogType.Warning);
-    }
+    void OnEnable() => OnDebugMessage += HandleDebugMessage;
+    void OnDisable() => OnDebugMessage -= HandleDebugMessage;
 
-    public static void Success(string message)
+    void HandleDebugMessage(object message, LogType logType)
     {
-        OnDebugMessage?.Invoke(message, LogType.Assert);
-    }
-
-    void OnEnable()
-    {
-        OnDebugMessage += HandleDebugMessage;
-    }
-
-    void OnDisable()
-    {
-        OnDebugMessage -= HandleDebugMessage;
-    }
-
-    void HandleDebugMessage(string message, LogType logType)
-    {
+        if (textBox == null) return;
+        
         Color color = logType switch
         {
             LogType.Error => Color.red,
@@ -50,6 +30,6 @@ public class DebugConsole : MonoBehaviour
             _ => Color.white
         };
 
-        debugConsole.text += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{message}</color>\n";
+        textBox.text += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{message}</color>\n";
     }
 }
