@@ -23,9 +23,15 @@ public class NetworkPlayer : NetworkBehaviour
         base.OnNetworkSpawn();
         var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
         if (IsOwnedByServer)
+        {
             transform.name = "Host:" + myID;    //this must be the host
+            DebugConsole.Log("Host:" + myID);
+        }
         else
+        {
             transform.name = "Client:" + myID; //this must be the client 
+            DebugConsole.Log("Client:" + myID);
+        }
         if (IsOwner)
         {
             foreach (var item in meshToDisable)

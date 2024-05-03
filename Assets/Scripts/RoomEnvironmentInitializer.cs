@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using NuiN.NExtensions;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class RoomEnvironmentInitializer : MonoBehaviour
+public class RoomEnvironmentInitializer : NetworkBehaviour
 {
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
 
     [SerializeField] float destroyRadius = 0.25f;
 
-    [SerializeField] TMP_Text debugText;
     [SerializeField] OVRSceneManager sceneManager;
 
     [SerializeField] GameObject treePrefab;
@@ -19,16 +19,20 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
+    [SerializeField] NetworkPrefabsList networkPrefabsList;
+
     float _roomScale;
     MeshFilter _sceneMeshFilter;
+    
+    
 
     IEnumerator Start()
     {
         const string spatialPermission = "com.oculus.permission.USE_SCENE";
         bool hasUserAuthorizedPermission = UnityEngine.Android.Permission.HasUserAuthorizedPermission(spatialPermission);
 
-        if (!hasUserAuthorizedPermission) debugText.text += "Please enable the permission in the Oculus app";
-        else debugText.text += "Permission granted";
+        if (!hasUserAuthorizedPermission) DebugConsole.Warn("Please enable the permission in the Oculus app");
+        else DebugConsole.Success("com.oculus.permission.USE_SCENE Permission granted");
 
         findRoomInterval.Init();
         
@@ -58,7 +62,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
         _sceneMeshFilter = meshFilter;
-        debugText.text += "Scene mesh cached";
+        DebugConsole.Success("Scene mesh cached");
     }
 
     void DestroyWalls(OVRSceneRoom room)

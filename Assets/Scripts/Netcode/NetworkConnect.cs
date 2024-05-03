@@ -25,8 +25,6 @@ public class NetworkConnect : MonoBehaviour
 
     public static event Action LobbyDeleted;
     
-    [SerializeField] TextMeshProUGUI debugConsole;
-
     [SerializeField] int maxConnections = 20;
     [SerializeField] UnityTransport transport;
 
@@ -46,7 +44,7 @@ public class NetworkConnect : MonoBehaviour
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In" + AuthenticationService.Instance.PlayerId);
-            debugConsole.text += "Signed In" + AuthenticationService.Instance.PlayerId;
+            DebugConsole.Success("Signed In" + AuthenticationService.Instance.PlayerId);
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
@@ -56,7 +54,7 @@ public class NetworkConnect : MonoBehaviour
         try
         {
             Debug.Log("Host - Creating an allocation.");
-            instance.debugConsole.text += "Host - Creating an allocation.";
+            DebugConsole.Log("Host - Creating an allocation.");
 
             // Once the allocation is created, you have ten seconds to BIND
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(instance.maxConnections);
@@ -71,7 +69,7 @@ public class NetworkConnect : MonoBehaviour
             
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Debug.Log("newJoinCode" + joinCode);
-            instance.debugConsole.text += "newJoinCode" + joinCode;
+            DebugConsole.Log("newJoinCode" + joinCode);
             
             DataObject joinCodeDataObj = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
             lobbyOptions.Data.Add("joinCode", joinCodeDataObj);
@@ -88,7 +86,7 @@ public class NetworkConnect : MonoBehaviour
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            instance.debugConsole.text += e.Message;
+            DebugConsole.Error(e.Message);
         }
     }
 
@@ -97,7 +95,8 @@ public class NetworkConnect : MonoBehaviour
         try
         {
             Debug.Log("Joining Relay with " + relayJoinCode);
-            //debugConsole.text += "Joining Relay with " + relayJoinCode;
+            DebugConsole.Log("Joining Relay with " + relayJoinCode);
+
             JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode); 
             instance.transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
             
@@ -106,13 +105,13 @@ public class NetworkConnect : MonoBehaviour
             if (NetworkManager.Singleton.IsClient)
             {
                 Debug.Log("Client - Connected to the server.");
-                instance.debugConsole.text += "Client - Connected to the server.";
+                DebugConsole.Success("Client - Connected to the server.");
             }
         }
         catch (RelayServiceException e)
         {
             Debug.LogError(e.Message);
-            instance.debugConsole.text += e.Message;
+            DebugConsole.Error(e.Message);
         }
     }
     
