@@ -36,6 +36,10 @@ public class HostMesh : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             SetMeshValues(_meshFilter.mesh);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
             CreateMeshOnClientClientRpc();
         }
     }
