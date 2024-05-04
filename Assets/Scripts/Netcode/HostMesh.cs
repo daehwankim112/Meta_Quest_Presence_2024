@@ -6,8 +6,9 @@ public class HostMesh : NetworkBehaviour
     NetworkList<Vector3> _vertices;
     NetworkList<Vector3> _normals;
     NetworkList<int> _triangles;
+    NetworkList<Vector2> _uvs;
 
-    MeshFilter _meshFilter;
+    [SerializeField] MeshFilter _meshFilter;
 
     [SerializeField] ClientMesh clientMeshPrefab;
 
@@ -16,17 +17,17 @@ public class HostMesh : NetworkBehaviour
         _vertices = new NetworkList<Vector3>();
         _normals = new NetworkList<Vector3>();
         _triangles = new NetworkList<int>();
+        _uvs = new NetworkList<Vector2>();
         
         _vertices.Initialize(this);
         _normals.Initialize(this);
         _triangles.Initialize(this);
+        _uvs.Initialize(this);
         
-        DebugConsole.Log("SWAAAAG");
-        
-        GameEvents.OnSceneMeshInitialized += SetMeshNetworkVariables;
+        //GameEvents.OnSceneMeshInitialized += SetMeshNetworkVariables;
     }
 
-    void OnDisable()
+    /*void OnDisable()
     {
         GameEvents.OnSceneMeshInitialized -= SetMeshNetworkVariables;
     }
@@ -34,7 +35,7 @@ public class HostMesh : NetworkBehaviour
     void SetMeshNetworkVariables(MeshFilter meshFilter)
     {
         _meshFilter = meshFilter;
-    }
+    }*/
 
     void Update()
     {
@@ -48,6 +49,7 @@ public class HostMesh : NetworkBehaviour
             foreach (var v in mesh.vertices) _vertices.Add(v);
             foreach (var n in mesh.normals) _normals.Add(n);
             foreach (var t in mesh.triangles) _triangles.Add(t);
+            foreach (var u in mesh.uv) _uvs.Add(u);
         }
         
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -63,27 +65,8 @@ public class HostMesh : NetworkBehaviour
         foreach (var v in _vertices) clientMesh.vertices.Add(v);
         foreach (var n in _normals) clientMesh.normals.Add(n);
         foreach (var t in _triangles) clientMesh.triangles.Add(t);
+        foreach (var u in _uvs) clientMesh.uvs.Add(u);
 
         clientMesh.NetworkObject.Spawn(true);
-    }
-
-    Mesh CreateMesh()
-    {
-        Mesh mesh = new()
-        {
-            /*vertices = new Vector3[_vertices.Count],
-            normals = new Vector3[_normals.Count],
-            triangles = new int[_triangles.Count]*/
-        };
-
-        /*for (int i = 0; i < _vertices.Count; i++) mesh.vertices[i] = _vertices[i];
-        for (int i = 0; i < _normals.Count; i++) mesh.normals[i] = _normals[i];
-        for (int i = 0; i < _triangles.Count; i++) mesh.triangles[i] = _triangles[i];
-        
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
-        mesh.Optimize();*/
-
-        return mesh;
     }
 }
