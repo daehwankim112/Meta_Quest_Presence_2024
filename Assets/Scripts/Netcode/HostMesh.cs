@@ -59,10 +59,14 @@ public class HostMesh : NetworkBehaviour
     void CreateMeshObject()
     {
         ClientMesh clientMesh = Instantiate(clientMeshPrefab);
-        clientMesh.SetMesh(CreateMesh());
+
+        foreach (var v in _vertices) clientMesh.vertices.Add(v);
+        foreach (var n in _normals) clientMesh.normals.Add(n);
+        foreach (var t in _triangles) clientMesh.triangles.Add(t);
+
         clientMesh.NetworkObject.Spawn(true);
     }
-    
+
     Mesh CreateMesh()
     {
         Mesh mesh = new()
