@@ -23,11 +23,13 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnLobbyJoined += DestroyThis;
+        GameEvents.OnLobbyJoined += DisableThis;
+        GameEvents.OnLobbyHosted += DisableThis;
     }
     void OnDisable()
     {
-        GameEvents.OnLobbyJoined -= DestroyThis;
+        GameEvents.OnLobbyJoined -= DisableThis;
+        GameEvents.OnLobbyHosted -= DisableThis;
     }
 
     IEnumerator Start()
@@ -133,8 +135,8 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         return (validTreePositions, validTreeRotations);
     }
 
-    void DestroyThis()
+    void DisableThis()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

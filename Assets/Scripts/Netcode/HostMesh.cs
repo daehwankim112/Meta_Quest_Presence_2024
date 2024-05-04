@@ -48,10 +48,5 @@ public class HostMesh : NetworkBehaviour
         clientMesh.transform.localScale = _meshFilter.transform.localScale;
 
         clientMesh.NetworkObject.Spawn(true);
-
-        if (IsHost)
-        {
-            Destroy(clientMesh.gameObject);
-        }
     }
 }
