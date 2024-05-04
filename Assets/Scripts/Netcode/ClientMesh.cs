@@ -39,13 +39,11 @@ public class ClientMesh : NetworkBehaviour
         foreach (var t in triangles) tL.Add(t);
         foreach (var u in uvs) uL.Add(u);
 
-        Mesh mesh = new()
-        {
-            vertices = vL.ToArray(),
-            normals = nL.ToArray(),
-            triangles = tL.ToArray(),
-            uv = uL.ToArray()
-        };
+        Mesh mesh = new();
+        mesh.SetVertices(vL.ToArray());
+        mesh.SetNormals(nL.ToArray());
+        mesh.SetTriangles(tL, 0);
+        mesh.SetUVs(0, uL.ToArray());
         
         meshFilter.mesh = mesh;
     }

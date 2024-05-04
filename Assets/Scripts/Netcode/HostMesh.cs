@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class HostMesh : NetworkBehaviour
 {
-    [SerializeField] MeshFilter meshFilter;
+    MeshFilter _meshFilter;
     [SerializeField] ClientMesh clientMeshPrefab;
-    Transform sceneParent;
     
     void Update()
     {
@@ -29,51 +28,29 @@ public class HostMesh : NetworkBehaviour
 
     private void SetMeshFilter(MeshFilter filter)
     {
-        meshFilter = filter;
+        _meshFilter = filter;
     }
 
     void CreateMeshObject()
     {
-        sceneParent = FindObjectOfType<RoomEnvironmentInitializer>().transform;
-
-        if (sceneParent == null)
+        if (_meshFilter == null)
         {
-            DebugConsole.Error("RoomEnvironmentInitializer not found");
-            return;
-        }
-
-
-        if (sceneParent.childCount <= 0 || sceneParent.GetChild(0).childCount <= 0)
-        {
-            DebugConsole.Error("Scene Room not found");
-            return;
-        }
-        
-        OVRSceneRoom room = sceneParent.GetChild(0).GetComponent<OVRSceneRoom>();
-        
-        if (room != null)
-        {
-            DebugConsole.Success("Found Scene Room");
-        }
-
-        Mesh mesh = meshFilter.mesh;
-
-        if (mesh == null)
-        {
-            Debug.Log("Mesh not found");
+            DebugConsole.Error("Room Environment not initialized when trying to send to clients");
             return;
         }
         
         ClientMesh clientMesh = Instantiate(clientMeshPrefab);
 
+        Mesh mesh = _meshFilter.mesh;
+        
         foreach (var v in mesh.vertices) clientMesh.vertices.Add(v);
         foreach (var n in mesh.normals) clientMesh.normals.Add(n);
         foreach (var t in mesh.triangles) clientMesh.triangles.Add(t);
         foreach (var u in mesh.uv) clientMesh.uvs.Add(u);
 
-        clientMesh.transform.position = meshFilter.transform.position;
-        clientMesh.transform.rotation = meshFilter.transform.rotation;
-        clientMesh.transform.localScale = meshFilter.transform.localScale;
+        clientMesh.transform.position = _meshFilter.transform.position;
+        clientMesh.transform.rotation = _meshFilter.transform.rotation;
+        clientMesh.transform.localScale = _meshFilter.transform.localScale;
 
         clientMesh.NetworkObject.Spawn(true);
     }
