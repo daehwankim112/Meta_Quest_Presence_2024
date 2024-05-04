@@ -23,11 +23,11 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnLobbyHosted += DestroyThis;
+        GameEvents.OnLobbyJoined += DestroyThis;
     }
     void OnDisable()
     {
-        GameEvents.OnLobbyHosted -= DestroyThis;
+        GameEvents.OnLobbyJoined -= DestroyThis;
     }
 
     IEnumerator Start()

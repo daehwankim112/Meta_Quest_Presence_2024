@@ -108,6 +108,8 @@ public class NetworkConnect : MonoBehaviour
             {
                 Debug.Log("Client - Connected to the server.");
                 DebugConsole.Success("Client - Connected to the server.");
+                
+                GameEvents.LobbyJoined();
             }
         }
         catch (RelayServiceException e)

@@ -9,4 +9,7 @@ public static class GameEvents
 
     public static event Action OnLobbyHosted;
     public static void LobbyHosted() => OnLobbyHosted?.Invoke();
+    
+    public static event Action OnLobbyJoined;
+    public static void LobbyJoined() => OnLobbyJoined?.Invoke();
 }
