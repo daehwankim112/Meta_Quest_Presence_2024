@@ -52,10 +52,12 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         
         DestroyWalls(room);
         RefreshSceneMeshCollider();
-        PopulateTrees();
+        var populatedTransforms = PopulateTrees();
         
-        GameEvents.SceneMeshInitalized(_sceneMeshFilter);
+        GameEvents.SceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
     }
+
+    
 
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
@@ -93,13 +95,14 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         _sceneMeshFilter.gameObject.AddComponent<MeshCollider>();
     }
 
-    void PopulateTrees()
+    (List<Vector3> treePositions, List<Quaternion> treeRotations) PopulateTrees()
     {
         Mesh mesh = _sceneMeshFilter.mesh;
 
         Vector2 randomNoisePosition = new Vector2(Random.Range(0, 10000), Random.Range(0, 10000));
 
-        var validPositions = new List<Vector3>();
+        var validTreePositions = new List<Vector3>();
+        var validTreeRotations = new List<Quaternion>();
 
         for (int i = 0; i < mesh.vertexCount; i += treeScarcity)
         {
@@ -108,14 +111,17 @@ public class RoomEnvironmentInitializer : MonoBehaviour
             float noiseSample = Mathf.PerlinNoise(vertice.x + randomNoisePosition.x, vertice.z + randomNoisePosition.y);
             if (noiseSample >= treeNoiseThreshold && normalY < treeNormalThreshold && vertice.y > minHeight && treePrefab.ValidPlacement(vertice))
             {
-                validPositions.Add(vertice);
+                validTreePositions.Add(vertice);
+                validTreeRotations.Add(Quaternion.Euler(0, Random.Range(0f, 360f), 0f));
             }
         }
 
-        foreach (var position in validPositions)
+        for (int i = 0; i < validTreePositions.Count; i++)
         {
-            Instantiate(treePrefab, position, Quaternion.Euler(0, Random.Range(0f, 360f), 0f), _sceneMeshFilter.transform);
+            Instantiate(treePrefab, validTreePositions[i], validTreeRotations[i], _sceneMeshFilter.transform);
         }
+
+        return (validTreePositions, validTreeRotations);
     }
 
     void OnDrawGizmos()
