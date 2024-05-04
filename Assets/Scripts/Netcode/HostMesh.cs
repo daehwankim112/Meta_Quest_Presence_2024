@@ -20,10 +20,18 @@ public class HostMesh : NetworkBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            SendMeshClientRPC();
+        }
+    }
+    
+
     void SetMesh(MeshFilter meshFilter)
     {
         _networkMesh = new NetworkMesh(meshFilter.mesh);
-        SendMeshClientRPC();
     }
 
     [ClientRpc]
