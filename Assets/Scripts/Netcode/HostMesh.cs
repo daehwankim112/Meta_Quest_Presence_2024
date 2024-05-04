@@ -1,38 +1,41 @@
 ﻿using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HostMesh : NetworkBehaviour
 {
     MeshFilter _meshFilter;
     [SerializeField] ClientMesh clientMeshPrefab;
-    
-    void Update()
-    {
-        if (!IsHost || !IsOwner) return;
-        
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            CreateMeshObject();
-        }
-    }
 
-    private void OnEnable()
+    [SerializeField] InputAction spawnMeshAction;
+
+    void OnEnable()
     {
+        spawnMeshAction.Enable();
+        spawnMeshAction.performed += HandleInputAction;
         GameEvents.OnSceneMeshInitialized += SetMeshFilter;
     }
-    private void OnDisable()
+    void OnDisable()
     {
+        spawnMeshAction.performed -= HandleInputAction;
         GameEvents.OnSceneMeshInitialized -= SetMeshFilter;
     }
 
-    private void SetMeshFilter(MeshFilter filter)
+    void SetMeshFilter(MeshFilter filter)
     {
         _meshFilter = filter;
     }
 
+    void HandleInputAction(InputAction.CallbackContext ctx)
+    {
+        CreateMeshObject();
+    }
+
     void CreateMeshObject()
     {
+        if (!IsHost || !IsOwner) return;
+        
         if (_meshFilter == null)
         {
             DebugConsole.Error("Room Environment not initialized when trying to send to clients");
@@ -43,10 +46,7 @@ public class HostMesh : NetworkBehaviour
 
         Mesh mesh = _meshFilter.mesh;
         
-        foreach (var v in mesh.vertices) clientMesh.vertices.Add(v);
-        foreach (var n in mesh.normals) clientMesh.normals.Add(n);
-        foreach (var t in mesh.triangles) clientMesh.triangles.Add(t);
-        foreach (var u in mesh.uv) clientMesh.uvs.Add(u);
+        clientMesh.Initialize(mesh);
 
         clientMesh.transform.position = _meshFilter.transform.position;
         clientMesh.transform.rotation = _meshFilter.transform.rotation;
