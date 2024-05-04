@@ -8,10 +8,9 @@ using UnityEngine;
 public class RoomEnvironmentInitializer : MonoBehaviour
 {
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
+    [SerializeField] Transform sceneParent;
 
     [SerializeField] float destroyRadius = 0.25f;
-
-    [SerializeField] OVRSceneManager sceneManager;
 
     [SerializeField] Tree treePrefab;
     [SerializeField] int treeScarcity;
@@ -19,12 +18,8 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
-    [SerializeField] NetworkPrefabsList networkPrefabsList;
-
     float _roomScale;
     MeshFilter _sceneMeshFilter;
-
-    [SerializeField] Transform sceneParent;
 
     IEnumerator Start()
     {
