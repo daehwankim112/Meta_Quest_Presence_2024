@@ -669,16 +669,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   findRoomInterval:
     seconds: 1
+  sceneParent: {fileID: 6666654417777375821}
   destroyRadius: 0.3
-  sceneManager: {fileID: 3746934038750912637}
   treePrefab: {fileID: 1272646332206331060, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
     type: 3}
-  treeScarcity: 75
+  treeScarcity: 75000000
   minHeight: 0.3
   treeNoiseThreshold: 0
   treeNormalThreshold: 0.3
-  networkPrefabsList: {fileID: 11400000, guid: a03d58d37de7fff43a2d700ca0afe8ac, type: 2}
-  sceneParent: {fileID: 6666654417777375821}
 --- !u!114 &2844477972004422458
 MonoBehaviour:
   m_ObjectHideFlags: 0
