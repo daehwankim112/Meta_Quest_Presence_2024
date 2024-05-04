@@ -3,17 +3,35 @@ using UnityEngine;
 
 public class HostMesh : NetworkBehaviour
 {
-    void Update()
+    NetworkMesh _networkMesh;
+    
+    void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (IsHost)
         {
-            SendMeshClientRPC();
+            GameEvents.OnSceneMeshInitialized += SetMesh;
         }
+    }
+    void OnDisable()
+    {
+        if (IsHost)
+        {
+            GameEvents.OnSceneMeshInitialized -= SetMesh;
+        }
+    }
+
+    void SetMesh(MeshFilter meshFilter)
+    {
+        _networkMesh = new NetworkMesh(meshFilter.mesh);
+        SendMeshClientRPC();
     }
 
     [ClientRpc]
     void SendMeshClientRPC()
     {
-        DebugConsole.Log("hello client");
+        if (IsHost) return;
+        
+        GameObject sceneMesh = new GameObject("HostMesh");
+        sceneMesh.AddComponent<MeshFilter>().mesh = _networkMesh.CreateMesh();
     }
 }

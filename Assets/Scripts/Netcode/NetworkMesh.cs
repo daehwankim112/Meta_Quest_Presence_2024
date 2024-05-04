@@ -1,13 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public struct NetworkMesh
+public readonly struct NetworkMesh
 {
-    public NetworkList<Vector3> vertices;
-    public NetworkList<Vector3> normals;
-    public NetworkList<int> triangles;
+    public readonly NetworkList<Vector3> vertices;
+    public readonly NetworkList<Vector3> normals;
+    public readonly NetworkList<int> triangles;
 
-    public void Init(Mesh mesh)
+    public NetworkMesh(Mesh mesh)
     {
         vertices = new NetworkList<Vector3>();
         normals = new NetworkList<Vector3>();
