@@ -21,6 +21,15 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     float _roomScale;
     MeshFilter _sceneMeshFilter;
 
+    void OnEnable()
+    {
+        GameEvents.OnLobbyHosted += DestroyThis;
+    }
+    void OnDisable()
+    {
+        GameEvents.OnLobbyHosted -= DestroyThis;
+    }
+
     IEnumerator Start()
     {
         const string spatialPermission = "com.oculus.permission.USE_SCENE";
@@ -124,8 +133,8 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         return (validTreePositions, validTreeRotations);
     }
 
-    void OnDrawGizmos()
+    void DestroyThis()
     {
-        Gizmos.DrawWireCube(Vector3.zero, new Vector3(_roomScale, _roomScale, _roomScale) * 2);
+        Destroy(gameObject);
     }
 }

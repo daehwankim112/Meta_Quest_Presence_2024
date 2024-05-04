@@ -69,23 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clientMeshPrefab: {fileID: 1681529917129080513, guid: 71dab1594ec687b46ad00bba8ba6c467,
     type: 3}
-  spawnMeshAction:
-    m_Name: Spawn Mesh
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 15794ab5-c464-4087-8412-71b5ec80ac9a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: b211a6d1-3128-4b3b-b034-06089f77f7db
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Spawn Mesh
-      m_Flags: 0
-    m_Flags: 0
 --- !u!1 &9187272379079657909
 GameObject:
   m_ObjectHideFlags: 0
