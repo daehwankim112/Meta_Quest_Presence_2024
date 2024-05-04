@@ -45,6 +45,8 @@ public class ClientMesh : NetworkBehaviour
         mesh.SetTriangles(tL, 0);
         mesh.SetUVs(0, uL.ToArray());
         
+        mesh.Optimize();
+        
         meshFilter.mesh = mesh;
     }
 }
