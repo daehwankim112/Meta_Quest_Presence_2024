@@ -82,6 +82,8 @@ public class NetworkConnect : MonoBehaviour
             NetworkManager.Singleton.StartHost();
 
             instance.StartCoroutine(UpdateLobby());
+
+            GameEvents.LobbyHosted();
         }
         catch (RelayServiceException e)
         {

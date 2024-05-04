@@ -11,18 +11,15 @@ public class HostMesh : NetworkBehaviour
     MeshFilter _meshFilter;
     [SerializeField] ClientMesh clientMeshPrefab;
 
-    [SerializeField] InputAction spawnMeshAction;
-
     void OnEnable()
     {
-        spawnMeshAction.Enable();
-        spawnMeshAction.performed += HandleInputAction;
         GameEvents.OnSceneMeshInitialized += HandleInitialize;
+        GameEvents.OnLobbyHosted += CreateMeshObject;
     }
     void OnDisable()
     {
-        spawnMeshAction.performed -= HandleInputAction;
         GameEvents.OnSceneMeshInitialized -= HandleInitialize;
+        GameEvents.OnLobbyHosted -= CreateMeshObject;
     }
 
     void HandleInitialize(MeshFilter filter, List<Vector3> treePositions, List<Quaternion> treeRotations)
@@ -30,11 +27,6 @@ public class HostMesh : NetworkBehaviour
         _meshFilter = filter;
         _treePositions = treePositions;
         _treeRotations = treeRotations;
-    }
-
-    void HandleInputAction(InputAction.CallbackContext ctx)
-    {
-        CreateMeshObject();
     }
 
     void CreateMeshObject()
