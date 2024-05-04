@@ -10,6 +10,9 @@ public class ClientMesh : NetworkBehaviour
     public NetworkList<Vector3> normals;
     public NetworkList<Vector2> uvs;
     public NetworkList<int> triangles;
+    public NetworkVariable<Vector3> position = new NetworkVariable<Vector3>();
+    public NetworkVariable<Quaternion> rotation = new NetworkVariable<Quaternion>();
+    public NetworkVariable<Vector3> scale = new NetworkVariable<Vector3>();
 
     void Awake()
     {
@@ -35,7 +38,7 @@ public class ClientMesh : NetworkBehaviour
         foreach (var n in normals) nL.Add(n);
         foreach (var t in triangles) tL.Add(t);
         foreach (var u in uvs) uL.Add(u);
-        
+
         Mesh mesh = new()
         {
             vertices = vL.ToArray(),

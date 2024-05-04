@@ -71,6 +71,10 @@ public class HostMesh : NetworkBehaviour
         foreach (var t in mesh.triangles) clientMesh.triangles.Add(t);
         foreach (var u in mesh.uv) clientMesh.uvs.Add(u);
 
+        clientMesh.transform.position = meshFilter.transform.position;
+        clientMesh.transform.rotation = meshFilter.transform.rotation;
+        clientMesh.transform.localScale = meshFilter.transform.localScale;
+
         clientMesh.NetworkObject.Spawn(true);
     }
 }
