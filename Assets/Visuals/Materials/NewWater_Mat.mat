@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.9
     - _Depth_Fade: 0.1
     - _Foam_Amount: 84.3
     - _Foam_Speed: 0.001
