@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public class HostMesh : NetworkBehaviour
@@ -17,9 +18,22 @@ public class HostMesh : NetworkBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameEvents.OnSceneMeshInitialized += SetMeshFilter;
+    }
+    private void OnDisable()
+    {
+        GameEvents.OnSceneMeshInitialized -= SetMeshFilter;
+    }
+
+    private void SetMeshFilter(MeshFilter filter)
+    {
+        meshFilter = filter;
+    }
+
     void CreateMeshObject()
     {
-        // Mesh mesh = meshFilter.mesh;
         sceneParent = FindObjectOfType<RoomEnvironmentInitializer>().transform;
 
         if (sceneParent == null)
@@ -42,7 +56,13 @@ public class HostMesh : NetworkBehaviour
             DebugConsole.Success("Found Scene Room");
         }
 
-        Mesh mesh = sceneParent.GetChild(3).GetComponent<MeshFilter>().mesh;
+        Mesh mesh = meshFilter.mesh;
+
+        if (mesh == null)
+        {
+            Debug.Log("Mesh not found");
+            return;
+        }
         
         ClientMesh clientMesh = Instantiate(clientMeshPrefab);
 
