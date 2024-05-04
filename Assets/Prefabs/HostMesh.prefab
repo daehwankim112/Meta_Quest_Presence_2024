@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396b1e2763cc4cbaa9d558a696940ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshFilter: {fileID: 6295416762179840975}
+  meshFilter: {fileID: 6295416762179840975}
   clientMeshPrefab: {fileID: 1681529917129080513, guid: 71dab1594ec687b46ad00bba8ba6c467,
     type: 3}
 --- !u!1 &9187272379079657909
@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2165119755812114113
 Transform:
   m_ObjectHideFlags: 0
