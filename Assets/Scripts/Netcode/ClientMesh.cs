@@ -69,5 +69,12 @@ public class ClientMesh : NetworkBehaviour
         }
         
         meshFilter.mesh = mesh;
+        
+        _vertices.Dispose();
+        _normals.Dispose();
+        _uvs.Dispose();
+        _triangles.Dispose();
+        _treePositions.Dispose();
+        _treeRotations.Dispose();
     }
 }
