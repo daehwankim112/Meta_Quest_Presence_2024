@@ -7,6 +7,7 @@ public class ClientMesh : NetworkBehaviour
 
     public void SetMesh(Mesh mesh)
     {
+        DebugConsole.Success("Hello");
         meshFilter.mesh = mesh;
     }
 }

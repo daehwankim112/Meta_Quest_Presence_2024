@@ -67,18 +67,18 @@ public class HostMesh : NetworkBehaviour
     {
         Mesh mesh = new()
         {
-            vertices = new Vector3[_vertices.Count],
+            /*vertices = new Vector3[_vertices.Count],
             normals = new Vector3[_normals.Count],
-            triangles = new int[_triangles.Count]
+            triangles = new int[_triangles.Count]*/
         };
 
-        for (int i = 0; i < _vertices.Count; i++) mesh.vertices[i] = _vertices[i];
+        /*for (int i = 0; i < _vertices.Count; i++) mesh.vertices[i] = _vertices[i];
         for (int i = 0; i < _normals.Count; i++) mesh.normals[i] = _normals[i];
         for (int i = 0; i < _triangles.Count; i++) mesh.triangles[i] = _triangles[i];
         
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-        mesh.Optimize();
+        mesh.Optimize();*/
 
         return mesh;
     }
