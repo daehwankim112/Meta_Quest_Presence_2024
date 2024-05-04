@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 3488756898884008314}
+  treePrefab: {fileID: 1272646332206331060, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
+    type: 3}
 --- !u!23 &3685997152537385694
 MeshRenderer:
   m_ObjectHideFlags: 0
