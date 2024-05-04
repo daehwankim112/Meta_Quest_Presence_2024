@@ -76,9 +76,9 @@ public class HostMesh : NetworkBehaviour
         for (int i = 0; i < _normals.Count; i++) mesh.normals[i] = _normals[i];
         for (int i = 0; i < _triangles.Count; i++) mesh.triangles[i] = _triangles[i];
         
-        /*mesh.RecalculateBounds();
+        mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-        mesh.Optimize();*/
+        mesh.Optimize();
 
         return mesh;
     }
