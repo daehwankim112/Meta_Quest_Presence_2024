@@ -38,7 +38,8 @@ public class HostMesh : NetworkBehaviour
 
     void Update()
     {
-        if (!IsHost) return;
+        Debug.LogError(_vertices.Count);
+        if (!IsHost || !IsOwner) return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -58,7 +59,7 @@ public class HostMesh : NetworkBehaviour
     void CreateMeshObject()
     {
         ClientMesh clientMesh = Instantiate(clientMeshPrefab);
-        clientMesh.SetMesh(CreateMesh());
+        //clientMesh.SetMesh(CreateMesh());
         clientMesh.NetworkObject.Spawn(true);
     }
     
