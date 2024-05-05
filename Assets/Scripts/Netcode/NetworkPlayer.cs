@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System;
+using Unity.Netcode.Components;
 
 [HelpURL("https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw")]
 
@@ -21,6 +23,8 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        GameEvents.OnLobbyJoined += ScaleNetworkPlayer;
+
         var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
         if (IsOwnedByServer)
         {
@@ -39,6 +43,17 @@ public class NetworkPlayer : NetworkBehaviour
                 item.enabled = false;
             }
         }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        GameEvents.OnLobbyJoined -= ScaleNetworkPlayer;
+    }
+
+    private void ScaleNetworkPlayer()
+    {
+        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     void Update()
