@@ -51,19 +51,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamAmount: 0.7
+    - _Alpha: 0.95
+    - _DepthFade: 0.2
+    - _DepthFoamNoiseScale: 20
+    - _DepthFoamStep: 0.6
+    - _DepthFoamSwirl: 1
+    - _DepthFoamWidth: 0.08
+    - _FoamAmount: 0.74
     - _FoamCutoff: 6.46
-    - _FoamScale: 76.42
+    - _FoamScale: 7.64
     - _FoamSpeed: 0.001
-    - _HeightFactor: 0.0002
+    - _FoamWidth: 0.09
+    - _HeightFactor: 0.2
     - _HeightOffset: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 10
+    - _Scale: 1
     - _SwirlSpeed: 0.75
     - _TideSpeed: 0.001
-    - _WaveSize: 100
+    - _WaveSize: 7
     m_Colors:
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.02745098}
+    - _DeepColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.019607844}
+    - _ShallowColor: {r: 0.003921569, g: 0.7254902, b: 0.8431372, a: 1}
     - _SurfaceColor: {r: 0.004763192, g: 0.7244353, b: 0.8415094, a: 0.78431374}
   m_BuildTextureStacks: []
