@@ -17,7 +17,7 @@ public static class RoomEnvironmentHelpers
                point.z < halfZ && point.z > -halfZ;
     }
 
-    public static void DestroyInBox(MeshFilter meshFilter, BoxCollider box)
+    public static void RemoveTrianglesInBox(MeshFilter meshFilter, BoxCollider box)
     {
         Mesh mesh = meshFilter.mesh;
         Vector3[] vertices = mesh.vertices;
@@ -38,10 +38,6 @@ public static class RoomEnvironmentHelpers
         }
 
         mesh.triangles = triangles.ToArray();
-
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-        mesh.Optimize();
     }
     
     public static Vector3 PivotVector3(Vector3 point, Vector3 pivot, Quaternion rotation) 

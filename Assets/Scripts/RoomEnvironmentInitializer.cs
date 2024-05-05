@@ -62,7 +62,6 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         yield return findRoomInterval.Wait;
         
         DestroyWalls(room);
-        RefreshSceneMeshCollider();
         var populatedTransforms = PopulateTrees();
         
         GameEvents.SceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
@@ -93,17 +92,18 @@ public class RoomEnvironmentInitializer : MonoBehaviour
                 BoxCollider boxCol = child.gameObject.AddComponent<BoxCollider>();
                 boxCol.size = boxCol.size.With(z: destroyRadius);
                 
-                RoomEnvironmentHelpers.DestroyInBox(_sceneMeshFilter, boxCol);
+                RoomEnvironmentHelpers.RemoveTrianglesInBox(_sceneMeshFilter, boxCol);
             }
         }
-
-        Destroy(room.gameObject);
-    }
-
-    void RefreshSceneMeshCollider()
-    {
+        
+        _sceneMeshFilter.mesh.RecalculateNormals();
+        _sceneMeshFilter.mesh.RecalculateBounds();
+        _sceneMeshFilter.mesh.Optimize();
+        
         Destroy(_sceneMeshFilter.GetComponent<MeshCollider>());
         _sceneMeshFilter.gameObject.AddComponent<MeshCollider>();
+        
+        Destroy(room.gameObject);
     }
 
     (List<Vector3> treePositions, List<Quaternion> treeRotations) PopulateTrees()

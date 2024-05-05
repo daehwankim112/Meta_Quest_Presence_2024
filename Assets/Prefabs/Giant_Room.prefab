@@ -673,7 +673,7 @@ MonoBehaviour:
   destroyRadius: 0.3
   treePrefab: {fileID: 1272646332206331060, guid: 0ca6d26bd718bdc46b93b8955b55c99e,
     type: 3}
-  treeScarcity: 75000000
+  treeScarcity: 75
   minHeight: 0.3
   treeNoiseThreshold: 0
   treeNormalThreshold: 0.3
