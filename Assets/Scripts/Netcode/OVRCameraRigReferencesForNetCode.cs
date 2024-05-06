@@ -4,6 +4,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [HelpURL("https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw")]
@@ -27,6 +28,11 @@ public class OVRCameraRigReferencesForNetCode : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    public void ScaleNetworkPlayer()
+    {
+        transform.localScale *= 0.2f;
     }
 
     private void OnDestroy()

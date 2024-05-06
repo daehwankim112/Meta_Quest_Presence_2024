@@ -23,6 +23,7 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
         GameEvents.OnLobbyJoined += ScaleNetworkPlayer;
 
         var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
@@ -53,7 +54,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     private void ScaleNetworkPlayer()
     {
-        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        OVRCameraRigReferencesForNetCode.Singleton.ScaleNetworkPlayer();
     }
 
     void Update()
@@ -71,6 +72,8 @@ public class NetworkPlayer : NetworkBehaviour
 
             rightHand.position = OVRCameraRigReferencesForNetCode.Singleton.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.rightHand.rotation;
+            
+            
         }
 
     }
