@@ -24,8 +24,6 @@ public class NetworkPlayer : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        GameEvents.OnLobbyJoined += ScaleNetworkPlayer;
-
         var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
         if (IsOwnedByServer)
         {
@@ -44,17 +42,6 @@ public class NetworkPlayer : NetworkBehaviour
                 item.enabled = false;
             }
         }
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        base.OnNetworkDespawn();
-        GameEvents.OnLobbyJoined -= ScaleNetworkPlayer;
-    }
-
-    private void ScaleNetworkPlayer()
-    {
-        OVRCameraRigReferencesForNetCode.Singleton.ScaleNetworkPlayer();
     }
 
     void Update()
