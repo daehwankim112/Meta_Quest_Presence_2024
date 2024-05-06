@@ -36,18 +36,12 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     IEnumerator Start()
     {
-        const string spatialPermission = "com.oculus.permission.USE_SCENE";
-        bool hasUserAuthorizedPermission = UnityEngine.Android.Permission.HasUserAuthorizedPermission(spatialPermission);
-
-        if (!hasUserAuthorizedPermission) DebugConsole.Warn("Please enable the permission in the Oculus app");
-        else DebugConsole.Success("com.oculus.permission.USE_SCENE Permission granted");
-
-        findRoomInterval.Init();
-
+        // wait until the scene parent children to know if the scene is ready
         while (sceneParent.childCount <= 0 || sceneParent.GetChild(0).childCount <= 0)
         {
             yield return null;
         }
+        
         OVRSceneRoom room = sceneParent.GetChild(0).GetComponent<OVRSceneRoom>();
 
         if (room != null)
@@ -55,6 +49,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
             DebugConsole.Success("Found Scene Room");
         }
 
+        // wait until the scene mesh is ready
         while (_sceneMeshFilter == null || _sceneMeshFilter.mesh.vertexCount <= 0)
         {
             yield return null;
@@ -64,13 +59,15 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         yield return findRoomInterval.Wait;
         
         DestroyWalls(room);
-        var populatedTransforms = PopulateTrees();
         
+        // create trees, and send an event that will recreate the trees on other clients
+        (List<Vector3> treePositions, List<Quaternion> treeRotations) populatedTransforms = PopulateTrees();
         GameEvents.SceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
     }
 
-    
-
+    /// <summary>
+    /// Handled in RoomMeshEvent.OnRoomMeshLoadCompleted UnityEvent
+    /// </summary>
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
         _sceneMeshFilter = meshFilter;
@@ -81,6 +78,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void DestroyWalls(OVRSceneRoom room)
     {
+        // add a box collider for calculations on each child, and destroy the scene's mesh in the bounds of the boxes
         foreach (Transform child in room.transform)
         {
             float childMag = child.position.magnitude;
@@ -102,6 +100,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         _sceneMeshFilter.mesh.RecalculateBounds();
         _sceneMeshFilter.mesh.Optimize();
         
+        // refresh mesh collider
         Destroy(_sceneMeshFilter.GetComponent<MeshCollider>());
         _sceneMeshFilter.gameObject.AddComponent<MeshCollider>();
         
@@ -124,14 +123,13 @@ public class RoomEnvironmentInitializer : MonoBehaviour
             float noiseSample = Mathf.PerlinNoise(vertice.x + randomNoisePosition.x, vertice.z + randomNoisePosition.y);
             if (noiseSample >= treeNoiseThreshold && normalY < treeNormalThreshold && vertice.y > minHeight && treePrefab.ValidPlacement(vertice))
             {
+                Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0f);
+                
                 validTreePositions.Add(vertice);
-                validTreeRotations.Add(Quaternion.Euler(0, Random.Range(0f, 360f), 0f));
+                validTreeRotations.Add(randomRotation);
+                
+                Instantiate(treePrefab, vertice, randomRotation, _sceneMeshFilter.transform);
             }
-        }
-
-        for (int i = 0; i < validTreePositions.Count; i++)
-        {
-            Instantiate(treePrefab, validTreePositions[i], validTreeRotations[i], _sceneMeshFilter.transform);
         }
 
         return (validTreePositions, validTreeRotations);
