@@ -20,6 +20,8 @@ public class NetworkPlayer : NetworkBehaviour
 
     public Renderer[] meshToDisable;
 
+    private bool scaled = false;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -59,9 +61,17 @@ public class NetworkPlayer : NetworkBehaviour
 
             rightHand.position = OVRCameraRigReferencesForNetCode.Singleton.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.rightHand.rotation;
-            
-            
         }
-
+        if (IsClient)
+        {
+            if (!scaled)
+            {
+                DebugConsole.Log("Client scaled");
+                head.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+                leftHand.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+                rightHand.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+                scaled = true;
+            }
+        }
     }
 }
