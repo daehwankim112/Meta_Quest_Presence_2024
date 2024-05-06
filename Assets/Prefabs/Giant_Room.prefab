@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 8777689056966068175}
   - component: {fileID: 1923648723061683807}
   - component: {fileID: 2844477972004422458}
+  - component: {fileID: 8804550635535929570}
   m_Layer: 0
   m_Name: Giant_Room
   m_TagString: Untagged
@@ -690,6 +691,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMeshMaterial: {fileID: 2100000, guid: d9973e3340ce36e488bc36b131d1923a, type: 2}
+--- !u!192 &8804550635535929570
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731400296381782665}
+  serializedVersion: 2
+  m_Size: {x: 25, y: 15, z: 25}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_IsViewVolume: 1
 --- !u!1 &3979231173446373091
 GameObject:
   m_ObjectHideFlags: 0
