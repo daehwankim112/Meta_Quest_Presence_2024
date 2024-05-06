@@ -36,6 +36,8 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     IEnumerator Start()
     {
+        findRoomInterval.Init();
+        
         // wait until the scene parent children to know if the scene is ready
         while (sceneParent.childCount <= 0 || sceneParent.GetChild(0).childCount <= 0)
         {
@@ -48,7 +50,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         {
             DebugConsole.Success("Found Scene Room");
         }
-
+        
         // wait until the scene mesh is ready
         while (_sceneMeshFilter == null || _sceneMeshFilter.mesh.vertexCount <= 0)
         {
