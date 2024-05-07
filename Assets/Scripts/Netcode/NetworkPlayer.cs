@@ -62,14 +62,14 @@ public class NetworkPlayer : NetworkBehaviour
             rightHand.position = OVRCameraRigReferencesForNetCode.Singleton.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.rightHand.rotation;
         }
-        if (!IsServer)
+        if (!IsServer && IsOwner)
         {
             if (!scaled)
             {
-                DebugConsole.Log("Client scaled");
-                head.localScale = new Vector3(0.001f, 0.001f, 0.001f);
-                leftHand.localScale = new Vector3(0.001f, 0.001f, 0.001f);
-                rightHand.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+                DebugConsole.Log("Client scaled. ID: " + transform.GetComponent<NetworkObject>().NetworkObjectId);
+                head.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                leftHand.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                rightHand.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                 scaled = true;
             }
         }
