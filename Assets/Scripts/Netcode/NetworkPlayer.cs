@@ -62,7 +62,7 @@ public class NetworkPlayer : NetworkBehaviour
             rightHand.position = OVRCameraRigReferencesForNetCode.Singleton.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.rightHand.rotation;
         }
-        if (IsClient)
+        if (!IsServer)
         {
             if (!scaled)
             {
