@@ -75,6 +75,9 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         _sceneMeshFilter = meshFilter;
         DebugConsole.Success("Scene mesh cached");
         
+        Destroy(meshFilter.GetComponent<OVRSemanticClassification>());
+        Destroy(meshFilter.GetComponent<OVRSceneAnchor>());
+        
         meshFilter.transform.SetParent(transform);
     }
 
