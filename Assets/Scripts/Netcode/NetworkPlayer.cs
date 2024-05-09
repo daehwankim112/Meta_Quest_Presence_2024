@@ -50,17 +50,17 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (IsOwner)
         {
-            root.position = OVRCameraRigReferencesForNetCode.Singleton.root.position;
-            root.rotation = OVRCameraRigReferencesForNetCode.Singleton.root.rotation;
+            root.position = OVRCameraRigReferencesForNetCode.instance.root.position;
+            root.rotation = OVRCameraRigReferencesForNetCode.instance.root.rotation;
 
-            head.position = OVRCameraRigReferencesForNetCode.Singleton.head.position;
-            head.rotation = OVRCameraRigReferencesForNetCode.Singleton.head.rotation;
+            head.position = OVRCameraRigReferencesForNetCode.instance.head.position;
+            head.rotation = OVRCameraRigReferencesForNetCode.instance.head.rotation;
 
-            leftHand.position = OVRCameraRigReferencesForNetCode.Singleton.leftHand.position;
-            leftHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.leftHand.rotation;
+            leftHand.position = OVRCameraRigReferencesForNetCode.instance.leftHand.position;
+            leftHand.rotation = OVRCameraRigReferencesForNetCode.instance.leftHand.rotation;
 
-            rightHand.position = OVRCameraRigReferencesForNetCode.Singleton.rightHand.position;
-            rightHand.rotation = OVRCameraRigReferencesForNetCode.Singleton.rightHand.rotation;
+            rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
+            rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
         }
         if (!IsServer && IsOwner)
         {

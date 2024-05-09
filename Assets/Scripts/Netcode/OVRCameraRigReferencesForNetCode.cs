@@ -11,35 +11,23 @@ using UnityEngine;
 
 public class OVRCameraRigReferencesForNetCode : MonoBehaviour
 {
-    public static OVRCameraRigReferencesForNetCode Singleton;
+    public static OVRCameraRigReferencesForNetCode instance;
 
     public Transform root;
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
 
-    private void Awake()
+    void OnEnable()
     {
-        if (Singleton == null)
-        {
-            Singleton = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        instance = this;
     }
 
-    public void ScaleNetworkPlayer()
+    void OnDestroy()
     {
-        transform.localScale *= 0.2f;
-    }
-
-    private void OnDestroy()
-    {
-        if (Singleton == this)
+        if (instance == this)
         {
-            Singleton = null;
+            instance = null;
         }
     }
 }

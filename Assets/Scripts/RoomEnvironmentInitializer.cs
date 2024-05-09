@@ -24,13 +24,11 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnLobbyJoined += DisableThis;
-        GameEvents.OnLobbyJoined += ScaleNetworkPlayer;
         GameEvents.OnLobbyHosted += DisableThis;
     }
     void OnDisable()
     {
         GameEvents.OnLobbyJoined -= DisableThis;
-        GameEvents.OnLobbyJoined -= ScaleNetworkPlayer;
         GameEvents.OnLobbyHosted -= DisableThis;
     }
 
@@ -143,10 +141,5 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     void DisableThis()
     {
         gameObject.SetActive(false);
-    }
-
-    void ScaleNetworkPlayer()
-    {
-        OVRCameraRigReferencesForNetCode.Singleton.ScaleNetworkPlayer();
     }
 }
