@@ -64,7 +64,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         
         // create trees, and send an event that will recreate the trees on other clients
         (List<Vector3> treePositions, List<Quaternion> treeRotations) populatedTransforms = PopulateTrees();
-        GameEvents.SceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
+        GameEvents.InvokeSceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
     }
 
     /// <summary>

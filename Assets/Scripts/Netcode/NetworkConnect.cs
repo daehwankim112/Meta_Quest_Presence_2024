@@ -83,7 +83,7 @@ public class NetworkConnect : MonoBehaviour
 
             instance.StartCoroutine(UpdateLobby());
 
-            GameEvents.LobbyHosted();
+            GameEvents.InvokeLobbyHosted();
         }
         catch (RelayServiceException e)
         {
@@ -109,7 +109,7 @@ public class NetworkConnect : MonoBehaviour
                 Debug.Log("Client - Connected to the server.");
                 DebugConsole.Success("Client - Connected to the server.");
                 
-                GameEvents.LobbyJoined();
+                GameEvents.InvokeLobbyJoined();
             }
         }
         catch (RelayServiceException e)

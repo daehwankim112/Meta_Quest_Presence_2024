@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NuiN.NExtensions;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -77,5 +78,8 @@ public class ClientMesh : NetworkBehaviour
         }
         
         meshFilter.mesh = mesh;
+
+        Vector3 spawnPosition = _treePositions[Random.Range(0, _treePositions.Count)].Add(y: 0.5f);
+        GameEvents.InvokeRecievedSceneMeshFromHost(spawnPosition);
     }
 }
