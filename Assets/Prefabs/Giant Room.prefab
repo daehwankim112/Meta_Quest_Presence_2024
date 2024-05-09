@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2838a3278c440d4f971d540ed1c0255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomScale: 20
   findRoomInterval:
     seconds: 1
   sceneParent: {fileID: 6666654417777375821}

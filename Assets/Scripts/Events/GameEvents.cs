@@ -15,4 +15,7 @@ public static class GameEvents
 
     public static void InvokeRecievedSceneMeshFromHost(Vector3 spawnPosition) => OnRecievedSceneMeshFromHost?.Invoke(spawnPosition);
     public static event Action<Vector3> OnRecievedSceneMeshFromHost;
+
+    public static void InvokeRoomScaled() => OnRoomScaled?.Invoke();
+    public static event Action OnRoomScaled;
 }

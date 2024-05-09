@@ -78,6 +78,7 @@ public class ClientMesh : NetworkBehaviour
         }
         
         meshFilter.mesh = mesh;
+        meshFilter.transform.localScale = RoomEnvironmentInitializer.RoomScale;
 
         Vector3 spawnPosition = _treePositions[Random.Range(0, _treePositions.Count)].Add(y: 0.5f);
         GameEvents.InvokeRecievedSceneMeshFromHost(spawnPosition);

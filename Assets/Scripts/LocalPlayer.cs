@@ -15,11 +15,13 @@ public class LocalPlayer : MonoBehaviour
     {
         GameEvents.OnRecievedSceneMeshFromHost += SetPlayerAsSmall;
         GameEvents.OnLobbyHosted += SetPlayerAsGiant;
+        GameEvents.OnRoomScaled += ScaleGiant;
     }
     void OnDisable()
     {
         GameEvents.OnRecievedSceneMeshFromHost -= SetPlayerAsSmall;
         GameEvents.OnLobbyHosted -= SetPlayerAsGiant;
+        GameEvents.OnRoomScaled -= ScaleGiant;
     }
 
     void SetPlayerAsGiant()
@@ -36,5 +38,10 @@ public class LocalPlayer : MonoBehaviour
         
         giantPlayer.SetActive(false);
         smallPlayer.SetActive(true);
+    }
+
+    void ScaleGiant()
+    {
+        giantPlayer.transform.localScale = RoomEnvironmentInitializer.RoomScale;
     }
 }

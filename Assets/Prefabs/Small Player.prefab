@@ -1804,7 +1804,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 90
   orthographic: 0
@@ -7647,6 +7647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353250538992666445}
+  - component: {fileID: 7996560167385433938}
   - component: {fileID: 884336048579353827}
   - component: {fileID: 1033528431521735784}
   - component: {fileID: 4647739158872754672}
@@ -7659,7 +7660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1353250538992666445
 Transform:
   m_ObjectHideFlags: 0
@@ -7670,7 +7671,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.25, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 485582069531047009}
@@ -7678,6 +7679,22 @@ Transform:
   - {fileID: 2814557831070061842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7996560167385433938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968359863667405369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693566195292974fa1857855555ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1353250538992666445}
+  head: {fileID: 6476154280490124074}
+  leftHand: {fileID: 5753536296603003850}
+  rightHand: {fileID: 6590427409053446685}
 --- !u!114 &884336048579353827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7700,17 +7717,17 @@ MonoBehaviour:
   slopeChecker: {fileID: 6938933370334772134}
   moveSpeed: 0.375
   runSpeedMult: 1.5
-  maxAirVelocityMagnitude: 6.2
-  groundSpeedMult: 2.85
+  maxAirVelocityMagnitude: 4
+  groundSpeedMult: 5
   groundDrag: 15
   airDrag: 0.002
   airNoInputCounteractMult: 0.01
   jumpDelay:
     duration: 0.2
     startCompleted: 1
-  jumpForce: 11
+  jumpForce: 6
   maxAirJumps: 1
-  gravity: 20
+  gravity: 15
   downForceMult: 0.15
   downForceStartUpVelocity: 3
   head: {fileID: 6476154280490124074}
@@ -10837,7 +10854,7 @@ GameObject:
   - component: {fileID: 8439014583754322406}
   - component: {fileID: 7163026544799256997}
   m_Layer: 7
-  m_Name: Capsule Floater
+  m_Name: Ground Floater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10881,7 +10898,7 @@ MonoBehaviour:
   affectOthers: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1079
   drawGizmos: 1
   gizmosGroundColor: {r: 0, g: 1, b: 0, a: 1}
   gizmosAirColor: {r: 0, g: 0, b: 1, a: 1}

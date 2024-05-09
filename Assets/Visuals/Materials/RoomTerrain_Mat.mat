@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BottomPosition: 0.75
-    - _MaxSandHeight: 0.25
+    - _MaxSandHeight: 9
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0

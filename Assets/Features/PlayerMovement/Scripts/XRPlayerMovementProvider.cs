@@ -63,12 +63,10 @@ namespace NuiN.Movement
 
             forward.y = 0f;
             right.y = 0f;
-            forward.Normalize();
-            right.Normalize();
 
             Vector3 desiredMoveDirection = forward * axis.y + right * axis.x;
 
-            return desiredMoveDirection.normalized;
+            return desiredMoveDirection;
         }
     
         public Quaternion GetRotation()

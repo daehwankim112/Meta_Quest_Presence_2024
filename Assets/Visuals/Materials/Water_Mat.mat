@@ -52,24 +52,24 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0.95
-    - _DepthFade: 0.2
-    - _DepthFoamNoiseScale: 20
-    - _DepthFoamStep: 0.6
+    - _DepthFade: 2
+    - _DepthFoamNoiseScale: 0.7
+    - _DepthFoamStep: 0.68
     - _DepthFoamSwirl: 1
-    - _DepthFoamWidth: 0.08
+    - _DepthFoamWidth: 1.25
     - _FoamAmount: 0.74
     - _FoamCutoff: 6.46
     - _FoamScale: 7.64
     - _FoamSpeed: 0.001
     - _FoamWidth: 0.09
-    - _HeightFactor: 0.2
-    - _HeightOffset: 0
+    - _HeightFactor: 4.95
+    - _HeightOffset: -5.73
     - _QueueControl: 1
     - _QueueOffset: 0
     - _Scale: 1
-    - _SwirlSpeed: 0.75
-    - _TideSpeed: 0.001
-    - _WaveSize: 7
+    - _SwirlSpeed: 0.85
+    - _TideSpeed: 0.03
+    - _WaveSize: 0.36
     m_Colors:
     - _DeepColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.019607844}

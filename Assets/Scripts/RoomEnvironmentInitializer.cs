@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class RoomEnvironmentInitializer : MonoBehaviour
 {
+    public static Vector3 RoomScale { get; private set; }
+
+    [SerializeField] float roomScale;
+    
     [SerializeField] SerializedWaitForSeconds findRoomInterval;
     [SerializeField] Transform sceneParent;
 
@@ -18,8 +22,12 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
-    float _roomScale;
     MeshFilter _sceneMeshFilter;
+
+    void Awake()
+    {
+        RoomScale = Vector3.one * roomScale;
+    }
 
     void OnEnable()
     {
@@ -48,7 +56,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         {
             DebugConsole.Success("Found Scene Room");
         }
-        
+
         // wait until the scene mesh is ready
         while (_sceneMeshFilter == null || _sceneMeshFilter.mesh.vertexCount <= 0)
         {
@@ -63,6 +71,9 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         // create trees, and send an event that will recreate the trees on other clients
         (List<Vector3> treePositions, List<Quaternion> treeRotations) populatedTransforms = PopulateTrees();
         GameEvents.InvokeSceneMeshInitalized(_sceneMeshFilter, populatedTransforms.treePositions, populatedTransforms.treeRotations);
+
+        _sceneMeshFilter.transform.localScale = RoomScale;
+        GameEvents.InvokeRoomScaled();
     }
 
     /// <summary>
@@ -71,12 +82,12 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     public void CacheSceneMesh(MeshFilter meshFilter)
     {
         _sceneMeshFilter = meshFilter;
-        DebugConsole.Success("Scene mesh cached");
-        
-        //Destroy(meshFilter.GetComponent<OVRSemanticClassification>());
-        //Destroy(meshFilter.GetComponent<OVRSceneAnchor>());
+
+        _sceneMeshFilter.gameObject.layer = Strings.Layers.SceneMesh;
         
         meshFilter.transform.SetParent(transform);
+        
+        DebugConsole.Success("Scene mesh cached");
     }
 
     void DestroyWalls(OVRSceneRoom room)
@@ -84,9 +95,6 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         // add a box collider for calculations on each child, and destroy the scene's mesh in the bounds of the boxes
         foreach (Transform child in room.transform)
         {
-            float childMag = child.position.magnitude;
-            if (childMag > _roomScale) _roomScale = childMag;
-            
             if (!child.TryGetComponent(out OVRSemanticClassification classification)) continue;
             IReadOnlyList<string> labels = classification.Labels;
             
