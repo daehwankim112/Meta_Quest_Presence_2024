@@ -24,7 +24,7 @@ public class LocalPlayer : MonoBehaviour
 
     void SetPlayerAsGiant()
     {
-        transform.position = Vector3.zero;
+        giantPlayer.transform.position = Vector3.zero;
         
         giantPlayer.SetActive(true);
         smallPlayer.SetActive(false);
@@ -32,7 +32,7 @@ public class LocalPlayer : MonoBehaviour
     
     void SetPlayerAsSmall(Vector3 spawnPosition)
     {
-        transform.position = spawnPosition;
+        smallPlayer.transform.position = spawnPosition;
         
         giantPlayer.SetActive(false);
         smallPlayer.SetActive(true);
