@@ -49,12 +49,12 @@ GameObject:
   - component: {fileID: 8580142807264466407}
   - component: {fileID: 3645200697976223128}
   m_Layer: 0
-  m_Name: Giant_Rig
+  m_Name: Giant Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4222432872184423584
 Transform:
   m_ObjectHideFlags: 0
