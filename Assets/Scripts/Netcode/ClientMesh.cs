@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+/// <summary>
+/// Recieves mesh data from the host to create the mesh
+/// </summary>
 public class ClientMesh : NetworkBehaviour
 {
     [SerializeField] MeshFilter meshFilter;
@@ -42,6 +45,11 @@ public class ClientMesh : NetworkBehaviour
     }
 
     public override void OnNetworkSpawn()
+    {
+        CreateMesh();
+    }
+
+    void CreateMesh()
     {
         var vL = new Vector3[_vertices.Count];
         var nL = new Vector3[_normals.Count];
