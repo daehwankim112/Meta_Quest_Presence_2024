@@ -19,13 +19,13 @@ public class EventSystemDragThresholdScaler : MonoBehaviour
     void OnEnable()
     {
         GameEvents.OnLobbyHosted += ScaleUp;
-        GameEvents.OnRoomScaled += ScaleDown;
+        GameEvents.OnLobbyJoined += ScaleDown;
     }
 
     void OnDisable()
     {
         GameEvents.OnLobbyHosted -= ScaleUp;
-        GameEvents.OnRoomScaled -= ScaleDown;
+        GameEvents.OnLobbyJoined -= ScaleDown;
     }
     
     void ScaleDown()
