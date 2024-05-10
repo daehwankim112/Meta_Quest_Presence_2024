@@ -81,6 +81,8 @@ public class ClientMesh : NetworkBehaviour
         meshFilter.transform.localScale = RoomEnvironmentInitializer.RoomScale;
 
         meshFilter.gameObject.AddComponent<MeshCollider>();
+
+        if (IsHost) return;
         
         Vector3 spawnPosition = _treePositions[Random.Range(0, _treePositions.Count)];
         GameEvents.InvokeRecievedSceneMeshFromHost(spawnPosition);
