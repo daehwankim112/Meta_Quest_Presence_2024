@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 114404121565817838}
   - component: {fileID: 114043904411177872}
   - component: {fileID: 6409022935264151129}
+  - component: {fileID: 2191239796302912475}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -246,6 +247,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
   _useInitialPressPositionForDrag: 1
+--- !u!114 &2191239796302912475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132932906392712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0281b5f8e345446b0b6e1b0e4bcdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 114404121565817838}
+  normalDragThreshold: 5
 --- !u!1 &1525749097544336
 GameObject:
   m_ObjectHideFlags: 0
