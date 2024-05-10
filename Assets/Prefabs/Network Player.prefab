@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1910374426260647930}
   - component: {fileID: 3704459958375433082}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 1836160470198601111}
   - component: {fileID: 1637036282349780120}
   - component: {fileID: 1048007783412156477}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RightHandCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: -8063438674459001740}
   - component: {fileID: 5955135456560989951}
   - component: {fileID: 991120698843952630}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Network Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4565714921494381758}
   - component: {fileID: 4931920080213082953}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6303584583179254718}
   - component: {fileID: 8880481171821595335}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 648272557712008269}
   - component: {fileID: 6633866544467452297}
   - component: {fileID: 565716013566555021}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HeadCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 7768239533231959275}
   - component: {fileID: 225319167322862398}
   - component: {fileID: 6390331222518444841}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LeftHandCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
