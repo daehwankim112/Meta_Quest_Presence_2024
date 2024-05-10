@@ -36,7 +36,7 @@ public class LocalPlayer : MonoBehaviour
     
     void SetPlayerAsSmall(Vector3 spawnPosition)
     {
-        smallPlayer.transform.position = spawnPosition.Add(spawnHeight);
+        smallPlayer.transform.position = spawnPosition.Add(y: spawnHeight);
         
         giantPlayer.SetActive(false);
         smallPlayer.SetActive(true);

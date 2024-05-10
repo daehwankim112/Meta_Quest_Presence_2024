@@ -13,6 +13,7 @@ public class EventSystemDragThresholdScaler : MonoBehaviour
     {
         _initialDragThreshold = eventSystem.pixelDragThreshold;
         eventSystem.pixelDragThreshold = _initialDragThreshold * Mathf.RoundToInt(RoomEnvironmentInitializer.RoomScale.magnitude);
+        DebugConsole.Log("Drag Threshold: " + RoomEnvironmentInitializer.RoomScale.magnitude);
     }
 
     void OnEnable()
