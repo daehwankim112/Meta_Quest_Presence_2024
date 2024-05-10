@@ -5,6 +5,8 @@ public class LocalPlayer : MonoBehaviour
 {
     [SerializeField] GameObject giantPlayer;
     [SerializeField] GameObject smallPlayer;
+
+    [SerializeField] float spawnHeight = 10f;
     
     void Start()
     {
@@ -34,7 +36,7 @@ public class LocalPlayer : MonoBehaviour
     
     void SetPlayerAsSmall(Vector3 spawnPosition)
     {
-        smallPlayer.transform.position = spawnPosition;
+        smallPlayer.transform.position = spawnPosition.Add(spawnHeight);
         
         giantPlayer.SetActive(false);
         smallPlayer.SetActive(true);
