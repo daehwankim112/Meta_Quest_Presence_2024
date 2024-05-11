@@ -1,7 +1,4 @@
 using NuiN.Movement;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +18,6 @@ public class GiantGrabbing : MonoBehaviour
         Right
     }
 
-
     void OnEnable()
     {
         leftHandGrabAction.action.performed += LeftGrab;
@@ -29,8 +25,7 @@ public class GiantGrabbing : MonoBehaviour
         rightHandGrabAction.action.performed += RightGrab;
         rightHandGrabAction.action.canceled += RightRelease;
     }
-
-
+    
     void OnDisable()
     {
         leftHandGrabAction.action.performed -= LeftGrab;
@@ -39,6 +34,7 @@ public class GiantGrabbing : MonoBehaviour
         rightHandGrabAction.action.canceled -= RightRelease;
 
     }
+    
     void Start()
     {
         leftHandGrabAction.Enable();

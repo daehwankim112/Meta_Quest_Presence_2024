@@ -7,7 +7,7 @@ public class Hand
 {
     public Transform HeldTransform { get; private set; }
     public bool IsHoldingObject => _currentHeldObject != null;
-    private IGrabbable _currentHeldObject;
+    private INetworkGrabbable _currentHeldObject;
     float _grabRadius;
 
     public Hand(float grabRadius)
@@ -19,20 +19,20 @@ public class Hand
     {
         if (IsHoldingObject) return;
         Collider[] colliders = Physics.OverlapSphere(grabPosition, _grabRadius);
-        Dictionary<IGrabbable, Transform> grabbables = new();
+        Dictionary<INetworkGrabbable, Transform> grabbables = new();
         foreach (var collider in colliders)
         {
-            if (collider.TryGetComponent(out IGrabbable grabbable))
+            if (collider.TryGetComponent(out INetworkGrabbable grabbable))
             {
                 grabbables.Add(grabbable, collider.transform);
             }
         }
         if (grabbables.Count == 0) return;
 
-        KeyValuePair<IGrabbable, Transform> closestGrabbable = new(null, null);
+        KeyValuePair<INetworkGrabbable, Transform> closestGrabbable = new(null, null);
         float maxDistance = float.MaxValue;
         
-        foreach (var grabbable in grabbables)
+        foreach (KeyValuePair<INetworkGrabbable, Transform> grabbable in grabbables)
         {
             float distance = Vector3.Distance(grabPosition, grabbable.Value.position);
             if (distance < maxDistance)
@@ -43,6 +43,7 @@ public class Hand
         }
         _currentHeldObject = closestGrabbable.Key;
         HeldTransform = closestGrabbable.Value;
+        
         _currentHeldObject.Grabbed();
     }
 
