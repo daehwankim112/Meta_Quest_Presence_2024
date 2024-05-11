@@ -20,7 +20,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     void INetworkGrabbable.Grabbing(Vector3 position)
     {
         var idList = new List<ulong>() { OwnerClientId };
-        BeingGrabbedClientRpc(new ClientRpcParams() { Send = { TargetClientIds = idList } }, position);
+        BeingGrabbedClientRpc(position, new ClientRpcParams() { Send = { TargetClientIds = idList } });
     }
 
     [ClientRpc]
@@ -33,7 +33,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     }
     
     [ClientRpc]
-    void BeingGrabbedClientRpc(ClientRpcParams rpcParams, Vector3 position)
+    void BeingGrabbedClientRpc(Vector3 position, ClientRpcParams rpcParams)
     {
         if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
         
