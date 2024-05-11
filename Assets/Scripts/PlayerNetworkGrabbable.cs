@@ -18,6 +18,6 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     [ClientRpc]
     void TestClientRpc(ClientRpcParams rpcParams)
     {
-        DebugConsole.Success($"Recieved grab? {OwnerClientId}");
+        DebugConsole.Success($"Recieved grab? {rpcParams.Send.TargetClientIds[0]}");
     }
 }
