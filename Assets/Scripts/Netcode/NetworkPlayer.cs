@@ -28,7 +28,6 @@ public class NetworkPlayer : NetworkBehaviour
         base.OnNetworkSpawn();
         
         NetworkObject networkObj = GetComponent<NetworkObject>();
-        networkObj.ChangeOwnership(NetworkManager.Singleton.LocalClientId);
         var myID = networkObj.OwnerClientId;
         
         if (IsOwnedByServer)
