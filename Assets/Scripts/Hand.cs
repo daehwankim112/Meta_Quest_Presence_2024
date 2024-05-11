@@ -42,6 +42,11 @@ public class Hand
         DebugConsole.Log("Grabbed Object");
     }
 
+    public void Grabbing(Vector3 position)
+    {
+        _currentHeldObject.Grabbing(position);
+    }
+
     public void Release()
     {
         if (!IsHoldingObject) return;

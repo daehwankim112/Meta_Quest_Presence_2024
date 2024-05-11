@@ -32,7 +32,6 @@ public class GiantGrabbing : MonoBehaviour
         leftHandGrabAction.action.canceled -= LeftRelease;
         rightHandGrabAction.action.performed -= RightGrab;
         rightHandGrabAction.action.canceled -= RightRelease;
-
     }
     
     void Start()
@@ -70,6 +69,11 @@ public class GiantGrabbing : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(_leftHand.IsHoldingObject) _leftHand.Grabbing(leftHandCollider.transform.position);
+        if(_rightHand.IsHoldingObject) _rightHand.Grabbing(rightHandCollider.transform.position);
+    }
 
     void LeftRelease(InputAction.CallbackContext context)
     {

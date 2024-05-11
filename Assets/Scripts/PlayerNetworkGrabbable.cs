@@ -5,20 +5,48 @@ using UnityEngine;
 
 public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
 {
-    public void Grabbed()
+    void INetworkGrabbable.Grabbed()
     {
         var idList = new List<ulong>() { OwnerClientId };
-        TestClientRpc(new ClientRpcParams() { Send = {TargetClientIds = idList} });
+        GrabbedClientRpc(new ClientRpcParams() { Send = {TargetClientIds = idList} });
+    }
+    
+    void INetworkGrabbable.Released()
+    {
+        var idList = new List<ulong>() { OwnerClientId };
+        ReleasedClientRpc(new ClientRpcParams() { Send = {TargetClientIds = idList} });
     }
 
-    public void Released()
+    void INetworkGrabbable.Grabbing(Vector3 position)
     {
-
+        var idList = new List<ulong>() { OwnerClientId };
+        BeingGrabbedClientRpc(new ClientRpcParams() { Send = { TargetClientIds = idList } }, position);
     }
 
     [ClientRpc]
-    void TestClientRpc(ClientRpcParams rpcParams)
+    void GrabbedClientRpc(ClientRpcParams rpcParams)
     {
-        DebugConsole.Success($"Recieved grab? {OwnerClientId}");
+        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        
+        DebugConsole.Success("Was Grabbed!");
+        GameEvents.InvokeLocalClientGrabbed();
+    }
+    
+    [ClientRpc]
+    void BeingGrabbedClientRpc(ClientRpcParams rpcParams, Vector3 position)
+    {
+        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        
+        DebugConsole.Log($"Being grabbed at: {position}");
+        GameEvents.InvokeLocalClientBeingGrabbed(position);
+    }
+    
+    [ClientRpc]
+    void ReleasedClientRpc(ClientRpcParams rpcParams)
+    {
+        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        
+        DebugConsole.Log("Was Released!");
+        GameEvents.InvokeLocalClientReleased();
     }
 }
