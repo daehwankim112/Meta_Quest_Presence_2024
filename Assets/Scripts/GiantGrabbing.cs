@@ -48,11 +48,9 @@ public class GiantGrabbing : MonoBehaviour
         switch (handSide)
         {
             case HandSide.Left:
-                DebugConsole.Log("Left Hand Grabbing");
                 _leftHand.Grab(leftHandCollider.transform.position);
                 break;
             case HandSide.Right:
-                DebugConsole.Log("Right Hand Grabbing");
                 _rightHand.Grab(rightHandCollider.transform.position);
                 break;
         }
@@ -63,10 +61,10 @@ public class GiantGrabbing : MonoBehaviour
         switch (handSide)
         {
             case HandSide.Left:
-                DebugConsole.Log("Left Hand Releasing");
+                _leftHand.Release();
                 break;
             case HandSide.Right:
-                DebugConsole.Log("Right Hand Releasing");
+                _rightHand.Release();
                 break;
         }
     }

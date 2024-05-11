@@ -45,6 +45,7 @@ public class Hand
         HeldTransform = closestGrabbable.Value;
         
         _currentHeldObject.Grabbed();
+        DebugConsole.Log("Grabbed Object");
     }
 
     public void Release()
