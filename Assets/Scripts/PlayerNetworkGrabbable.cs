@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
+using UnityEngine;
 
 public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
 {
@@ -18,6 +19,6 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     [ClientRpc]
     void TestClientRpc(ClientRpcParams rpcParams)
     {
-        DebugConsole.Success($"Recieved grab? {rpcParams.Send.TargetClientIds[0]}");
+        DebugConsole.Success($"Recieved grab? {OwnerClientId}");
     }
 }

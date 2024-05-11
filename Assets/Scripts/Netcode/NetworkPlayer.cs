@@ -26,8 +26,11 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        var myID = transform.GetComponent<NetworkObject>().NetworkObjectId;
+        
+        NetworkObject networkObj = GetComponent<NetworkObject>();
+        networkObj.ChangeOwnership(NetworkManager.Singleton.LocalClientId);
+        var myID = networkObj.OwnerClientId;
+        
         if (IsOwnedByServer)
         {
             transform.name = "Host:" + myID;    //this must be the host
