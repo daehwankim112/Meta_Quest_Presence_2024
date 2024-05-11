@@ -39,19 +39,20 @@ public class GiantGrabbing : MonoBehaviour
     {
         leftHandGrabAction.Enable();
         rightHandGrabAction.Enable();
-        _leftHand = new Hand(leftHandCollider.radius);
-        _rightHand = new Hand(rightHandCollider.radius);
+        _leftHand = new Hand();
+        _rightHand = new Hand();
     }
 
     void Grab(HandSide handSide)
     {
+        float grabRadiusMult = RoomEnvironmentInitializer.RoomScale.magnitude;
         switch (handSide)
         {
             case HandSide.Left:
-                _leftHand.Grab(leftHandCollider.transform.position);
+                _leftHand.Grab(leftHandCollider.transform.position, leftHandCollider.radius * grabRadiusMult);
                 break;
             case HandSide.Right:
-                _rightHand.Grab(rightHandCollider.transform.position);
+                _rightHand.Grab(rightHandCollider.transform.position, rightHandCollider.radius * grabRadiusMult);
                 break;
         }
     }

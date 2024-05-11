@@ -8,17 +8,11 @@ public class Hand
     public Transform HeldTransform { get; private set; }
     public bool IsHoldingObject => _currentHeldObject != null;
     private INetworkGrabbable _currentHeldObject;
-    float _grabRadius;
 
-    public Hand(float grabRadius)
-    {
-        _grabRadius = grabRadius;
-    }
-
-    public void Grab(Vector3 grabPosition)
+    public void Grab(Vector3 grabPosition, float radius)
     {
         if (IsHoldingObject) return;
-        Collider[] colliders = Physics.OverlapSphere(grabPosition, _grabRadius);
+        Collider[] colliders = Physics.OverlapSphere(grabPosition, radius);
         Dictionary<INetworkGrabbable, Transform> grabbables = new();
         foreach (var collider in colliders)
         {

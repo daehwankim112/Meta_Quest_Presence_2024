@@ -13,15 +13,15 @@ using Unity.Netcode.Components;
 
 public class NetworkPlayer : NetworkBehaviour
 {
-    public Transform root;
-    public Transform head;
-    public Transform leftHand;
-    public Transform rightHand;
+    [SerializeField] Transform root;
+    [SerializeField] Transform head;
+    [SerializeField] Transform leftHand;
+    [SerializeField] Transform rightHand;
 
-    public Renderer[] meshToDisable;
-    public Collider[] collidersToDestroy;
+    [SerializeField] Renderer[] meshToDisable;
+    [SerializeField] Collider[] collidersToDestroy;
 
-    private bool scaled = false;
+    [SerializeField] float initialScale;
 
     public override void OnNetworkSpawn()
     {
@@ -49,6 +49,11 @@ public class NetworkPlayer : NetworkBehaviour
             {
                 Destroy(col);
             }
+
+            Vector3 scale = Vector3.one * RoomEnvironmentInitializer.RoomScale.magnitude * initialScale;
+            head.localScale = scale;
+            leftHand.localScale = scale;
+            rightHand.localScale = scale;
         }
     }
 
@@ -67,17 +72,6 @@ public class NetworkPlayer : NetworkBehaviour
 
             rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
-        }
-        if (!IsServer && IsOwner)
-        {
-            if (!scaled)
-            {
-                DebugConsole.Log("Client scaled. ID: " + transform.GetComponent<NetworkObject>().NetworkObjectId);
-                head.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                leftHand.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                rightHand.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                scaled = true;
-            }
         }
     }
 }
