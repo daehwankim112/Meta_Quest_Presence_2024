@@ -26,7 +26,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     [ClientRpc]
     void GrabbedClientRpc(ClientRpcParams rpcParams)
     {
-        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
         
         DebugConsole.Success("Was Grabbed!");
         GameEvents.InvokeLocalClientGrabbed();
@@ -35,7 +35,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     [ClientRpc]
     void BeingGrabbedClientRpc(Vector3 position, ClientRpcParams rpcParams)
     {
-        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
         
         DebugConsole.Log($"Being grabbed at: {position}");
         GameEvents.InvokeLocalClientBeingGrabbed(position);
@@ -44,7 +44,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     [ClientRpc]
     void ReleasedClientRpc(ClientRpcParams rpcParams)
     {
-        if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
         
         DebugConsole.Log("Was Released!");
         GameEvents.InvokeLocalClientReleased();
