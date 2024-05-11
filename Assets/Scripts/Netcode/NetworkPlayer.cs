@@ -52,7 +52,9 @@ public class NetworkPlayer : NetworkBehaviour
                 Destroy(col);
             }
 
-            Vector3 scale = Vector3.one * RoomEnvironmentInitializer.RoomScale.magnitude * initialScale;
+            Vector3 scale = Vector3.one * initialScale;
+            if (IsServer) scale *= RoomEnvironmentInitializer.RoomScale.magnitude;
+            
             head.localScale = scale;
             leftHand.localScale = scale;
             rightHand.localScale = scale;
