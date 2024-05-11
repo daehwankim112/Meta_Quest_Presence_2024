@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3353849685317621743}
+  - component: {fileID: 2428361335225795332}
   m_Layer: 0
   m_Name: LeftHandAnchor
   m_TagString: Untagged
@@ -35,6 +36,27 @@ Transform:
   - {fileID: 3080872631322873546}
   m_Father: {fileID: 3260134634808426279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2428361335225795332
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820686071184719350}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &966236650071146339
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +69,7 @@ GameObject:
   - component: {fileID: 6550503726153098935}
   - component: {fileID: 8580142807264466407}
   - component: {fileID: 3645200697976223128}
+  - component: {fileID: 5309136544377702583}
   m_Layer: 0
   m_Name: Giant Player
   m_TagString: Untagged
@@ -119,6 +142,60 @@ MonoBehaviour:
   head: {fileID: 9029079766796958092}
   leftHand: {fileID: 3353849685317621743}
   rightHand: {fileID: 4486473940225242981}
+--- !u!114 &5309136544377702583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966236650071146339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab71b696b218e14985167e775b9063c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandCollider: {fileID: 2428361335225795332}
+  rightHandCollider: {fileID: 4412769998112562858}
+  leftHandGrabAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Left Hand Grab
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7a265a73-6b75-42af-a45e-3e69915ec609
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 319afeaf-9262-4542-ab6f-d4f748422b3c
+        m_Path: <XRController>{LeftHand}/gripPressed
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Left Hand Grab
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  rightHandGrabAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right Hand Grab
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 259adbdf-8a65-459e-85cb-f9ef5b018c43
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: ee853965-e48a-4c23-b2d1-3317c6c1a80f
+        m_Path: <XRController>{RightHand}/gripPressed
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Right Hand Grab
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!1 &2323864428610428832
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4486473940225242981}
+  - component: {fileID: 4412769998112562858}
   m_Layer: 0
   m_Name: RightHandAnchor
   m_TagString: Untagged
@@ -415,6 +493,27 @@ Transform:
   - {fileID: 3342667585390971623}
   m_Father: {fileID: 3260134634808426279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4412769998112562858
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076053008974355477}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6883955594109437311
 GameObject:
   m_ObjectHideFlags: 0
