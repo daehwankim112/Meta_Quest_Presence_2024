@@ -19,6 +19,7 @@ public class NetworkPlayer : NetworkBehaviour
     public Transform rightHand;
 
     public Renderer[] meshToDisable;
+    public Collider[] collidersToDestroy;
 
     private bool scaled = false;
 
@@ -42,6 +43,11 @@ public class NetworkPlayer : NetworkBehaviour
             foreach (var item in meshToDisable)
             {
                 item.enabled = false;
+            }
+
+            foreach (var col in collidersToDestroy)
+            {
+                Destroy(col);
             }
         }
     }

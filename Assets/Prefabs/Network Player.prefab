@@ -260,6 +260,10 @@ MonoBehaviour:
   - {fileID: 6633866544467452297}
   - {fileID: 225319167322862398}
   - {fileID: 1637036282349780120}
+  collidersToDestroy:
+  - {fileID: 565716013566555021}
+  - {fileID: 6390331222518444841}
+  - {fileID: 1048007783412156477}
 --- !u!114 &991120698843952630
 MonoBehaviour:
   m_ObjectHideFlags: 0
