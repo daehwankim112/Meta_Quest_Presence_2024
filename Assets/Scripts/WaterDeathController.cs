@@ -46,6 +46,9 @@ public class WaterDeathController : NetworkBehaviour
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
         boat.NetworkObject.Spawn();
         boat.destination = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
+        Vector3 dirToDestination = VectorUtils.Direction(boatSpawnPos, boat.destination);
+        boat.destination *= dirToDestination * randomRadius;
+        
         SetClientPosition(boat.PlayerSpawnPos, playerID);
         
         _activeBoats.Add(boat);
@@ -83,7 +86,7 @@ public class WaterDeathController : NetworkBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawCube(new Vector3(0, waterHeight, 0), new Vector3(100, 0, 100));
+        Gizmos.DrawWireCube(new Vector3(0, waterHeight, 0), new Vector3(100, 0, 100));
         Gizmos.color = Color.white;
     }
 }
