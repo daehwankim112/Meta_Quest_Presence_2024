@@ -4,11 +4,17 @@ using UnityEngine.InputSystem;
 
 public class GiantGrabbing : MonoBehaviour
 {
-    [SerializeField] SphereCollider leftHandCollider;
-    [SerializeField] SphereCollider rightHandCollider;
+    [SerializeField] Transform leftHandTransform;
+    [SerializeField] Transform rightHandTransform;
 
     [SerializeField] InputActionProperty leftHandGrabAction;
     [SerializeField] InputActionProperty rightHandGrabAction;
+
+    [SerializeField] float grabRadius;
+    [SerializeField] float grabZOffset;
+
+    Vector3 LeftHandPosition => leftHandTransform.position + leftHandTransform.forward * grabZOffset;
+    Vector3 RightHandPosition => rightHandTransform.position + rightHandTransform.forward * grabZOffset;
 
     Hand _leftHand, _rightHand;
 
@@ -44,14 +50,13 @@ public class GiantGrabbing : MonoBehaviour
 
     void Grab(HandSide handSide)
     {
-        float grabRadiusMult = RoomEnvironmentInitializer.RoomScale.magnitude;
         switch (handSide)
         {
             case HandSide.Left:
-                _leftHand.Grab(leftHandCollider.transform.position, leftHandCollider.radius * grabRadiusMult);
+                _leftHand.Grab(LeftHandPosition, grabRadius);
                 break;
             case HandSide.Right:
-                _rightHand.Grab(rightHandCollider.transform.position, rightHandCollider.radius * grabRadiusMult);
+                _rightHand.Grab(RightHandPosition, grabRadius);
                 break;
         }
     }
@@ -71,8 +76,8 @@ public class GiantGrabbing : MonoBehaviour
 
     void Update()
     {
-        if(_leftHand.IsHoldingObject) _leftHand.Grabbing(leftHandCollider.transform.position);
-        if(_rightHand.IsHoldingObject) _rightHand.Grabbing(rightHandCollider.transform.position);
+        if(_leftHand.IsHoldingObject) _leftHand.Grabbing(LeftHandPosition);
+        if(_rightHand.IsHoldingObject) _rightHand.Grabbing(RightHandPosition);
     }
 
     void LeftRelease(InputAction.CallbackContext context)
@@ -94,6 +99,12 @@ public class GiantGrabbing : MonoBehaviour
     void RightGrab(InputAction.CallbackContext context)
     {
         Grab(HandSide.Right);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(LeftHandPosition, grabRadius);
+        Gizmos.DrawWireSphere(RightHandPosition, grabRadius);
     }
 }
     
