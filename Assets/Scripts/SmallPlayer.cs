@@ -8,6 +8,8 @@ public class SmallPlayer : NetworkBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] GroundMovementController movement;
 
+    bool _respawning;
+
     void OnEnable()
     {
         GameEvents.OnLocalClientGrabbed += Grabbed;
@@ -42,17 +44,20 @@ public class SmallPlayer : NetworkBehaviour
 
     void Update()
     {
-        if (transform.position.y <= WaterDeathController.WaterHeight)
+        if (!_respawning && transform.position.y <= WaterDeathController.WaterHeight)
         {
             Debug.LogError("Player Fell");
             GameEvents.InvokePlayerFellInWater(NetworkObject.OwnerClientId);
             rb.velocity = rb.velocity.With(z:0, x: 0);
             rb.angularVelocity = Vector3.zero;
+            _respawning = true;
         }
     }
 
     void SetPosition(Vector3 position)
     {
+        Debug.LogError("Set Position");
         transform.position = position;
+        _respawning = false;
     }
 }
