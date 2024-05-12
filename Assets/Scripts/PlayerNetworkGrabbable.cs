@@ -32,7 +32,6 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
         if (!IsOwner) return;
         
         GameEvents.InvokeLocalClientBeingGrabbed(newVal);
-        DebugConsole.Log($"Being grabbed at: {newVal}");
     }
 
     void GrabbedOrReleased(bool oldVal, bool newVal)
