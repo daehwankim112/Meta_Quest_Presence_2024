@@ -7647,9 +7647,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353250538992666445}
-  - component: {fileID: 7996560167385433938}
   - component: {fileID: 884336048579353827}
   - component: {fileID: 1033528431521735784}
+  - component: {fileID: 7976221383355268406}
+  - component: {fileID: 7996560167385433938}
   - component: {fileID: 4647739158872754672}
   - component: {fileID: 1297581907435316071}
   - component: {fileID: 4524725863685258838}
@@ -7679,22 +7680,6 @@ Transform:
   - {fileID: 2814557831070061842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7996560167385433938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6968359863667405369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3693566195292974fa1857855555ed2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 1353250538992666445}
-  head: {fileID: 6476154280490124074}
-  leftHand: {fileID: 5753536296603003850}
-  rightHand: {fileID: 6590427409053446685}
 --- !u!114 &884336048579353827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7834,6 +7819,38 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   toggleSprint: 1
   lookSensitivity: 5
+--- !u!114 &7976221383355268406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968359863667405369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277ddadcf78d7694886d4fb294e1a9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnGrab:
+  - {fileID: 1033528431521735784}
+  - {fileID: 884336048579353827}
+  - {fileID: 8439014583754322406}
+--- !u!114 &7996560167385433938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968359863667405369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693566195292974fa1857855555ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1353250538992666445}
+  head: {fileID: 6476154280490124074}
+  leftHand: {fileID: 5753536296603003850}
+  rightHand: {fileID: 6590427409053446685}
 --- !u!114 &4647739158872754672
 MonoBehaviour:
   m_ObjectHideFlags: 0
