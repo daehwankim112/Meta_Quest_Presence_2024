@@ -39,6 +39,8 @@ public class WaterDeathController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void SpawnBoatRespawnPlayerServerRpc(ulong playerID)
     {
+        Debug.LogError("Host Recieved Player Fell");
+        
         Vector2 randomRadius = Random.insideUnitCircle.normalized * spawnRadius;
         Vector3 boatSpawnPos = new Vector3(randomRadius.x, Random.Range(boatMinHeight, boatMaxHeight), randomRadius.y);
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
@@ -53,6 +55,8 @@ public class WaterDeathController : NetworkBehaviour
     [ClientRpc]
     void SetClientPositionClientRpc(Vector3 position, ClientRpcParams clientRpcParams)
     {
+        Debug.LogError("Client Recieved Position");
+        
         GameEvents.InvokeSetPlayerPosition(position);
     }
 
