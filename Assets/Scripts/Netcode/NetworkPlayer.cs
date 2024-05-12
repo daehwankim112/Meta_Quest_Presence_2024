@@ -65,7 +65,7 @@ public class NetworkPlayer : NetworkBehaviour
 
             if (!IsServer)
             {
-                GameEvents.OnLocalPlayerGrappled += SetGrapplePos;
+                GameEvents.OnLocalPlayerGrappling += SetGrapplePos;
                 GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePos;
             }
         }
@@ -77,7 +77,7 @@ public class NetworkPlayer : NetworkBehaviour
 
         if (IsOwner && !IsServer)
         {
-            GameEvents.OnLocalPlayerGrappled -= SetGrapplePos;
+            GameEvents.OnLocalPlayerGrappling -= SetGrapplePos;
             GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePos;
         }
     }
