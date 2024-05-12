@@ -7,7 +7,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
 {
     NetworkVariable<Vector3> _grabbingPosition = new();
     NetworkVariable<bool> _isGrabbed = new();
-    NetworkVariable<Vector3> _releaseDirection;
+    NetworkVariable<Vector3> _releaseDirection = new();
 
     public override void OnNetworkSpawn()
     {
