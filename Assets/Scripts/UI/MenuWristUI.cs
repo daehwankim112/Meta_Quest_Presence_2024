@@ -22,10 +22,10 @@ public class MenuWristUI : MonoBehaviour
     void Update()
     {
         Vector3 DirectionToCamera = VectorUtils.Direction(Forward.position, CentreCamera.position);
-        Debug.LogError("Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
+        // Debug.LogError("Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
         if (Vector3.Angle(Forward.forward, DirectionToCamera) < Threshhold)
         {
-            Debug.LogError("In threshold! Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
+            // Debug.LogError("In threshold! Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
