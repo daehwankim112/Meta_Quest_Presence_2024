@@ -5,48 +5,49 @@ using UnityEngine;
 
 public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
 {
-    void INetworkGrabbable.Grabbed()
+    NetworkVariable<Vector3> _grabbingPosition = new();
+    NetworkVariable<bool> _isGrabbed = new();
+
+    public override void OnNetworkSpawn()
     {
-        var idList = new List<ulong>() { OwnerClientId };
-        GrabbedClientRpc(new ClientRpcParams() { Send = {TargetClientIds = idList} });
-    }
-    
-    void INetworkGrabbable.Released()
-    {
-        var idList = new List<ulong>() { OwnerClientId };
-        ReleasedClientRpc(new ClientRpcParams() { Send = {TargetClientIds = idList} });
+        _grabbingPosition.Initialize(this);
+        _isGrabbed.Initialize(this);
+        
+        _grabbingPosition.OnValueChanged += BeingGrabbed;
+        _isGrabbed.OnValueChanged += GrabbedOrReleased;
     }
 
-    void INetworkGrabbable.Grabbing(Vector3 position)
+    public override void OnNetworkDespawn()
     {
-        var idList = new List<ulong>() { OwnerClientId };
-        BeingGrabbedClientRpc(position, new ClientRpcParams() { Send = { TargetClientIds = idList } });
+        _grabbingPosition.OnValueChanged -= BeingGrabbed;
+        _isGrabbed.OnValueChanged -= GrabbedOrReleased;
     }
 
-    [ClientRpc]
-    void GrabbedClientRpc(ClientRpcParams rpcParams)
+    void INetworkGrabbable.Grabbed() => _isGrabbed.Value = true;
+    void INetworkGrabbable.Released() => _isGrabbed.Value = false;
+    void INetworkGrabbable.Grabbing(Vector3 position) => _grabbingPosition.Value = position;
+
+    void BeingGrabbed(Vector3 oldVal, Vector3 newVal)
     {
-        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
+        if (!IsOwner) return;
         
-        DebugConsole.Success("Was Grabbed!");
-        GameEvents.InvokeLocalClientGrabbed();
+        GameEvents.InvokeLocalClientBeingGrabbed(newVal);
+        DebugConsole.Log($"Being grabbed at: {newVal}");
     }
-    
-    [ClientRpc]
-    void BeingGrabbedClientRpc(Vector3 position, ClientRpcParams rpcParams)
+
+    void GrabbedOrReleased(bool oldVal, bool newVal)
     {
-        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
-        
-        DebugConsole.Log($"Being grabbed at: {position}");
-        GameEvents.InvokeLocalClientBeingGrabbed(position);
-    }
-    
-    [ClientRpc]
-    void ReleasedClientRpc(ClientRpcParams rpcParams)
-    {
-        //if (!rpcParams.Send.TargetClientIds.Contains(OwnerClientId)) return;
-        
-        DebugConsole.Log("Was Released!");
-        GameEvents.InvokeLocalClientReleased();
+        if (!IsOwner) return;
+
+        if (newVal)
+        {
+            GameEvents.InvokeLocalClientGrabbed();
+            DebugConsole.Success("Was Grabbed!");
+        }
+        else
+        {
+            GameEvents.InvokeLocalClientReleased();
+            DebugConsole.Log("Was Released!");
+        }
     }
 }
