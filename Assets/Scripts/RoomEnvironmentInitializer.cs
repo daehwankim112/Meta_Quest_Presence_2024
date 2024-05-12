@@ -74,7 +74,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         }
 
         DebugConsole.Success("Found Scene Mesh");
-        // yield return findRoomInterval.Wait;
+        yield return findRoomInterval.Wait;
         
         DestroyWalls(room);
         
@@ -165,11 +165,17 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void PlayHostedSound()
     {
-        hostedSound.Play();
+        RuntimeHelper.DoAfter(0.5f, () =>
+        {
+            hostedSound.Play();
+        });
     }
 
     void PlayJoinedSound()
     {
-        joinedSound.Play();
+        RuntimeHelper.DoAfter(0.5f, () =>
+        {
+            joinedSound.Play();
+        });
     }
 }
