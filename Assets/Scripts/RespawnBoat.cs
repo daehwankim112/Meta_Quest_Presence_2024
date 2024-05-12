@@ -19,17 +19,14 @@ public class RespawnBoat : MonoBehaviour
     
     void Update()
     {
-        Vector3 dirToDestination = VectorUtils.Direction(transform.position, _destination);
-        Quaternion rotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.LookRotation(dirToDestination.With(y:0));
-        rotation = Quaternion.RotateTowards(rotation, targetRotation, rotateSpeed * Time.deltaTime);
-        transform.rotation = rotation;
+        Vector3 dirToDestination = VectorUtils.Direction(transform.position.With(y:0), _destination.With(y:0));
+        transform.rotation = Quaternion.LookRotation(dirToDestination.With(y:0));
     }
 
     void FixedUpdate()
     {
         Vector3 dirToDestination = VectorUtils.Direction(transform.position, _destination);
-        rb.AddForce(dirToDestination * moveSpeed, ForceMode.Acceleration);
+        rb.velocity = dirToDestination * moveSpeed;
     }
 
     public bool ReachedDestination()

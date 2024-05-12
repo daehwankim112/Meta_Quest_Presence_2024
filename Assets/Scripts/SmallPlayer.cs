@@ -42,6 +42,8 @@ public class SmallPlayer : MonoBehaviour
         if (transform.position.y <= WaterDeathController.WaterHeight)
         {
             GameEvents.InvokePlayerFellInWater(this);
+            rb.velocity = rb.velocity.With(z:0, x: 0);
+            rb.angularVelocity = Vector3.zero;
         }
     }
 }
