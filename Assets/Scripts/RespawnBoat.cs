@@ -10,11 +10,8 @@ public class RespawnBoat : NetworkBehaviour
     [SerializeField] Transform playerSpawnPos;
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
-
+    
     public NetworkVariable<Vector3> destination = new();
-
-    [SerializeField] NetworkObject networkObject;
-    public NetworkObject NetworkObj => networkObject;
 
     public override void OnNetworkSpawn()
     {
@@ -30,6 +27,7 @@ public class RespawnBoat : NetworkBehaviour
 
     void FixedUpdate()
     {
+        rb.angularVelocity = Vector3.zero;
         Vector3 dirToDestination = VectorUtils.Direction(transform.position, destination.Value);
         rb.velocity = dirToDestination * moveSpeed;
     }

@@ -84,7 +84,6 @@ MonoBehaviour:
   rotateSpeed: 100
   destination:
     m_InternalValue: {x: 0, y: 0, z: 0}
-  networkObject: {fileID: -791057005988038999}
 --- !u!54 &2715111453452278738
 Rigidbody:
   m_ObjectHideFlags: 0

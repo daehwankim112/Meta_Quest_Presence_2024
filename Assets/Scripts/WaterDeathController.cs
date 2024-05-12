@@ -36,13 +36,13 @@ public class WaterDeathController : NetworkBehaviour
         DespawnCompletedBoats();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void SpawnBoatRespawnPlayerServerRpc(ulong playerID)
     {
         Vector2 randomRadius = Random.insideUnitCircle.normalized * spawnRadius;
         Vector3 boatSpawnPos = new Vector3(randomRadius.x, Random.Range(boatMinHeight, boatMaxHeight), randomRadius.y);
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
-        boat.NetworkObj.Spawn();
+        boat.NetworkObject.Spawn();
         boat.destination.Value = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
         
         SetClientPositionClientRpc(boat.PlayerSpawnPos, new ClientRpcParams {Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {playerID}}});
@@ -67,7 +67,7 @@ public class WaterDeathController : NetworkBehaviour
             if (boat.ReachedDestination())
             {
                 _activeBoats.Remove(boat);
-                boat.NetworkObj.Despawn();
+                boat.NetworkObject.Despawn();
             }
         }
     }

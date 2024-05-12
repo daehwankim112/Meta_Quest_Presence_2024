@@ -7,7 +7,6 @@ public class SmallPlayer : NetworkBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] GroundMovementController movement;
-    [SerializeField] NetworkObject networkObject;
 
     void OnEnable()
     {
@@ -45,7 +44,7 @@ public class SmallPlayer : NetworkBehaviour
     {
         if (transform.position.y <= WaterDeathController.WaterHeight)
         {
-            GameEvents.InvokePlayerFellInWater(networkObject.OwnerClientId);
+            GameEvents.InvokePlayerFellInWater(NetworkObject.OwnerClientId);
             rb.velocity = rb.velocity.With(z:0, x: 0);
             rb.angularVelocity = Vector3.zero;
         }
