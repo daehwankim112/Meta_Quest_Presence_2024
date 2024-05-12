@@ -7,12 +7,13 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
 {
     NetworkVariable<Vector3> _grabbingPosition = new();
     NetworkVariable<bool> _isGrabbed = new();
-    Vector3 _releaseDirection;
+    NetworkVariable<Vector3> _releaseDirection;
 
     public override void OnNetworkSpawn()
     {
         _grabbingPosition.Initialize(this);
         _isGrabbed.Initialize(this);
+        _releaseDirection.Initialize(this);
         
         _grabbingPosition.OnValueChanged += BeingGrabbed;
         _isGrabbed.OnValueChanged += GrabbedOrReleased;
@@ -28,7 +29,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
     void INetworkGrabbable.Released(Vector3 direction)
     {
         _isGrabbed.Value = false;
-        _releaseDirection = direction;
+        _releaseDirection.Value = direction;
     }
 
     void INetworkGrabbable.Grabbing(Vector3 position) => _grabbingPosition.Value = position;
@@ -51,7 +52,7 @@ public class PlayerNetworkGrabbable : NetworkBehaviour, INetworkGrabbable
         }
         else
         {
-            GameEvents.InvokeLocalClientReleased(_releaseDirection);
+            GameEvents.InvokeLocalClientReleased(_releaseDirection.Value);
             DebugConsole.Log("Was Released!");
         }
     }

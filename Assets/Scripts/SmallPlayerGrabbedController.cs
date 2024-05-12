@@ -37,6 +37,6 @@ public class SmallPlayerGrabbedController : MonoBehaviour
         disableOnGrab.ForEach(item => item.enabled = true);
         
         rb.isKinematic = false;
-        rb.AddForce(direction * 100, ForceMode.VelocityChange);
+        rb.AddForce(direction * 200, ForceMode.VelocityChange);
     }
 }
