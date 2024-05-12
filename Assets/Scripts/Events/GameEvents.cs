@@ -22,8 +22,8 @@ public static class GameEvents
     public static void InvokeLocalClientGrabbed() => OnLocalClientGrabbed?.Invoke();
     public static event Action OnLocalClientGrabbed;
     
-    public static void InvokeLocalClientReleased() => OnLocalClientReleased?.Invoke();
-    public static event Action OnLocalClientReleased;
+    public static void InvokeLocalClientReleased(Vector3 direction) => OnLocalClientReleased?.Invoke(direction);
+    public static event Action<Vector3> OnLocalClientReleased;
 
     public static void InvokeLocalClientBeingGrabbed(Vector3 position) => OnLocalClientBeingGrabbed?.Invoke(position);
     public static event Action<Vector3> OnLocalClientBeingGrabbed;

@@ -1,13 +1,16 @@
 using Oculus.Interaction.PoseDetection.Debug.Editor.Generated;
 using System.Collections;
 using System.Collections.Generic;
+using NuiN.NExtensions;
 using UnityEngine;
 
 public class Hand
 {
-    public Transform HeldTransform { get; private set; }
     public bool IsHoldingObject => _currentHeldObject != null;
-    private INetworkGrabbable _currentHeldObject;
+    
+    INetworkGrabbable _currentHeldObject;
+    Vector3 _lastFramePosition;
+    Vector3 _direction;
 
     public void Grab(Vector3 grabPosition, float radius)
     {
@@ -36,7 +39,6 @@ public class Hand
             }
         }
         _currentHeldObject = closestGrabbable.Key;
-        HeldTransform = closestGrabbable.Value;
         
         _currentHeldObject.Grabbed();
         DebugConsole.Log("Grabbed Object");
@@ -44,15 +46,17 @@ public class Hand
 
     public void Grabbing(Vector3 position)
     {
+        _direction = VectorUtils.Direction(_lastFramePosition, position);
+        
         _currentHeldObject.Grabbing(position);
+        
+        _lastFramePosition = position;
     }
 
     public void Release()
     {
         if (!IsHoldingObject) return;
-        _currentHeldObject.Released();
+        _currentHeldObject.Released(_direction);
         _currentHeldObject = null;
-        HeldTransform = null;
     }
-
 }

@@ -8,15 +8,15 @@ public class SmallPlayerGrabbedController : MonoBehaviour
     
     void OnEnable()
     {
-        GameEvents.OnLocalClientGrabbed += DisableScripts;
-        GameEvents.OnLocalClientReleased += EnableScripts;
+        GameEvents.OnLocalClientGrabbed += Grabbed;
+        GameEvents.OnLocalClientReleased += Released;
         GameEvents.OnLocalClientBeingGrabbed += MoveToHandPosition;
     }
 
     void OnDisable()
     {
-        GameEvents.OnLocalClientGrabbed -= DisableScripts;
-        GameEvents.OnLocalClientReleased -= EnableScripts;
+        GameEvents.OnLocalClientGrabbed -= Grabbed;
+        GameEvents.OnLocalClientReleased -= Released;
         GameEvents.OnLocalClientBeingGrabbed -= MoveToHandPosition;
     }
 
@@ -25,17 +25,18 @@ public class SmallPlayerGrabbedController : MonoBehaviour
         transform.position = position;
     }
 
-    void DisableScripts()
+    void Grabbed()
     {
         disableOnGrab.ForEach(item => item.enabled = false);
         
         rb.isKinematic = true;
     }
 
-    void EnableScripts()
+    void Released(Vector3 direction)
     {
         disableOnGrab.ForEach(item => item.enabled = true);
         
         rb.isKinematic = false;
+        rb.AddForce(direction * 100, ForceMode.VelocityChange);
     }
 }
