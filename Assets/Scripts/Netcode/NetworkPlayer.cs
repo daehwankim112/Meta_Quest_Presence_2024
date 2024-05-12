@@ -21,7 +21,8 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] Renderer[] meshToDisable;
     [SerializeField] Collider[] collidersToDestroy;
 
-    [SerializeField] float initialScale;
+    [SerializeField] float smallPlayerInitialScale = 2f;
+    [SerializeField] float giantInitialScale = 1f;
 
     public override void OnNetworkSpawn()
     {
@@ -52,12 +53,12 @@ public class NetworkPlayer : NetworkBehaviour
                 Destroy(col);
             }
 
-            Vector3 scale = Vector3.one * initialScale;
-            if (IsServer) scale *= RoomEnvironmentInitializer.RoomScale.magnitude;
+            float scale = IsServer ? giantInitialScale * RoomEnvironmentInitializer.RoomScale.magnitude: smallPlayerInitialScale;
+            Vector3 scaleVector = Vector3.one * scale;
             
-            head.localScale = scale;
-            leftHand.localScale = scale;
-            rightHand.localScale = scale;
+            head.localScale = scaleVector;
+            leftHand.localScale = scaleVector;
+            rightHand.localScale = scaleVector;
         }
     }
 
