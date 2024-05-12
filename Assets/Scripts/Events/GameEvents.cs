@@ -34,8 +34,8 @@ public static class GameEvents
     public static void InvokeSetPlayerPosition(Vector3 position) => OnSetPlayerPosition?.Invoke(position);
     public static event Action<Vector3> OnSetPlayerPosition;
 
-    public static void InvokeLocalPlayerGrappled(Vector3 hitPoint) => OnLocalPlayerGrappled?.Invoke(hitPoint);
-    public static event Action<Vector3> OnLocalPlayerGrappled;
+    public static void InvokeLocalPlayerGrappling(Vector3 hitPoint) => OnLocalPlayerGrappling?.Invoke(hitPoint);
+    public static event Action<Vector3> OnLocalPlayerGrappling;
     
     public static void InvokeLocalPlayerUnGrappled() => OnLocalPlayerUnGrappled?.Invoke();
     public static event Action OnLocalPlayerUnGrappled;

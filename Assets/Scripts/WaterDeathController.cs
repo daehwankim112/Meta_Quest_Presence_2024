@@ -45,7 +45,7 @@ public class WaterDeathController : NetworkBehaviour
         boat.NetworkObject.Spawn();
         boat.destination = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
         Vector3 dirToDestination = VectorUtils.Direction(boatSpawnPos, boat.destination);
-        boat.destination *= dirToDestination * randomRadius;
+        boat.destination += dirToDestination.With(y: 0) * Vector3.Distance(boatSpawnPos.With(y: 0), boat.destination.With(y: 0));
         
         SetClientPosition(boat.PlayerSpawnPos, playerID);
         

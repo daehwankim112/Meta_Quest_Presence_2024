@@ -63,6 +63,11 @@ public class GrapplingHook : MonoBehaviour
         {
             hitIndicator.gameObject.SetActive(false);
         }
+
+        if (_attached)
+        {
+            GameEvents.InvokeLocalPlayerGrappling(_connectedTransform.TransformPoint(_localPos));
+        }
     }
 
     void LateUpdate()
@@ -120,6 +125,8 @@ public class GrapplingHook : MonoBehaviour
         
         movement.EnableGravity();
         movement.EnableMovementNoKinematic();
+        
+        GameEvents.InvokeLocalPlayerUnGrappled();
         
         _connectedTransform = null;
         _localPos = Vector3.zero;

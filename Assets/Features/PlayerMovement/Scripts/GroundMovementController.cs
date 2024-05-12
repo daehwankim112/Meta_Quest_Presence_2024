@@ -108,8 +108,6 @@ namespace NuiN.Movement
 
             bool inputtingDirection = direction != Vector3.zero;
 
-            bool sprinting = true;
-
             float speed = (moveSpeed * runSpeedMult);
     
             Vector3 moveVector = direction * speed;

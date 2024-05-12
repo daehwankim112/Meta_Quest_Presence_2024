@@ -22,7 +22,7 @@ public class RespawnBoat : NetworkBehaviour
     void FixedUpdate()
     {
         rb.angularVelocity = Vector3.zero;
-        Vector3 dirToDestination = VectorUtils.Direction(transform.position, destination);
+        Vector3 dirToDestination = VectorUtils.Direction(transform.position.With(y:0), destination.With(y:0));
         rb.velocity = dirToDestination * moveSpeed;
     }
 
