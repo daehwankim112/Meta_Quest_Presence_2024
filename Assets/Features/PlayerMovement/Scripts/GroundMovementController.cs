@@ -34,6 +34,9 @@ namespace NuiN.Movement
         bool _jumping;
         bool _onSlope;
 
+        float _startDownMult;
+        float _startGravity;
+
         bool _allowMovement = true;
 
         void Reset()
@@ -64,6 +67,9 @@ namespace NuiN.Movement
         void Start()
         {
             rb.useGravity = false;
+
+            _startGravity = gravity;
+            _startDownMult = downForceMult;
         }
 
         void FixedUpdate()
@@ -102,9 +108,9 @@ namespace NuiN.Movement
 
             bool inputtingDirection = direction != Vector3.zero;
 
-            bool sprinting = movementProvider.Value.Sprinting;
+            bool sprinting = true;
 
-            float speed = (sprinting ? moveSpeed * runSpeedMult : moveSpeed);
+            float speed = (moveSpeed * runSpeedMult);
     
             Vector3 moveVector = direction * speed;
             Vector3 groundVelocity = rb.velocity.With(y: 0);
@@ -113,7 +119,7 @@ namespace NuiN.Movement
             if (!groundChecker.Grounded || _jumping)
             {
                 rb.drag = airDrag;
-                float maxAirVel = sprinting ? maxAirVelocityMagnitude * runSpeedMult : maxAirVelocityMagnitude;
+                float maxAirVel = maxAirVelocityMagnitude * runSpeedMult;
 
                 // only allow movement in a direction that doesnt increase forward velocity past the max air vel
                 if (nextFrameVelocity.magnitude >= maxAirVel && nextFrameVelocity.magnitude >= groundVelocity.magnitude)
@@ -190,6 +196,32 @@ namespace NuiN.Movement
             groundChecker.enabled = true;
             _allowMovement = true;
             rb.isKinematic = false;
+        }
+
+        public void DisableGravity()
+        {
+            downForceMult = 0;
+            gravity = 0;
+            groundChecker.enabled = false;
+            groundChecker.Grounded = false;
+            rb.drag = airDrag;
+        }
+
+        public void EnableGravity()
+        {
+            downForceMult = _startDownMult;
+            gravity = _startGravity;
+            groundChecker.enabled = true;
+        }
+
+        public void DisableMovementNoKinematic()
+        {
+            _allowMovement = false;
+        }
+        
+        public void EnableMovementNoKinematic()
+        {
+            _allowMovement = true;
         }
     }
 }

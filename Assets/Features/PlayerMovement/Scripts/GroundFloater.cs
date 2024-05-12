@@ -6,7 +6,7 @@ namespace NuiN.Movement
 {
     public class GroundFloater : MonoBehaviour
     {
-        public bool Grounded { get; private set; }
+        public bool Grounded { get; set; }
         public bool InCoyoteTime { get; private set; }
         
         public event Action OnFinishedJump;

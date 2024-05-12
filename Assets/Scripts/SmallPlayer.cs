@@ -55,7 +55,6 @@ public class SmallPlayer : NetworkBehaviour
 
     void SetPosition(Vector3 position)
     {
-        Debug.LogError("Set Position");
         transform.position = position;
         _respawning = false;
     }
