@@ -46,8 +46,7 @@ public class SmallPlayer : NetworkBehaviour
     {
         if (!_respawning && transform.position.y <= WaterDeathController.WaterHeight)
         {
-            Debug.LogError("Player Fell");
-            GameEvents.InvokePlayerFellInWater(NetworkObject.OwnerClientId);
+            GameEvents.InvokePlayerFellInWater(NetworkManager.LocalClientId);
             rb.velocity = rb.velocity.With(z:0, x: 0);
             rb.angularVelocity = Vector3.zero;
             _respawning = true;
