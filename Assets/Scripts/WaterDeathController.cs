@@ -46,16 +46,21 @@ public class WaterDeathController : NetworkBehaviour
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
         boat.NetworkObject.Spawn();
         boat.destination = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
-        SetClientPositionClientRpc(boat.PlayerSpawnPos, new ClientRpcParams {Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {playerID}}});
+        SetClientPosition(boat.PlayerSpawnPos, playerID);
         
         _activeBoats.Add(boat);
+    }
+
+    void SetClientPosition(Vector3 position, ulong playerID)
+    {
+        Debug.LogError("Player ID to set Position: " + playerID);
+        SetClientPositionClientRpc(position, new ClientRpcParams {Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {playerID}}});
     }
 
     [ClientRpc]
     void SetClientPositionClientRpc(Vector3 position, ClientRpcParams clientRpcParams)
     {
         Debug.LogError("Client Recieved Position");
-        
         GameEvents.InvokeSetPlayerPosition(position);
     }
 
