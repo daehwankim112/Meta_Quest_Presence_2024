@@ -7831,11 +7831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277ddadcf78d7694886d4fb294e1a9a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnGrab:
-  - {fileID: 1033528431521735784}
-  - {fileID: 884336048579353827}
-  - {fileID: 8439014583754322406}
   rb: {fileID: 8635902921045277319}
+  movement: {fileID: 884336048579353827}
 --- !u!114 &7996560167385433938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10913,10 +10910,10 @@ MonoBehaviour:
   coyoteTime:
     duration: 0.15
     startCompleted: 1
-  affectOthers: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 1079
+  relVelForce: 0.44
   drawGizmos: 1
   gizmosGroundColor: {r: 0, g: 1, b: 0, a: 1}
   gizmosAirColor: {r: 0, g: 0, b: 1, a: 1}

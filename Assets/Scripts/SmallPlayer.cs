@@ -1,11 +1,12 @@
+using NuiN.Movement;
 using NuiN.NExtensions;
 using UnityEngine;
 
-public class SmallPlayerGrabbedController : MonoBehaviour
+public class SmallPlayer : MonoBehaviour
 {
-    [SerializeField] MonoBehaviour[] disableOnGrab;
     [SerializeField] Rigidbody rb;
-    
+    [SerializeField] GroundMovementController movement;
+
     void OnEnable()
     {
         GameEvents.OnLocalClientGrabbed += Grabbed;
@@ -27,16 +28,20 @@ public class SmallPlayerGrabbedController : MonoBehaviour
 
     void Grabbed()
     {
-        disableOnGrab.ForEach(item => item.enabled = false);
-        
-        rb.isKinematic = true;
+        movement.DisableMovement();
     }
 
     void Released(Vector3 direction)
     {
-        disableOnGrab.ForEach(item => item.enabled = true);
-        
-        rb.isKinematic = false;
+        movement.EnableMovement();
         rb.AddForce(direction * 100, ForceMode.VelocityChange);
+    }
+
+    void Update()
+    {
+        if (transform.position.y <= WaterDeathController.WaterHeight)
+        {
+            GameEvents.InvokePlayerFellInWater(this);
+        }
     }
 }

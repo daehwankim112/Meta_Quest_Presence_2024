@@ -34,6 +34,8 @@ namespace NuiN.Movement
         bool _jumping;
         bool _onSlope;
 
+        bool _allowMovement = true;
+
         void Reset()
         {
             movementProvider.Value = this.GetInHierarchy<IMovementProvider>();
@@ -66,6 +68,8 @@ namespace NuiN.Movement
 
         void FixedUpdate()
         {
+            if (!_allowMovement) return;
+            
             if (!groundChecker.Grounded)
             {
                 LayerMask mask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
@@ -139,7 +143,7 @@ namespace NuiN.Movement
 
         void Jump()
         {
-            if (!jumpDelay.Complete()) return;
+            if (!_allowMovement || !jumpDelay.Complete()) return;
 
             // set jumping true to immediately switch to air drag in movement logic
             _jumping = true;
@@ -173,6 +177,19 @@ namespace NuiN.Movement
         void SetJumpingFalse()
         {
             _jumping = false;
+        }
+
+        public void DisableMovement()
+        {
+            groundChecker.enabled = false;
+            _allowMovement = false;
+            rb.isKinematic = true;
+        }
+        public void EnableMovement()
+        {
+            groundChecker.enabled = true;
+            _allowMovement = true;
+            rb.isKinematic = false;
         }
     }
 }

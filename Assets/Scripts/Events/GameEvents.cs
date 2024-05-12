@@ -27,4 +27,7 @@ public static class GameEvents
 
     public static void InvokeLocalClientBeingGrabbed(Vector3 position) => OnLocalClientBeingGrabbed?.Invoke(position);
     public static event Action<Vector3> OnLocalClientBeingGrabbed;
+
+    public static void InvokePlayerFellInWater(SmallPlayer smallPlayer) => OnSmallPlayerFellInWater?.Invoke(smallPlayer);
+    public static event Action<SmallPlayer> OnSmallPlayerFellInWater;
 }

@@ -20,8 +20,9 @@ namespace NuiN.Movement
         [SerializeField] float floatSpring = 2f;
         [SerializeField] float floatDamper = 0.1f;
         [SerializeField] SimpleTimer coyoteTime = new(0.15f, true);
-        [SerializeField] bool affectOthers;
         [SerializeField] LayerMask groundMask = ~0;
+
+        [SerializeField] float relVelForce = 0.5f;
 
         [Header("Debugging")] 
         [SerializeField] bool drawGizmos = true;
@@ -106,12 +107,7 @@ namespace NuiN.Movement
             float x = hitDist - floatHeight;
             float springForce = (x * floatSpring) - (relVel * floatDamper);
             
-            rb.AddForce(rayDir * springForce, ForceMode.VelocityChange);
-
-            if (affectOthers && hitOtherRB)
-            {
-                otherRB.AddForceAtPosition(rayDir * -springForce, hit.point);
-            }
+            rb.AddForce(rayDir * springForce + (otherVel * relVelForce), ForceMode.VelocityChange);
         }
 
         bool IsGrounded(Vector3 rayStart, Vector3 rayDir, out RaycastHit hit)
