@@ -4,6 +4,7 @@ using UnityEngine;
 public class SmallPlayerGrabbedController : MonoBehaviour
 {
     [SerializeField] MonoBehaviour[] disableOnGrab;
+    [SerializeField] Rigidbody rb;
     
     void OnEnable()
     {
@@ -27,10 +28,14 @@ public class SmallPlayerGrabbedController : MonoBehaviour
     void DisableScripts()
     {
         disableOnGrab.ForEach(item => item.enabled = false);
+        
+        rb.isKinematic = true;
     }
 
     void EnableScripts()
     {
         disableOnGrab.ForEach(item => item.enabled = true);
+        
+        rb.isKinematic = false;
     }
 }
