@@ -46,6 +46,7 @@ public class WaterDeathController : NetworkBehaviour
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
         boat.NetworkObject.Spawn();
         boat.destination.Value = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
+        boat.spawnPosition.Value = boatSpawnPos;
         
         SetClientPositionClientRpc(boat.PlayerSpawnPos, new ClientRpcParams {Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {playerID}}});
         
