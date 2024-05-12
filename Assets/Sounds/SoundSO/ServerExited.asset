@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9114bca19cf226f4a8c4a5a96dee6b04, type: 3}
-  m_Name: ClientJoined
+  m_Name: ServerExited
   m_EditorClassIdentifier: 
   audioMixerGroup: {fileID: 0}
   clips:
-  - {fileID: 8300000, guid: 2786b7a027507264ebaad5d1bf1cd1dd, type: 3}
+  - {fileID: 8300000, guid: ac747ae94ae63b14da0640929cb8cb60, type: 3}
   minVolume: 1
   maxVolume: 1
   useFixedVolumes: 1

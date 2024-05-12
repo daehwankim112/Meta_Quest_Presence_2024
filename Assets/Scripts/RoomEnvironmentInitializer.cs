@@ -24,9 +24,6 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
-    [SerializeField] SoundSO hostedSound;
-    [SerializeField] SoundSO joinedSound;
-
 
     MeshFilter _sceneMeshFilter;
 
@@ -37,16 +34,12 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnLobbyJoined += PlayJoinedSound;
         GameEvents.OnLobbyJoined += DisableThis;
-        GameEvents.OnLobbyHosted += PlayHostedSound;
         GameEvents.OnLobbyHosted += DisableThis;
     }
     void OnDisable()
     {
-        GameEvents.OnLobbyJoined -= PlayJoinedSound;
         GameEvents.OnLobbyJoined -= DisableThis;
-        GameEvents.OnLobbyHosted -= PlayHostedSound;
         GameEvents.OnLobbyHosted -= DisableThis;
     }
 
@@ -161,21 +154,5 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     void DisableThis()
     {
         gameObject.SetActive(false);
-    }
-
-    void PlayHostedSound()
-    {
-        RuntimeHelper.DoAfter(0.5f, () =>
-        {
-            hostedSound.Play();
-        });
-    }
-
-    void PlayJoinedSound()
-    {
-        RuntimeHelper.DoAfter(0.5f, () =>
-        {
-            joinedSound.Play();
-        });
     }
 }
