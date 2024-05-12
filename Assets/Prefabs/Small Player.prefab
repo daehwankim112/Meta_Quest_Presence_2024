@@ -7649,6 +7649,7 @@ GameObject:
   - component: {fileID: 1353250538992666445}
   - component: {fileID: 884336048579353827}
   - component: {fileID: 1033528431521735784}
+  - component: {fileID: 5659031746689218273}
   - component: {fileID: 7976221383355268406}
   - component: {fileID: 7996560167385433938}
   - component: {fileID: 4647739158872754672}
@@ -7819,6 +7820,27 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   toggleSprint: 1
   lookSensitivity: 5
+--- !u!114 &5659031746689218273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968359863667405369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1974526242
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &7976221383355268406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7833,6 +7855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8635902921045277319}
   movement: {fileID: 884336048579353827}
+  networkObject: {fileID: 5659031746689218273}
 --- !u!114 &7996560167385433938
 MonoBehaviour:
   m_ObjectHideFlags: 0

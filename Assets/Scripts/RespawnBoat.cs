@@ -13,6 +13,9 @@ public class RespawnBoat : NetworkBehaviour
 
     public NetworkVariable<Vector3> destination = new();
 
+    [SerializeField] NetworkObject networkObject;
+    public NetworkObject NetworkObj => networkObject;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
