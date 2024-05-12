@@ -12,11 +12,6 @@ public class RespawnBoat : NetworkBehaviour
     [SerializeField] float rotateSpeed;
 
     public Vector3 destination;
-
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-    }
     
     void Update()
     {

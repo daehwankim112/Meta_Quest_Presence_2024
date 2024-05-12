@@ -84,10 +84,7 @@ MonoBehaviour:
   playerSpawnPos: {fileID: 4345329834587452039}
   moveSpeed: 1
   rotateSpeed: 100
-  spawnPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  destination:
-    m_InternalValue: {x: 0, y: 0, z: 0}
+  destination: {x: 0, y: 0, z: 0}
 --- !u!54 &2715111453452278738
 Rigidbody:
   m_ObjectHideFlags: 0
