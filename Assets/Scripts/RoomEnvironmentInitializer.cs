@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NuiN.NExtensions;
+using NuiN.ScriptableHarmony.Sound;
+using Oculus.VoiceSDK.UX;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -22,6 +24,10 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
+    [SerializeField] SoundSO hostedSound;
+    [SerializeField] SoundSO joinedSound;
+
+
     MeshFilter _sceneMeshFilter;
 
     void Awake()
@@ -31,12 +37,16 @@ public class RoomEnvironmentInitializer : MonoBehaviour
 
     void OnEnable()
     {
+        GameEvents.OnLobbyJoined += PlayJoinedSound;
         GameEvents.OnLobbyJoined += DisableThis;
+        GameEvents.OnLobbyHosted += PlayHostedSound;
         GameEvents.OnLobbyHosted += DisableThis;
     }
     void OnDisable()
     {
+        GameEvents.OnLobbyJoined -= PlayJoinedSound;
         GameEvents.OnLobbyJoined -= DisableThis;
+        GameEvents.OnLobbyHosted -= PlayHostedSound;
         GameEvents.OnLobbyHosted -= DisableThis;
     }
 
@@ -151,5 +161,15 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     void DisableThis()
     {
         gameObject.SetActive(false);
+    }
+
+    void PlayHostedSound()
+    {
+        hostedSound.Play();
+    }
+
+    void PlayJoinedSound()
+    {
+        joinedSound.Play();
     }
 }

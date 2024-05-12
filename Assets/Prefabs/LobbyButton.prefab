@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3121732256197405878}
   - component: {fileID: 7257057625292491383}
   - component: {fileID: 2541368752105366191}
+  - component: {fileID: 4402383971529435341}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -255,7 +256,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3121732256197405878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4402383971529435341}
+        m_TargetAssemblyTypeName: SpatialButtonSound, Assembly-CSharp
+        m_MethodName: PlayAtPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2541368752105366191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +283,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10
   image: {fileID: 3121732256197405878}
+--- !u!114 &4402383971529435341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859564684095372823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7745da5735e2e842baa52678d1d5a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 11400000, guid: 5074775963ccd0648ade7022e1d2daf2, type: 2}
 --- !u!1 &5873815726880839954
 GameObject:
   m_ObjectHideFlags: 0
