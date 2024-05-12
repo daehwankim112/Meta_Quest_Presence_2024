@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using NuiN.NExtensions;
+using Unity.Netcode;
 using UnityEngine;
 
-public class WaterDeathController : MonoBehaviour
+public class WaterDeathController : NetworkBehaviour
 {
     public static float WaterHeight { get; private set; }
     
@@ -14,7 +15,7 @@ public class WaterDeathController : MonoBehaviour
     [SerializeField] float spawnRadius = 100f;
     [SerializeField] RespawnBoat boatPrefab;
     
-    List<(RespawnBoat boat, SmallPlayer player)> _activeBoats = new ();
+    List<RespawnBoat> _activeBoats = new ();
 
     void Awake()
     {
@@ -23,39 +24,50 @@ public class WaterDeathController : MonoBehaviour
 
     void OnEnable()
     {
-        GameEvents.OnSmallPlayerFellInWater += StartRespawnPlayer;
+        GameEvents.OnSmallPlayerFellInWater += SpawnBoatRespawnPlayerServerRpc;
     }
     void OnDisable()
     {
-        GameEvents.OnSmallPlayerFellInWater -= StartRespawnPlayer;
+        GameEvents.OnSmallPlayerFellInWater -= SpawnBoatRespawnPlayerServerRpc;
     }
     
     void Update()
     {
-        MoveBoats();
+        DespawnCompletedBoats();
     }
 
-    void StartRespawnPlayer(SmallPlayer player)
+    [ServerRpc]
+    void SpawnBoatRespawnPlayerServerRpc(ulong playerID)
     {
         Vector2 randomRadius = Random.insideUnitCircle.normalized * spawnRadius;
         Vector3 boatSpawnPos = new Vector3(randomRadius.x, Random.Range(boatMinHeight, boatMaxHeight), randomRadius.y);
         RespawnBoat boat = Instantiate(boatPrefab, boatSpawnPos, Quaternion.identity);
-        boat.SetDestination(Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight)));
-        player.transform.position = boat.PlayerSpawnPos;
+        boat.NetworkObject.Spawn();
+        boat.destination.Value = Vector3.zero.With(y: Random.Range(boatMinHeight, boatMaxHeight));
         
-        _activeBoats.Add((boat, player));
+        SetClientPositionClientRpc(boat.PlayerSpawnPos, new ClientRpcParams {Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {playerID}}});
+        
+        _activeBoats.Add(boat);
     }
 
-    void MoveBoats()
+    [ClientRpc]
+    void SetClientPositionClientRpc(Vector3 position, ClientRpcParams clientRpcParams)
     {
+        GameEvents.InvokeSetPlayerPosition(position);
+    }
+
+    void DespawnCompletedBoats()
+    {
+        if (!IsServer) return;
+        
         for (int i = _activeBoats.Count-1; i >= 0; i--)
         {
-            (RespawnBoat boat, SmallPlayer player) boatWithPlayer = _activeBoats[i];
+            RespawnBoat boat = _activeBoats[i];
 
-            if (boatWithPlayer.boat.ReachedDestination())
+            if (boat.ReachedDestination())
             {
-                _activeBoats.Remove(boatWithPlayer);
-                Destroy(boatWithPlayer.boat.gameObject);
+                _activeBoats.Remove(boat);
+                boat.NetworkObject.Despawn();
             }
         }
     }

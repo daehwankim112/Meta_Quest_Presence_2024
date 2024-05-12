@@ -1,8 +1,9 @@
 using NuiN.Movement;
 using NuiN.NExtensions;
+using Unity.Netcode;
 using UnityEngine;
 
-public class SmallPlayer : MonoBehaviour
+public class SmallPlayer : NetworkBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] GroundMovementController movement;
@@ -12,6 +13,7 @@ public class SmallPlayer : MonoBehaviour
         GameEvents.OnLocalClientGrabbed += Grabbed;
         GameEvents.OnLocalClientReleased += Released;
         GameEvents.OnLocalClientBeingGrabbed += MoveToHandPosition;
+        GameEvents.OnSetPlayerPosition += SetPosition;
     }
 
     void OnDisable()
@@ -19,6 +21,7 @@ public class SmallPlayer : MonoBehaviour
         GameEvents.OnLocalClientGrabbed -= Grabbed;
         GameEvents.OnLocalClientReleased -= Released;
         GameEvents.OnLocalClientBeingGrabbed -= MoveToHandPosition;
+        GameEvents.OnSetPlayerPosition -= SetPosition;
     }
 
     void MoveToHandPosition(Vector3 position)
@@ -41,9 +44,14 @@ public class SmallPlayer : MonoBehaviour
     {
         if (transform.position.y <= WaterDeathController.WaterHeight)
         {
-            GameEvents.InvokePlayerFellInWater(this);
+            GameEvents.InvokePlayerFellInWater(NetworkObject.OwnerClientId);
             rb.velocity = rb.velocity.With(z:0, x: 0);
             rb.angularVelocity = Vector3.zero;
         }
+    }
+
+    void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 }
