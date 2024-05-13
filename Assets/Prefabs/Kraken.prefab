@@ -1512,6 +1512,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5888788986634163514}
+    - targetCorrespondingSourceObject: {fileID: 1487730144137659891, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5595898251780249114}
+    - targetCorrespondingSourceObject: {fileID: 9077659865161676975, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8128487520896390895}
   m_SourcePrefab: {fileID: 100100000, guid: 55d058a417b6be843a8d138a6ad66a7b, type: 3}
 --- !u!1 &121367941742182764 stripped
 GameObject:
@@ -2323,7 +2331,7 @@ MonoBehaviour:
   - {fileID: 803675823098546170}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
 --- !u!1 &524615217059978513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7028834577972775835, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3452,7 +3460,7 @@ MonoBehaviour:
   - {fileID: 4498967145191542775}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
 --- !u!1 &1731909895416749413 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9134526910152281071, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3639,7 +3647,34 @@ MonoBehaviour:
   - {fileID: 5504397264516957154}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
+--- !u!1 &1961021323687439909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9077659865161676975, guid: 55d058a417b6be843a8d138a6ad66a7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7407472561196570250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &8128487520896390895
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961021323687439909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.09
+  m_Center: {x: 0, y: 0.03, z: 0}
 --- !u!1 &1975830969595229315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -169115058240790007, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -8233,7 +8268,7 @@ MonoBehaviour:
   - {fileID: 4004119330244537956}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
 --- !u!1 &5728386533888255240 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6218362504727661694, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -10142,7 +10177,7 @@ MonoBehaviour:
   - {fileID: 7764716203889055457}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
 --- !u!1 &6875414194293774636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5069151280935727194, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -11772,6 +11807,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8244362087336530809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1487730144137659891, guid: 55d058a417b6be843a8d138a6ad66a7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7407472561196570250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &5595898251780249114
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244362087336530809}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.06
+  m_Center: {x: 0, y: 0.07, z: 0.03}
 --- !u!1 &8301784261438758636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1583435013312956518, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -12426,7 +12488,7 @@ MonoBehaviour:
   - {fileID: 2545097592025798672}
   root: {fileID: 7009316744652026209}
   solverDistance: 30
-  correctionSpeed: 2
+  correctionSpeed: 1
 --- !u!1 &8780073940919142690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6983473651706929240, guid: 55d058a417b6be843a8d138a6ad66a7b,
