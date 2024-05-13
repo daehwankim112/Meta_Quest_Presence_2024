@@ -24,15 +24,13 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] float smallPlayerInitialScale = 2f;
     [SerializeField] float giantInitialScale = 1f;
     
+    [SerializeField] Transform grapplePoint;
     [SerializeField] LineRenderer grapplingLR;
 
-    NetworkVariable<Vector3> _grapplePos = new();
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        
-        _grapplePos.Initialize(this);
         
         NetworkObject networkObj = GetComponent<NetworkObject>();
         var myID = networkObj.OwnerClientId;
@@ -87,24 +85,12 @@ public class NetworkPlayer : NetworkBehaviour
 
     void SetGrapplePosition(Vector3 position)
     {
-        SetGrapplePositionServerRpc(position);
+        grapplePoint.position = position;
     }
 
     void ResetGrapplePosition()
     {
-        ResetGrapplePositionServerRpc();
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void SetGrapplePositionServerRpc(Vector3 position)
-    {
-        _grapplePos.Value = position;
-    }
-    
-    [ServerRpc(RequireOwnership = false)]
-    void ResetGrapplePositionServerRpc()
-    {
-        _grapplePos.Value = Vector3.zero;
+        grapplePoint.localPosition = Vector3.zero;
     }
 
     void Update()
@@ -134,11 +120,11 @@ public class NetworkPlayer : NetworkBehaviour
             return;
         }
         
-        if (_grapplePos.Value != Vector3.zero)
+        if (grapplePoint.localPosition != Vector3.zero)
         {
             grapplingLR.enabled = true;
             grapplingLR.SetPosition(0, rightHand.position);
-            grapplingLR.SetPosition(1, _grapplePos.Value);
+            grapplingLR.SetPosition(1, grapplePoint.position);
         }
         else
         {
