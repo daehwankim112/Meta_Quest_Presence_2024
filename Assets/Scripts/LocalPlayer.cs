@@ -1,13 +1,19 @@
 using NuiN.NExtensions;
+using Unity.Netcode;
 using UnityEngine;
 
 public class LocalPlayer : MonoBehaviour
 {
-    [SerializeField] GameObject giantPlayer;
-    [SerializeField] GameObject smallPlayer;
+    [SerializeField] OVRCameraRigReferencesForNetCode giantPlayer;
+    [SerializeField] OVRCameraRigReferencesForNetCode smallPlayer;
 
     [SerializeField] float spawnHeight = 10f;
-    
+
+    void Awake()
+    {
+        OVRCameraRigReferencesForNetCode.instance = giantPlayer;
+    }
+
     void Start()
     {
         SetPlayerAsGiant();
@@ -28,18 +34,21 @@ public class LocalPlayer : MonoBehaviour
 
     void SetPlayerAsGiant()
     {
+        OVRCameraRigReferencesForNetCode.instance = giantPlayer;
         giantPlayer.transform.position = Vector3.zero;
         
-        giantPlayer.SetActive(true);
-        smallPlayer.SetActive(false);
+        giantPlayer.gameObject.SetActive(true);
+        smallPlayer.gameObject.SetActive(false);
     }
     
     void SetPlayerAsSmall(Vector3 spawnPosition)
     {
+        OVRCameraRigReferencesForNetCode.instance = smallPlayer;
+
         smallPlayer.transform.position = spawnPosition.Add(y: spawnHeight);
         
-        giantPlayer.SetActive(false);
-        smallPlayer.SetActive(true);
+        giantPlayer.gameObject.SetActive(false);
+        smallPlayer.gameObject.SetActive(true);
     }
 
     void ScaleGiant()

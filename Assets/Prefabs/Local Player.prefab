@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b349a7aa021c50849ae727fd3b560472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giantPlayer: {fileID: 997567963764126153}
-  smallPlayer: {fileID: 5432322161212630390}
+  giantPlayer: {fileID: 3613729008311384882}
+  smallPlayer: {fileID: 4985088155230113821}
   spawnHeight: 10
 --- !u!1001 &49770331191922346
 PrefabInstance:
@@ -117,12 +117,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fec34d410485a74899bb3d659954c5b, type: 3}
---- !u!1 &997567963764126153 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 966236650071146339, guid: 8fec34d410485a74899bb3d659954c5b,
+--- !u!114 &3613729008311384882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3645200697976223128, guid: 8fec34d410485a74899bb3d659954c5b,
     type: 3}
   m_PrefabInstance: {fileID: 49770331191922346}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693566195292974fa1857855555ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4191102519926090250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4222432872184423584, guid: 8fec34d410485a74899bb3d659954c5b,
@@ -208,9 +214,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3159251331872692047}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5432322161212630390 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6968359863667405369, guid: 93f3ff3c97a5cb245a5ae8b54b075d6d,
+--- !u!114 &4985088155230113821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7996560167385433938, guid: 93f3ff3c97a5cb245a5ae8b54b075d6d,
     type: 3}
   m_PrefabInstance: {fileID: 3159251331872692047}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693566195292974fa1857855555ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -17,17 +17,4 @@ public class OVRCameraRigReferencesForNetCode : MonoBehaviour
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
-
-    void OnEnable()
-    {
-        instance = this;
-    }
-
-    void OnDestroy()
-    {
-        if (instance == this)
-        {
-            instance = null;
-        }
-    }
 }
