@@ -27,6 +27,8 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] Transform grapplePoint;
     [SerializeField] LineRenderer grapplingLR;
 
+    [SerializeField] GameObject bodyVisual;
+
 
     public override void OnNetworkSpawn()
     {
@@ -37,6 +39,7 @@ public class NetworkPlayer : NetworkBehaviour
         
         if (IsOwnedByServer)
         {
+            bodyVisual.SetActive(false);
             transform.name = "Host:" + myID;    //this must be the host
             DebugConsole.Log("Host:" + myID);
         }

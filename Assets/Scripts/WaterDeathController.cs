@@ -71,6 +71,11 @@ public class WaterDeathController : NetworkBehaviour
         {
             RespawnBoat boat = _activeBoats[i];
 
+            if (boat == null)
+            {
+                _activeBoats.Remove(boat);
+                continue;
+            }
             if (boat.ReachedDestination())
             {
                 _activeBoats.Remove(boat);
