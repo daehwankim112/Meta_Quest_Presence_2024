@@ -112,6 +112,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8389496927404587394, guid: 8fec34d410485a74899bb3d659954c5b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 479c71df5365b3f42b34b91f4abdf7c7, type: 2}
+    - target: {fileID: 8389496928288835941, guid: 8fec34d410485a74899bb3d659954c5b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 479c71df5365b3f42b34b91f4abdf7c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -197,6 +207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968359863667405369, guid: 93f3ff3c97a5cb245a5ae8b54b075d6d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8233527157503994972, guid: 93f3ff3c97a5cb245a5ae8b54b075d6d,
         type: 3}
