@@ -8,6 +8,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System;
 using Unity.Netcode.Components;
+using NuiN.NExtensions;
 
 [HelpURL("https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw")]
 
@@ -42,6 +43,8 @@ public class NetworkPlayer : NetworkBehaviour
         }
         if (IsOwner)
         {
+            NetworkManager.Singleton.OnServerStopped += Reload;
+
             foreach (var item in meshToDisable)
             {
                 item.enabled = false;
@@ -61,6 +64,11 @@ public class NetworkPlayer : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        NetworkManager.Singleton.OnServerStopped -= Reload;
+    }
 
     void Update()
     {
@@ -78,5 +86,10 @@ public class NetworkPlayer : NetworkBehaviour
             rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
         }
+    }
+
+    void Reload(bool input)
+    {
+        GeneralUtils.ReloadScene();
     }
 }

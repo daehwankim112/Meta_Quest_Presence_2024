@@ -138,7 +138,7 @@ public class NetworkConnect : MonoBehaviour
         NetworkManager.Singleton.Shutdown();
         Lobbies.Instance.DeleteLobbyAsync(instance.CurrentLobby.Id);
         LobbyDeleted?.Invoke();
-        // RuntimeHelper.DoAfter(1f, GeneralUtils.ReloadScene);
+        RuntimeHelper.DoAfter(0.1f, GeneralUtils.ReloadScene);
     }
 
     public static string GetJoinCode(Lobby lobby)

@@ -32,7 +32,7 @@ public class MenuWristUI : MonoBehaviour
             foreach (var image in images)
             {
                 var tempColor = image.color;
-                tempColor.a = Mathf.Lerp(0, 1, 1 - (Mathf.Abs(Vector3.Angle(Forward.forward, DirectionToCamera)) / (Threshhold * 2f)));
+                tempColor.a = Mathf.Lerp(0, 1, 2 - (Mathf.Abs(Vector3.Angle(Forward.forward, DirectionToCamera)) * 2f / (Threshhold)));
                 image.color = tempColor;
             }
         }

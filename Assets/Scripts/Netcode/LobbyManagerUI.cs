@@ -8,6 +8,7 @@ using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,7 +59,13 @@ public class LobbyManagerUI : MonoBehaviour
         exitLobbyButton.gameObject.SetActive(true);
         createLobbyButton.gameObject.SetActive(false);
     }
-    private void ExitLobby()
+
+    void JoinedLobby()
+    {
+        exitLobbyButton.gameObject.SetActive(false);
+        createLobbyButton.gameObject.SetActive(true);
+    }
+    void ExitLobby()
     {
         NetworkConnect.DeleteLobby();
         createLobbyButton.gameObject.SetActive(true);
