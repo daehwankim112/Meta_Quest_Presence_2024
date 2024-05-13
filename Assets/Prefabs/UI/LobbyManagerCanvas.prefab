@@ -839,7 +839,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 787879059274000748}
   m_HandleRect: {fileID: 2111047675730007408}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1018,6 +1018,7 @@ MonoBehaviour:
   ExitSound: {fileID: 11400000, guid: fd98d3e0ceda5534ba67957025772e17, type: 2}
   hostedSound: {fileID: 11400000, guid: c1d741be847060d49b9bc57d95ca5077, type: 2}
   joinedSound: {fileID: 11400000, guid: fbcc0ae8dc9905b448129e2d45655b11, type: 2}
+  menuWristUI: {fileID: 0}
 --- !u!223 &1373744621997317311
 Canvas:
   m_ObjectHideFlags: 0
