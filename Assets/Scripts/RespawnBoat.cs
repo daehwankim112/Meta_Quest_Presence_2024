@@ -15,12 +15,16 @@ public class RespawnBoat : NetworkBehaviour
     
     void Update()
     {
+        if (!IsServer) return;
+        
         Vector3 dirToDestination = VectorUtils.Direction(transform.position.With(y:0), destination.With(y:0));
         transform.rotation = Quaternion.LookRotation(dirToDestination.With(y:0));
     }
 
     void FixedUpdate()
     {
+        if (!IsServer) return;
+        
         rb.angularVelocity = Vector3.zero;
         Vector3 dirToDestination = VectorUtils.Direction(transform.position.With(y:0), destination.With(y:0));
         rb.velocity = dirToDestination * moveSpeed;
