@@ -42,4 +42,7 @@ public static class GameEvents
 
     public static void InvokeCannonRepaired() => OnCannonRepaired?.Invoke();
     public static event Action OnCannonRepaired;
+    
+    public static void InvokeTreeDestroyed() => OnTreeDestroyed?.Invoke();
+    public static event Action OnTreeDestroyed;
 }
