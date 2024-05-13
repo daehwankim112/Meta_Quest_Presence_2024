@@ -22,7 +22,8 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] Renderer[] meshToDisable;
     [SerializeField] Collider[] collidersToDestroy;
 
-    [SerializeField] float initialScale;
+    [SerializeField] float smallPlayerInitialScale;
+    [SerializeField] float giantPlayerInitialScale;
     
     [SerializeField] Transform grapplePoint;
     [SerializeField] LineRenderer grapplingLR;
@@ -70,12 +71,13 @@ public class NetworkPlayer : NetworkBehaviour
                 Destroy(col);
             }
 
-            Vector3 scale = Vector3.one * initialScale;
+            float scale = IsServer ? giantPlayerInitialScale * RoomEnvironmentInitializer.RoomScale.magnitude : smallPlayerInitialScale;
+            Vector3 scaleVector = Vector3.one * scale;
             if (IsServer) scale *= RoomEnvironmentInitializer.RoomScale.magnitude;
             
-            head.localScale = scale;
-            leftHand.localScale = scale;
-            rightHand.localScale = scale;
+            head.localScale = scaleVector;
+            leftHand.localScale = scaleVector;
+            rightHand.localScale = scaleVector;
 
             if (!IsServer)
             {
