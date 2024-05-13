@@ -7957,8 +7957,8 @@ GameObject:
   - component: {fileID: 1297581907435316071}
   - component: {fileID: 4524725863685258838}
   - component: {fileID: 8635902921045277319}
-  - component: {fileID: 8119370647380578221}
   - component: {fileID: 280359270050342731}
+  - component: {fileID: 8119370647380578221}
   - component: {fileID: 5909007623747832298}
   m_Layer: 7
   m_Name: Small Player
@@ -8212,6 +8212,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &280359270050342731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968359863667405369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2769307134
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &8119370647380578221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8226,27 +8247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8635902921045277319}
   movement: {fileID: 884336048579353827}
---- !u!114 &280359270050342731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6968359863667405369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2012579501
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5909007623747832298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11459,7 +11459,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1079
-  relVelForce: 0.5
+  relVelForce: 0.43
   drawGizmos: 1
   gizmosGroundColor: {r: 0, g: 1, b: 0, a: 1}
   gizmosAirColor: {r: 0, g: 0, b: 1, a: 1}
