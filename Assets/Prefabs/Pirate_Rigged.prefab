@@ -192,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 1250949407608683242}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.145, y: 1.0104103, z: -0.023513312}
+  m_LocalPosition: {x: -0.2010447, y: 0.81947625, z: 0.15975118}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -399,7 +399,7 @@ Transform:
   m_GameObject: {fileID: 5354934600700506883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.141, y: 1.0103953, z: -0.03}
+  m_LocalPosition: {x: 0.20104474, y: 0.81947625, z: 0.15975118}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -691,7 +691,7 @@ MonoBehaviour:
       color: {r: 1, g: 0, b: 0, a: 0.5}
       size: 0.1
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 180, z: 0}
     m_Visible: 1
   - m_Transform: {fileID: 4291508577089790327}
     m_Style:
@@ -707,7 +707,7 @@ MonoBehaviour:
       color: {r: 1, g: 0, b: 0, a: 0.5}
       size: 0.1
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 180, z: 0}
     m_Visible: 1
   - m_Transform: {fileID: 2677265409750797340}
     m_Style:
@@ -757,6 +757,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 503fc352d70d9564d9c501c090def9ba,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 503fc352d70d9564d9c501c090def9ba,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 503fc352d70d9564d9c501c090def9ba,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 503fc352d70d9564d9c501c090def9ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1214,19 +1229,19 @@ MonoBehaviour:
   head:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 8460719663156352875}
-    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingPositionOffset: {x: 0.0022, y: 0.0125, z: 0}
     trackingRotationOffset: {x: 0, y: 180, z: 0}
   leftHand:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 9129761953766789678}
-    trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    trackingPositionOffset: {x: -0.00025, y: 0, z: -0.003}
+    trackingRotationOffset: {x: -192.6, y: -90.4, z: -75.37}
   rightHand:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 837628810219247104}
-    trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
-  headBodyPositionOffset: {x: 0.25, y: -0.72, z: -0.5}
+    trackingPositionOffset: {x: 0.0005, y: 0, z: -0.003}
+    trackingRotationOffset: {x: 192.6, y: 90.4, z: 75.37}
+  headBodyPositionOffset: {x: 0.25, y: 0, z: -0.5}
   headBodyYawOffset: 0
 --- !u!4 &5389205024105585028 stripped
 Transform:
