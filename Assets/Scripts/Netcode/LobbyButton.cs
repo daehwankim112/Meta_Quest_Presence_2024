@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class LobbyButton : MonoBehaviour
 {
     [SerializeField] TMP_Text lobbyNameText;
     [SerializeField] Button button;
-    
+
     string _joinCode = string.Empty;
     string _lobbyName = string.Empty;
 
@@ -26,7 +27,7 @@ public class LobbyButton : MonoBehaviour
     {
         _joinCode = NetworkConnect.GetJoinCode(lobby);
         _lobbyName = NetworkConnect.GetLobbyName(lobby);
-        
+
         lobbyNameText.SetText(_lobbyName);
     }
 

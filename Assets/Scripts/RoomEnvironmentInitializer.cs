@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NuiN.NExtensions;
+using NuiN.ScriptableHarmony.Sound;
+using Oculus.VoiceSDK.UX;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -22,6 +24,7 @@ public class RoomEnvironmentInitializer : MonoBehaviour
     [SerializeField] float treeNoiseThreshold;
     [SerializeField] float treeNormalThreshold;
 
+
     MeshFilter _sceneMeshFilter;
 
     void Awake()
@@ -39,6 +42,8 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         GameEvents.OnLobbyJoined -= DisableThis;
         GameEvents.OnLobbyHosted -= DisableThis;
     }
+
+    
 
     IEnumerator Start()
     {

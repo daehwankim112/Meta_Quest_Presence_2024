@@ -8,6 +8,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System;
 using Unity.Netcode.Components;
+using NuiN.NExtensions;
 
 [HelpURL("https://youtu.be/6fZ7LT5AeTw?si=9QcoxIA9VkCT3uWw")]
 
@@ -21,14 +22,7 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] Renderer[] meshToDisable;
     [SerializeField] Collider[] collidersToDestroy;
 
-    [SerializeField] float smallPlayerInitialScale = 2f;
-    [SerializeField] float giantInitialScale = 1f;
-    
-    [SerializeField] Transform grapplePoint;
-    [SerializeField] LineRenderer grapplingLR;
-
-    [SerializeField] GameObject bodyVisual;
-
+    [SerializeField] float initialScale;
 
     public override void OnNetworkSpawn()
     {
@@ -39,7 +33,6 @@ public class NetworkPlayer : NetworkBehaviour
         
         if (IsOwnedByServer)
         {
-            //bodyVisual.SetActive(false);
             transform.name = "Host:" + myID;    //this must be the host
             DebugConsole.Log("Host:" + myID);
         }
@@ -60,40 +53,20 @@ public class NetworkPlayer : NetworkBehaviour
                 Destroy(col);
             }
 
-            float scale = IsServer ? giantInitialScale * RoomEnvironmentInitializer.RoomScale.magnitude: smallPlayerInitialScale;
-            Vector3 scaleVector = Vector3.one * scale;
+            Vector3 scale = Vector3.one * initialScale;
+            if (IsServer) scale *= RoomEnvironmentInitializer.RoomScale.magnitude;
             
-            head.localScale = scaleVector;
-            leftHand.localScale = scaleVector;
-            rightHand.localScale = scaleVector;
-
-            if (!IsServer)
-            {
-                GameEvents.OnLocalPlayerGrappling += SetGrapplePosition;
-                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePosition;
-            }
+            head.localScale = scale;
+            leftHand.localScale = scale;
+            rightHand.localScale = scale;
         }
     }
+
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-
-        if (!IsServer)
-        {
-            GameEvents.OnLocalPlayerGrappling -= SetGrapplePosition;
-            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePosition;
-        }
-    }
-
-    void SetGrapplePosition(Vector3 position)
-    {
-        grapplePoint.position = position;
-    }
-
-    void ResetGrapplePosition()
-    {
-        grapplePoint.localPosition = Vector3.zero;
+        RuntimeHelper.DoAfter(0.5f, GeneralUtils.ReloadScene);
     }
 
     void Update()
@@ -111,26 +84,6 @@ public class NetworkPlayer : NetworkBehaviour
 
             rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
-        }
-    }
-
-    void LateUpdate()
-    {
-        if (IsOwner && !IsServer)
-        {
-            grapplingLR.enabled = false;
-            return;
-        }
-        
-        if (grapplePoint.localPosition != Vector3.zero)
-        {
-            grapplingLR.enabled = true;
-            grapplingLR.SetPosition(0, rightHand.position);
-            grapplingLR.SetPosition(1, grapplePoint.position);
-        }
-        else
-        {
-            grapplingLR.enabled = false;
         }
     }
 }

@@ -16,6 +16,9 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using NuiN.ScriptableHarmony.Sound;
+using NuiN.NExtensions;
+using Unity.VisualScripting;
 
 [HelpURL("https://youtu.be/Pry4grExYQQ?si=7Jh1pwQdKrPFnWrz")]
 
@@ -134,7 +137,6 @@ public class NetworkConnect : MonoBehaviour
         
         NetworkManager.Singleton.Shutdown();
         Lobbies.Instance.DeleteLobbyAsync(instance.CurrentLobby.Id);
-        
         LobbyDeleted?.Invoke();
     }
 
