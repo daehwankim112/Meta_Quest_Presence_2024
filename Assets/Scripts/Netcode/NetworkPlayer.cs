@@ -115,7 +115,6 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (IsOwner && !IsServer)
         {
-            Debug.LogError("Local player, disabling lr");
             grapplingLR.enabled = false;
             return;
         }
