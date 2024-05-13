@@ -68,8 +68,8 @@ public class NetworkPlayer : NetworkBehaviour
 
             if (!IsServer)
             {
-                GameEvents.OnLocalPlayerGrappling += SetGrapplePositionServerRpc;
-                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePositionServerRpc;
+                GameEvents.OnLocalPlayerGrappling += SetGrapplePosition;
+                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePosition;
             }
         }
     }
@@ -80,9 +80,19 @@ public class NetworkPlayer : NetworkBehaviour
 
         if (!IsServer)
         {
-            GameEvents.OnLocalPlayerGrappling -= SetGrapplePositionServerRpc;
-            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePositionServerRpc;
+            GameEvents.OnLocalPlayerGrappling -= SetGrapplePosition;
+            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePosition;
         }
+    }
+
+    void SetGrapplePosition(Vector3 position)
+    {
+        SetGrapplePositionServerRpc(position);
+    }
+
+    void ResetGrapplePosition()
+    {
+        ResetGrapplePositionServerRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -117,7 +127,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     void LateUpdate()
     {
-        if (IsOwner)
+        if (IsOwner && !IsServer)
         {
             Debug.LogError("Local player, disabling lr");
             grapplingLR.enabled = false;
