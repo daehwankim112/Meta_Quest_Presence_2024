@@ -158,7 +158,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "306416d4b043ea0029c22716cc66eaf278a2665b"
+      "hash": "87526dd08a8f9076dace25e004f15995bf6d6416"
     },
     "com.unity.ai.navigation": {
       "version": "1.1.5",

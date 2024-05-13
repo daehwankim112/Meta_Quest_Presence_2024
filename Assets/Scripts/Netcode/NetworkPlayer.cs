@@ -61,6 +61,7 @@ public class NetworkPlayer : NetworkBehaviour
         }
     }
 
+
     void Update()
     {
         if (IsOwner)

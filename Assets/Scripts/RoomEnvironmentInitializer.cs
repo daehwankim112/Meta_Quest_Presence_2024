@@ -32,6 +32,11 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         RoomScale = Vector3.one * roomScale;
     }
 
+    void OnDestroy()
+    {
+        NetworkManager.Singleton.OnServerStopped -= Reload;
+    }
+
     void OnEnable()
     {
         GameEvents.OnLobbyJoined += DisableThis;
@@ -43,8 +48,14 @@ public class RoomEnvironmentInitializer : MonoBehaviour
         GameEvents.OnLobbyHosted -= DisableThis;
     }
 
+    void Reload(bool input)
+    {
+        GeneralUtils.ReloadScene();
+    }
+
     IEnumerator Start()
     {
+        NetworkManager.Singleton.OnServerStopped += Reload;
         findRoomInterval.Init();
         
         // wait until the scene parent children to know if the scene is ready

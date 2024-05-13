@@ -21,11 +21,9 @@ public class MenuWristUI : MonoBehaviour
     void Update()
     {
         Vector3 DirectionToCamera = VectorUtils.Direction(Forward.position, CentreCamera.position);
-        // Debug.LogError("Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
         UpdateColledImagesRecursive();
         if (Vector3.Angle(Forward.forward, DirectionToCamera) < Threshhold)
         {
-            // Debug.LogError("In threshold! Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
@@ -34,7 +32,7 @@ public class MenuWristUI : MonoBehaviour
             foreach (var image in images)
             {
                 var tempColor = image.color;
-                tempColor.a = Mathf.Lerp(0, 1, 1 - (Mathf.Abs(Vector3.Angle(Forward.forward, DirectionToCamera)) / Threshhold));
+                tempColor.a = Mathf.Lerp(0, 1, 1 - (Mathf.Abs(Vector3.Angle(Forward.forward, DirectionToCamera)) / (Threshhold * 2f)));
                 image.color = tempColor;
             }
         }

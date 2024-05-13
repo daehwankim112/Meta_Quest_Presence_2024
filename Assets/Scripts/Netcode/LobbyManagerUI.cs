@@ -94,7 +94,6 @@ public class LobbyManagerUI : MonoBehaviour
             {
                 if (!NetworkManager.Singleton.IsServer)
                 {
-                    Debug.LogError("Lobby Manager is not server");
                     GameObject lobbyButton = Instantiate(lobbyButtonPrefab, grid.transform);
                     lobbyButton.GetComponent<LobbyButton>().Initialize(lobby);
                     _lobbies.Add(lobbyButton);
@@ -102,7 +101,6 @@ public class LobbyManagerUI : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Lobby Manager is server");
                     GameObject lobbyInfo = Instantiate(lobbyInfoPrefab, grid.transform);
                     lobbyInfo.GetComponent<LobbyInfo>().Initialize(lobby);
                     _lobbies.Add(lobbyInfo);
