@@ -91,7 +91,11 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        RuntimeHelper.DoAfter(0.5f, GeneralUtils.ReloadScene);
+        if (OwnerClientId == 0)
+        {
+            Debug.Log("Host disconnected");
+            RuntimeHelper.DoAfter(0.5f, GeneralUtils.ReloadScene);
+        }
         
         if (!IsServer)
         {
