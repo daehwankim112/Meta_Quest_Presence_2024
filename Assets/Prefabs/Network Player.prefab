@@ -220,8 +220,7 @@ MonoBehaviour:
   - {fileID: 565716013566555021}
   - {fileID: 6390331222518444841}
   - {fileID: 1048007783412156477}
-  smallPlayerInitialScale: 2
-  giantInitialScale: 1
+  initialScale: 1
   grapplePoint: {fileID: 2588929881425320369}
   grapplingLR: {fileID: -2646609534185149762}
   bodyVisual: {fileID: 7766439581471534143}

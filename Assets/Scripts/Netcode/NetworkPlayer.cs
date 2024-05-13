@@ -76,6 +76,12 @@ public class NetworkPlayer : NetworkBehaviour
             head.localScale = scale;
             leftHand.localScale = scale;
             rightHand.localScale = scale;
+
+            if (!IsServer)
+            {
+                GameEvents.OnLocalPlayerGrappling += SetGrapplePosition;
+                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePosition;
+            }
         }
     }
 
@@ -84,6 +90,22 @@ public class NetworkPlayer : NetworkBehaviour
     {
         base.OnNetworkDespawn();
         RuntimeHelper.DoAfter(0.5f, GeneralUtils.ReloadScene);
+        
+        if (!IsServer)
+        {
+            GameEvents.OnLocalPlayerGrappling -= SetGrapplePosition;
+            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePosition;
+        }
+    }
+
+    void SetGrapplePosition(Vector3 position)
+    {
+        grapplePoint.position = position;
+    }
+
+    void ResetGrapplePosition()
+    {
+        grapplePoint.position = Vector3.zero;
     }
 
     void Update()
@@ -121,6 +143,26 @@ public class NetworkPlayer : NetworkBehaviour
             }
             rightHand.position = _lastRightHandPos;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (IsOwner && !IsServer)
+        {
+            grapplingLR.enabled = false;
+            return;
+        }
+
+        if (grapplePoint.localPosition != Vector3.zero)
+        {
+            grapplingLR.enabled = true;
+            grapplingLR.SetPosition(0, rightHand.position);
+            grapplingLR.SetPosition(1, grapplePoint.position);
+        }
+        else
+        {
+            grapplingLR.enabled = false;
         }
     }
 }
