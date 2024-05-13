@@ -96,7 +96,10 @@ namespace NuiN.Movement
             Vector3 vel = rb.velocity;
 
             bool hitOtherRB = hit.collider.TryGetComponent(out Rigidbody otherRB);
+            bool hitBoat = hit.collider.TryGetComponent(out RespawnBoat boat);
+            
             Vector3 otherVel = hitOtherRB ? otherRB.velocity : default;
+            if (hitBoat) otherVel = new Vector3(boat.xzVelocity.Value.x, 0, boat.xzVelocity.Value.y);
 
             float rayDirVel = Vector3.Dot(rayDir, vel);
             float otherDirVel = Vector3.Dot(rayDir, otherVel);
