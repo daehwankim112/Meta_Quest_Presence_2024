@@ -41,13 +41,24 @@ public class GrapplingHook : MonoBehaviour
     
     void Awake() => activateAction.action.Enable();
     void Start() => ropeLR.enabled = false;
-    void OnEnable() => GameEvents.OnLocalClientGrabbed += SetBeingGrabbed;
-    void OnDisable() => GameEvents.OnLocalClientReleased += SetReleased;
+    void OnEnable()
+    {
+        GameEvents.OnLocalClientGrabbed += SetBeingGrabbed;
+        GameEvents.OnSmallPlayerFellInWater += DetachHandler;
+    }
+    void OnDisable()
+    {
+        GameEvents.OnLocalClientReleased -= SetReleased;
+        GameEvents.OnSmallPlayerFellInWater -= DetachHandler;
+    }
+
     void SetBeingGrabbed()
     {
         _beingGrabbed = true;
         Detach();
     }
+
+    void DetachHandler(ulong _) => Detach();
 
     void SetReleased(Vector3 _) => _beingGrabbed = false;
 

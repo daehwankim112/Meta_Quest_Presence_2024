@@ -40,7 +40,6 @@ public class Hand
         _currentHeldObject = closestGrabbable.Key;
         
         _currentHeldObject.Grabbed();
-        DebugConsole.Log("Grabbed Object");
     }
 
     public void Grabbing(Vector3 position)
