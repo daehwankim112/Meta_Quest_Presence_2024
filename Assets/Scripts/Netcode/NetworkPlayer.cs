@@ -30,6 +30,10 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] GameObject bodyVisual;
     [SerializeField] GameObject krakenVisual;
 
+    Vector3 _lastRootPos;
+    Vector3 _lastHeadPos;
+    Vector3 _lastLeftHandPos;
+    Vector3 _lastRightHandPos;
 
     public override void OnNetworkSpawn()
     {
@@ -107,16 +111,36 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (IsOwner)
         {
-            root.position = OVRCameraRigReferencesForNetCode.instance.root.position;
+            Vector3 rootPos = OVRCameraRigReferencesForNetCode.instance.root.position;
+            if (rootPos != Vector3.zero)
+            {
+                _lastRootPos = rootPos;
+            }
+            root.position = _lastRootPos;
             root.rotation = OVRCameraRigReferencesForNetCode.instance.root.rotation;
 
-            head.position = OVRCameraRigReferencesForNetCode.instance.head.position;
+            Vector3 headPos = OVRCameraRigReferencesForNetCode.instance.head.position;
+            if (headPos != Vector3.zero)
+            {
+                _lastHeadPos = headPos;
+            }
+            head.position = _lastHeadPos;
             head.rotation = OVRCameraRigReferencesForNetCode.instance.head.rotation;
 
-            leftHand.position = OVRCameraRigReferencesForNetCode.instance.leftHand.position;
+            Vector3 leftHandPos = OVRCameraRigReferencesForNetCode.instance.leftHand.position;
+            if (leftHandPos != Vector3.zero)
+            {
+                _lastLeftHandPos = leftHandPos;
+            }
+            leftHand.position = _lastLeftHandPos;
             leftHand.rotation = OVRCameraRigReferencesForNetCode.instance.leftHand.rotation;
 
-            rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
+            Vector3 rightHandPos = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
+            if (rightHandPos != Vector3.zero)
+            {
+                _lastRightHandPos = rightHandPos;
+            }
+            rightHand.position = _lastRightHandPos;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
         }
     }
