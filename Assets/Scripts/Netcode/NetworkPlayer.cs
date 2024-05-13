@@ -23,8 +23,6 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] Collider[] collidersToDestroy;
 
     [SerializeField] float initialScale;
-    [SerializeField] float smallPlayerInitialScale = 2f;
-    [SerializeField] float giantInitialScale = 1f;
     
     [SerializeField] Transform grapplePoint;
     [SerializeField] LineRenderer grapplingLR;
