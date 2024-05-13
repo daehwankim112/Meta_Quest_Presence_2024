@@ -43,7 +43,7 @@ public class NetworkPlayer : NetworkBehaviour
         }
         if (IsOwner)
         {
-            NetworkManager.Singleton.OnServerStopped += Reload;
+            NetworkManager.Singleton.OnClientDisconnectCallback += Reload;
 
             foreach (var item in meshToDisable)
             {
@@ -67,7 +67,7 @@ public class NetworkPlayer : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        NetworkManager.Singleton.OnServerStopped -= Reload;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= Reload;
     }
 
     void Update()
@@ -88,8 +88,11 @@ public class NetworkPlayer : NetworkBehaviour
         }
     }
 
-    void Reload(bool input)
+    void Reload(ulong input)
     {
-        GeneralUtils.ReloadScene();
+        if (input == 0)
+        {
+            GeneralUtils.ReloadScene();
+        }
     }
 }
