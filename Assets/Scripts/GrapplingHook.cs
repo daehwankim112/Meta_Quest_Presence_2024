@@ -37,20 +37,24 @@ public class GrapplingHook : MonoBehaviour
 
     Transform _connectedTransform;
     Vector3 _localPos;
-
+    bool _beingGrabbed;
     
-    void Awake()
+    void Awake() => activateAction.action.Enable();
+    void Start() => ropeLR.enabled = false;
+    void OnEnable() => GameEvents.OnLocalClientGrabbed += SetBeingGrabbed;
+    void OnDisable() => GameEvents.OnLocalClientReleased += SetReleased;
+    void SetBeingGrabbed()
     {
-        activateAction.action.Enable();
+        _beingGrabbed = true;
+        Detach();
     }
 
-    void Start()
-    {
-        ropeLR.enabled = false;
-    }
+    void SetReleased(Vector3 _) => _beingGrabbed = false;
 
     void Update()
     {
+        if (_beingGrabbed) return;
+        
         if (activateAction.action.WasPressedThisFrame()) Activate();
         else if(activateAction.action.WasReleasedThisFrame()) Detach();
 
@@ -122,9 +126,12 @@ public class GrapplingHook : MonoBehaviour
     void Detach()
     {
         rb.drag = 0;
-        
-        movement.EnableGravity();
-        movement.EnableMovementNoKinematic();
+
+        if (!_beingGrabbed)
+        {
+            movement.EnableGravity();
+            movement.EnableMovementNoKinematic();
+        }
         
         GameEvents.InvokeLocalPlayerUnGrappled();
         

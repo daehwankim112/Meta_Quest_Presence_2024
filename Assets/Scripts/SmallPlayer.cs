@@ -39,6 +39,7 @@ public class SmallPlayer : NetworkBehaviour
     void Released(Vector3 direction)
     {
         movement.EnableMovement();
+        movement.EnableGravity();
         rb.AddForce(direction * 100, ForceMode.VelocityChange);
     }
 

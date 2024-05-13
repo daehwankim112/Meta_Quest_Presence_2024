@@ -45,6 +45,13 @@ public class Hand
 
     public void Grabbing(Vector3 position)
     {
+        if (position.y <= WaterDeathController.WaterHeight)
+        {
+            _direction = Vector3.zero;
+            Release();
+            return;
+        }
+        
         _direction = VectorUtils.Direction(_lastFramePosition, position);
         
         _currentHeldObject.Grabbing(position);
