@@ -28,6 +28,7 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] LineRenderer grapplingLR;
 
     [SerializeField] GameObject bodyVisual;
+    [SerializeField] GameObject krakenVisual;
 
 
     public override void OnNetworkSpawn()
@@ -42,11 +43,17 @@ public class NetworkPlayer : NetworkBehaviour
             //bodyVisual.SetActive(false);
             transform.name = "Host:" + myID;    //this must be the host
             DebugConsole.Log("Host:" + myID);
+            
+            bodyVisual.gameObject.SetActive(false);
+            krakenVisual.gameObject.SetActive(true);
         }
         else
         {
             transform.name = "Client:" + myID; //this must be the client 
             DebugConsole.Log("Client:" + myID);
+            
+            bodyVisual.gameObject.SetActive(true);
+            krakenVisual.gameObject.SetActive(false);
         }
         if (IsOwner)
         {
