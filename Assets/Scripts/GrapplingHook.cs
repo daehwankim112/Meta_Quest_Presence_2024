@@ -45,9 +45,11 @@ public class GrapplingHook : MonoBehaviour
     {
         GameEvents.OnLocalClientGrabbed += SetBeingGrabbed;
         GameEvents.OnSmallPlayerFellInWater += DetachHandler;
+        GameEvents.OnLocalClientReleased += SetReleased;
     }
     void OnDisable()
     {
+        GameEvents.OnLocalClientGrabbed -= SetBeingGrabbed;
         GameEvents.OnLocalClientReleased -= SetReleased;
         GameEvents.OnSmallPlayerFellInWater -= DetachHandler;
     }
