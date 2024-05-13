@@ -121,6 +121,7 @@ public class GrapplingHook : MonoBehaviour
 
     void Activate()
     {
+        if (!pullTimer.Complete()) return;
         if (!Hit(out RaycastHit hit)) return;
 
         movement.DisableGravity();
@@ -141,7 +142,7 @@ public class GrapplingHook : MonoBehaviour
 
         rb.drag = grappleDrag;
         
-        pullSound?.PlaySpatial(hand.position);
+        pullSound?.PlaySpatial(hand.position, hand);
     }
 
     void Detach()
