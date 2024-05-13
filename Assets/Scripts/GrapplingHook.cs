@@ -69,8 +69,7 @@ public class GrapplingHook : MonoBehaviour
     void SetReleased(Vector3 _)
     {
         _beingGrabbed = false;
-        movement.EnableGravity();
-        movement.EnableMovementNoKinematic();
+        Detach();
     }
 
     void Update()
