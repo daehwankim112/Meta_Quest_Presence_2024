@@ -43,8 +43,6 @@ public class NetworkPlayer : NetworkBehaviour
         }
         if (IsOwner)
         {
-            NetworkManager.Singleton.OnClientDisconnectCallback += Reload;
-
             foreach (var item in meshToDisable)
             {
                 item.enabled = false;
@@ -64,10 +62,11 @@ public class NetworkPlayer : NetworkBehaviour
         }
     }
 
+
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
-        NetworkManager.Singleton.OnClientDisconnectCallback -= Reload;
+        RuntimeHelper.DoAfter(0.5f, GeneralUtils.ReloadScene);
     }
 
     void Update()
@@ -85,14 +84,6 @@ public class NetworkPlayer : NetworkBehaviour
 
             rightHand.position = OVRCameraRigReferencesForNetCode.instance.rightHand.position;
             rightHand.rotation = OVRCameraRigReferencesForNetCode.instance.rightHand.rotation;
-        }
-    }
-
-    void Reload(ulong input)
-    {
-        if (input == 0)
-        {
-            GeneralUtils.ReloadScene();
         }
     }
 }
