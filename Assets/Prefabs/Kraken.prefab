@@ -819,6 +819,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2710364405534185370}
+    - targetCorrespondingSourceObject: {fileID: 9134526910152281071, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7805485238398121631}
     - targetCorrespondingSourceObject: {fileID: 1372424085714221788, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -927,6 +931,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2774242500340437254}
+    - targetCorrespondingSourceObject: {fileID: -2256826340541874833, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 508674396434218704}
     - targetCorrespondingSourceObject: {fileID: -6218362504727661694, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -1143,6 +1151,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4202867627156862496}
+    - targetCorrespondingSourceObject: {fileID: 2894899153632803061, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6367022208615404524}
     - targetCorrespondingSourceObject: {fileID: 3617080896525701178, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -1251,6 +1263,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 623099680711982664}
+    - targetCorrespondingSourceObject: {fileID: 4441749265623408451, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 261018024996619935}
     - targetCorrespondingSourceObject: {fileID: 3848338509547548063, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -1359,6 +1375,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3995883053100035138}
+    - targetCorrespondingSourceObject: {fileID: -6961911552638411930, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8802181642431273226}
     - targetCorrespondingSourceObject: {fileID: -6389106212405682551, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -1467,6 +1487,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8444726891318566882}
+    - targetCorrespondingSourceObject: {fileID: -877779952597175730, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2659053941837934661}
     - targetCorrespondingSourceObject: {fileID: -5767867955081040120, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -1511,7 +1535,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4035799210845532134
 ConfigurableJoint:
@@ -1667,7 +1691,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8918286578545412412
 ConfigurableJoint:
@@ -1823,7 +1847,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8588444978885246069
 ConfigurableJoint:
@@ -1979,7 +2003,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8413468312172644069
 ConfigurableJoint:
@@ -2135,7 +2159,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6820861435270354252
 ConfigurableJoint:
@@ -2260,6 +2284,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &508674396434218704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460076805510048741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &524615217059978513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7028834577972775835, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -2291,7 +2333,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4685112783368206838
 ConfigurableJoint:
@@ -2447,7 +2489,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &9168222164791333141
 ConfigurableJoint:
@@ -2603,7 +2645,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4969464582293972567
 ConfigurableJoint:
@@ -2759,7 +2801,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &164068186682862491
 ConfigurableJoint:
@@ -2915,7 +2957,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6424307400427959157
 ConfigurableJoint:
@@ -3077,7 +3119,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6356492646135761596
 ConfigurableJoint:
@@ -3233,7 +3275,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5192608608254288203
 ConfigurableJoint:
@@ -3358,6 +3400,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2659053941837934661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521617186340168900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &1731909895416749413 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9134526910152281071, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3389,7 +3449,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8341754174243585309
 ConfigurableJoint:
@@ -3514,6 +3574,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7805485238398121631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731909895416749413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &1975830969595229315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -169115058240790007, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3545,7 +3623,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4634198841470146315
 ConfigurableJoint:
@@ -3701,7 +3779,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7938518591920469045
 ConfigurableJoint:
@@ -3857,7 +3935,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &820533969341098366
 ConfigurableJoint:
@@ -4019,7 +4097,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &1220123348345243189
 ConfigurableJoint:
@@ -4175,7 +4253,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6550619474349057368
 ConfigurableJoint:
@@ -4331,7 +4409,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4153637235690215276
 ConfigurableJoint:
@@ -4487,7 +4565,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &3073523997381308246
 ConfigurableJoint:
@@ -4643,7 +4721,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5320100905310592515
 ConfigurableJoint:
@@ -4799,7 +4877,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &290474117556832859
 ConfigurableJoint:
@@ -4955,7 +5033,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8418066131075770394
 ConfigurableJoint:
@@ -5111,7 +5189,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7167646074265468673
 ConfigurableJoint:
@@ -5267,7 +5345,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8622181589100464113
 ConfigurableJoint:
@@ -5423,7 +5501,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4798579594709222787
 ConfigurableJoint:
@@ -5579,7 +5657,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5955515699665139305
 ConfigurableJoint:
@@ -5735,7 +5813,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6866387250081187121
 ConfigurableJoint:
@@ -5891,7 +5969,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &3788429042573493059
 ConfigurableJoint:
@@ -6047,7 +6125,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5933226045385142296
 ConfigurableJoint:
@@ -6203,7 +6281,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &9216564901405172108
 ConfigurableJoint:
@@ -6359,7 +6437,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &1315773853446290770
 ConfigurableJoint:
@@ -6548,7 +6626,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5654519355255853579
 ConfigurableJoint:
@@ -6704,7 +6782,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &4637831426699383690
 ConfigurableJoint:
@@ -6860,7 +6938,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &11334630972810920
 ConfigurableJoint:
@@ -7016,7 +7094,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7504251144502406482
 ConfigurableJoint:
@@ -7172,7 +7250,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5596761585971450143
 ConfigurableJoint:
@@ -7328,7 +7406,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8913222742281399980
 ConfigurableJoint:
@@ -7484,7 +7562,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5286192567347528100
 ConfigurableJoint:
@@ -7640,7 +7718,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2283648994664782948
 ConfigurableJoint:
@@ -7796,7 +7874,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &946832150429286065
 ConfigurableJoint:
@@ -7952,7 +8030,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5834408507167301208
 ConfigurableJoint:
@@ -8077,6 +8155,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6367022208615404524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683576252050419327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &5728386533888255240 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6218362504727661694, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -8108,7 +8204,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6163478645758453789
 ConfigurableJoint:
@@ -8264,7 +8360,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6414119491920928772
 ConfigurableJoint:
@@ -8420,7 +8516,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &3706306573232013410
 ConfigurableJoint:
@@ -8576,7 +8672,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8346026818958292306
 ConfigurableJoint:
@@ -8732,7 +8828,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &1254306296420449428
 ConfigurableJoint:
@@ -8888,7 +8984,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6497382008710926072
 ConfigurableJoint:
@@ -9044,7 +9140,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2964715247297003227
 ConfigurableJoint:
@@ -9200,7 +9296,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2805627453423304641
 ConfigurableJoint:
@@ -9356,7 +9452,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2953652239179815183
 ConfigurableJoint:
@@ -9512,7 +9608,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5131150873634443812
 ConfigurableJoint:
@@ -9674,7 +9770,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &1690902420670424544
 ConfigurableJoint:
@@ -9830,7 +9926,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &460654722690249995
 ConfigurableJoint:
@@ -9955,6 +10051,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &261018024996619935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586763357834365385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &6875414194293774636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5069151280935727194, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -9986,7 +10100,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8494739304835221314
 ConfigurableJoint:
@@ -10142,7 +10256,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6585552765498610438
 ConfigurableJoint:
@@ -10298,7 +10412,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7011845714227995888
 ConfigurableJoint:
@@ -10454,7 +10568,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6438710945006092122
 ConfigurableJoint:
@@ -10610,7 +10724,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &9164015853965773157
 ConfigurableJoint:
@@ -10802,7 +10916,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5833227190219528076
 ConfigurableJoint:
@@ -10958,7 +11072,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7996411220836225746
 ConfigurableJoint:
@@ -11114,7 +11228,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &8819233206169150474
 ConfigurableJoint:
@@ -11270,7 +11384,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7676150484743321979
 ConfigurableJoint:
@@ -11426,7 +11540,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &1246435070373284793
 ConfigurableJoint:
@@ -11582,7 +11696,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2496519338603399463
 ConfigurableJoint:
@@ -11738,7 +11852,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &2998334192137466948
 ConfigurableJoint:
@@ -11894,7 +12008,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &7391941749486921072
 ConfigurableJoint:
@@ -12050,7 +12164,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &3692625421814429924
 ConfigurableJoint:
@@ -12175,6 +12289,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8802181642431273226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768213085545532908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242153187e046464e9ec27a3c5de3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceInterval:
+    minDuration: 0.5
+    maxDuration: 0.75
+    startCompleted: 0
+  minForce: 75
+  maxForce: 100
 --- !u!1 &8780073940919142690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6983473651706929240, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -12206,7 +12338,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5074994720814213945
 ConfigurableJoint:
@@ -12362,7 +12494,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &3441809032813725358
 ConfigurableJoint:
@@ -12518,7 +12650,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &5073824893066015934
 ConfigurableJoint:
@@ -12674,7 +12806,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!153 &6715206949457805955
 ConfigurableJoint:
