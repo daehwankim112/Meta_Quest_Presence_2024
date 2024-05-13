@@ -1229,19 +1229,19 @@ MonoBehaviour:
   head:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 8460719663156352875}
-    trackingPositionOffset: {x: -0.01, y: 0.15, z: 0}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 0, y: 180, z: 0}
   leftHand:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 9129761953766789678}
-    trackingPositionOffset: {x: -0.00025, y: 0, z: -0.003}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: -192.6, y: -90.4, z: -75.37}
   rightHand:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 837628810219247104}
-    trackingPositionOffset: {x: 0.0005, y: 0, z: -0.003}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 192.6, y: 90.4, z: 75.37}
-  headBodyPositionOffset: {x: -0.33, y: 0, z: -0.29}
+  headBodyPositionOffset: {x: 0, y: -2.05, z: 0}
   headBodyYawOffset: 0
 --- !u!4 &5389205024105585028 stripped
 Transform:

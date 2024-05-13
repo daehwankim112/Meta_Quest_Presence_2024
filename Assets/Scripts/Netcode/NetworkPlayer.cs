@@ -39,7 +39,7 @@ public class NetworkPlayer : NetworkBehaviour
         
         if (IsOwnedByServer)
         {
-            bodyVisual.SetActive(false);
+            //bodyVisual.SetActive(false);
             transform.name = "Host:" + myID;    //this must be the host
             DebugConsole.Log("Host:" + myID);
         }

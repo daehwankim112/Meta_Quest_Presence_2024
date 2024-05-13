@@ -9,7 +9,7 @@ public class VRMap
     public Vector3 trackingRotationOffset;
     public void Map()
     {
-        ikTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
+        ikTarget.position = vrTarget.position + trackingPositionOffset;
         ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
     }
 }
@@ -28,7 +28,7 @@ public class IKTargetFollowVRRig : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.localPosition = headBodyPositionOffset;
+        transform.position = head.vrTarget.position + headBodyPositionOffset;
         float yaw = head.vrTarget.eulerAngles.y;
         transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(transform.eulerAngles.x, yaw, transform.eulerAngles.z),turnSmoothness);
 
