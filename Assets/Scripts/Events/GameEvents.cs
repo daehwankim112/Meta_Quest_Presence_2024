@@ -39,4 +39,7 @@ public static class GameEvents
     
     public static void InvokeLocalPlayerUnGrappled() => OnLocalPlayerUnGrappled?.Invoke();
     public static event Action OnLocalPlayerUnGrappled;
+
+    public static void InvokeCannonRepaired() => OnCannonRepaired?.Invoke();
+    public static event Action OnCannonRepaired;
 }
