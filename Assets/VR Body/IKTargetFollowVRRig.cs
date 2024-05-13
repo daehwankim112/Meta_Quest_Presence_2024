@@ -23,9 +23,7 @@ public class IKTargetFollowVRRig : MonoBehaviour
     public VRMap rightHand;
 
     public Vector3 headBodyPositionOffset;
-    public float headBodyYawOffset;
 
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = head.vrTarget.position + headBodyPositionOffset;

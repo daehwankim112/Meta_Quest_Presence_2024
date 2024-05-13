@@ -410,6 +410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1487730144137659891, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
+      propertyPath: m_Name
+      value: Head._Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487730144137659891, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
@@ -610,7 +615,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 18884228338075901}
+      addedObject: {fileID: 1648466077886524091}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 55d058a417b6be843a8d138a6ad66a7b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5381528693790830524}
     - targetCorrespondingSourceObject: {fileID: -2744125969780551923, guid: 55d058a417b6be843a8d138a6ad66a7b,
         type: 3}
       insertIndex: -1
@@ -2302,6 +2311,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 3168664925629144156}
+  - {fileID: 9052924450097831222}
+  - {fileID: 8182944108362716968}
+  - {fileID: 6764716392420110798}
+  - {fileID: 6385683139685200070}
+  - {fileID: 3916127964756339862}
+  - {fileID: 3341003754758420581}
+  - {fileID: 2847046452814837668}
+  - {fileID: 803675823098546170}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &524615217059978513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7028834577972775835, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3418,6 +3440,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 1809355339834395826}
+  - {fileID: 7724817410695485679}
+  - {fileID: 7342922371625350688}
+  - {fileID: 8032886172636298545}
+  - {fileID: 3070309308707424474}
+  - {fileID: 1637373344111639404}
+  - {fileID: 1344346526791278213}
+  - {fileID: 5232466483045581041}
+  - {fileID: 4498967145191542775}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &1731909895416749413 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9134526910152281071, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -3592,6 +3627,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 447285094824013439}
+  - {fileID: 156955977565863752}
+  - {fileID: 5881840442632703045}
+  - {fileID: 6139612307590332668}
+  - {fileID: 2793129510325173148}
+  - {fileID: 3750372616610139594}
+  - {fileID: 4385246994754148242}
+  - {fileID: 8270791425997204019}
+  - {fileID: 5504397264516957154}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &1975830969595229315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -169115058240790007, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -8173,6 +8221,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 8577463824695171921}
+  - {fileID: 8512715772722236329}
+  - {fileID: 8830221621774110380}
+  - {fileID: 5407759810080113827}
+  - {fileID: 198243297814709383}
+  - {fileID: 7373509563796968413}
+  - {fileID: 98605876980696502}
+  - {fileID: 3328351882360786714}
+  - {fileID: 4004119330244537956}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &5728386533888255240 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6218362504727661694, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -10069,6 +10130,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 8646134574147117279}
+  - {fileID: 2510018147226675984}
+  - {fileID: 4095458336222578486}
+  - {fileID: 8055800560938363489}
+  - {fileID: 8613088547725091743}
+  - {fileID: 9196571385529742291}
+  - {fileID: 1064968708256065515}
+  - {fileID: 5113527596480589175}
+  - {fileID: 7764716203889055457}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &6875414194293774636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5069151280935727194, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -10225,6 +10299,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.04, z: 0.04}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &7009316744652026209 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55d058a417b6be843a8d138a6ad66a7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7407472561196570250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7013506068507791574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8676084006100990372, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -10855,7 +10935,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7407472561196570250}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &18884228338075901
+--- !u!54 &1648466077886524091
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641984996942425051}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5381528693790830524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10864,7 +10971,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7641984996942425051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933ae96d5faaa984baa041eef30e1c53, type: 3}
+  m_Script: {fileID: 11500000, guid: fbcdfea25d543c541ba946d917d79a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turnSmoothness: 0.1
@@ -10883,8 +10990,8 @@ MonoBehaviour:
     ikTarget: {fileID: 1199096179417544627}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 90, y: 0, z: 0}
+  rb: {fileID: 1648466077886524091}
   headBodyPositionOffset: {x: 0, y: -10, z: 0}
-  headBodyYawOffset: 0
 --- !u!1 &7891494995044322790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8410303050929874068, guid: 55d058a417b6be843a8d138a6ad66a7b,
@@ -12307,6 +12414,19 @@ MonoBehaviour:
     startCompleted: 0
   minForce: 75
   maxForce: 100
+  rbsToSolve:
+  - {fileID: 1670295421519373761}
+  - {fileID: 870923658910170866}
+  - {fileID: 868843743136153401}
+  - {fileID: 1016293267017162527}
+  - {fileID: 7457924398740442531}
+  - {fileID: 6917194623383908345}
+  - {fileID: 1951239205829372327}
+  - {fileID: 1316608020149751176}
+  - {fileID: 2545097592025798672}
+  root: {fileID: 7009316744652026209}
+  solverDistance: 30
+  correctionSpeed: 2
 --- !u!1 &8780073940919142690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6983473651706929240, guid: 55d058a417b6be843a8d138a6ad66a7b,
