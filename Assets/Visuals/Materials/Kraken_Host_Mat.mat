@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kraken_Mat
+  m_Name: Kraken_Host_Mat
   m_Shader: {fileID: -6465566751694194690, guid: 74fbe145e1d6a574494ee155d1136fbe,
     type: 3}
   m_Parent: {fileID: 0}
@@ -30,7 +30,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3050
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -52,8 +52,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _MinFadeDistance: 10.02
-    - _QueueControl: 1
-    - _QueueOffset: 0
+    - _QueueControl: 0
+    - _QueueOffset: 50
     - _SomeValue: 1.1
     m_Colors:
     - _Color: {r: 0.6637149, g: 0.503916, b: 0.7169812, a: 1}
