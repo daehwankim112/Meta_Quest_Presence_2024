@@ -25,11 +25,14 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField] float giantInitialScale = 1f;
     
     [SerializeField] LineRenderer grapplingLR;
-    NetworkVariable<Vector3> _grapplingHookEndPos = new();
+
+    NetworkVariable<Vector3> _grapplePos = new();
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        
+        _grapplePos.Initialize(this);
         
         NetworkObject networkObj = GetComponent<NetworkObject>();
         var myID = networkObj.OwnerClientId;
@@ -65,8 +68,8 @@ public class NetworkPlayer : NetworkBehaviour
 
             if (!IsServer)
             {
-                GameEvents.OnLocalPlayerGrappling += SetGrapplePos;
-                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePos;
+                GameEvents.OnLocalPlayerGrappling += SetGrapplePositionServerRpc;
+                GameEvents.OnLocalPlayerUnGrappled += ResetGrapplePositionServerRpc;
             }
         }
     }
@@ -75,21 +78,23 @@ public class NetworkPlayer : NetworkBehaviour
     {
         base.OnNetworkDespawn();
 
-        if (IsOwner && !IsServer)
+        if (!IsServer)
         {
-            GameEvents.OnLocalPlayerGrappling -= SetGrapplePos;
-            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePos;
+            GameEvents.OnLocalPlayerGrappling -= SetGrapplePositionServerRpc;
+            GameEvents.OnLocalPlayerUnGrappled -= ResetGrapplePositionServerRpc;
         }
     }
 
-    void SetGrapplePos(Vector3 pos)
+    [ServerRpc(RequireOwnership = false)]
+    void SetGrapplePositionServerRpc(Vector3 position)
     {
-        _grapplingHookEndPos.Value = pos;
+        _grapplePos.Value = position;
     }
-
-    void ResetGrapplePos()
+    
+    [ServerRpc(RequireOwnership = false)]
+    void ResetGrapplePositionServerRpc()
     {
-        _grapplingHookEndPos.Value = Vector3.zero;
+        _grapplePos.Value = Vector3.zero;
     }
 
     void Update()
@@ -114,15 +119,16 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (IsOwner)
         {
+            Debug.LogError("Local player, disabling lr");
             grapplingLR.enabled = false;
             return;
         }
         
-        if (_grapplingHookEndPos.Value != Vector3.zero)
+        if (_grapplePos.Value != Vector3.zero)
         {
             grapplingLR.enabled = true;
             grapplingLR.SetPosition(0, rightHand.position);
-            grapplingLR.SetPosition(1, _grapplingHookEndPos.Value);
+            grapplingLR.SetPosition(1, _grapplePos.Value);
         }
         else
         {
