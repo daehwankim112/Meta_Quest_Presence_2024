@@ -107,7 +107,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     void ResetGrapplePosition()
     {
-        grapplePoint.position = Vector3.zero;
+        grapplePoint.localPosition = Vector3.zero;
     }
 
     void Update()
@@ -150,12 +150,6 @@ public class NetworkPlayer : NetworkBehaviour
 
     void LateUpdate()
     {
-        if (IsOwner && !IsServer)
-        {
-            grapplingLR.enabled = false;
-            return;
-        }
-
         if (grapplePoint.localPosition != Vector3.zero)
         {
             grapplingLR.enabled = true;
