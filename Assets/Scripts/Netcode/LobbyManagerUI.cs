@@ -25,6 +25,7 @@ public class LobbyManagerUI : MonoBehaviour
     [SerializeField] SoundSO ExitSound;
     [SerializeField] SoundSO hostedSound;
     [SerializeField] SoundSO joinedSound;
+    [SerializeField] MenuWristUI menuWristUI;
 
     List<GameObject> _lobbies = new();
 
@@ -93,15 +94,19 @@ public class LobbyManagerUI : MonoBehaviour
             {
                 if (!NetworkManager.Singleton.IsServer)
                 {
+                    Debug.LogError("Lobby Manager is not server");
                     GameObject lobbyButton = Instantiate(lobbyButtonPrefab, grid.transform);
                     lobbyButton.GetComponent<LobbyButton>().Initialize(lobby);
                     _lobbies.Add(lobbyButton);
+                    menuWristUI.UpdateColledImagesRecursive(_lobbies);
                 }
                 else
                 {
+                    Debug.LogError("Lobby Manager is server");
                     GameObject lobbyInfo = Instantiate(lobbyInfoPrefab, grid.transform);
-                    lobbyInfo.GetComponent<LobbyButton>().Initialize(lobby);
+                    lobbyInfo.GetComponent<LobbyInfo>().Initialize(lobby);
                     _lobbies.Add(lobbyInfo);
+                    menuWristUI.UpdateColledImagesRecursive(_lobbies);
                 }
             }
             
@@ -122,6 +127,7 @@ public class LobbyManagerUI : MonoBehaviour
         }
 
         _lobbies.Clear();
+        menuWristUI.UpdateColledImagesRecursive();
     }
     void PlayHostedSound()
     {

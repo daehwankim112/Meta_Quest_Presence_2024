@@ -11,8 +11,7 @@ public class MenuWristUI : MonoBehaviour
     [SerializeField] float Threshhold = 60f;
     [SerializeField] Transform CentreCamera;
     [SerializeField] Transform Forward;
-    [HideInInspector] public List<Image> images;
-    HashSet<Transform> visitedObjects = new HashSet<Transform>();
+    public List<Image> images;
 
     void Start()
     {
@@ -23,6 +22,7 @@ public class MenuWristUI : MonoBehaviour
     {
         Vector3 DirectionToCamera = VectorUtils.Direction(Forward.position, CentreCamera.position);
         // Debug.LogError("Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
+        UpdateColledImagesRecursive();
         if (Vector3.Angle(Forward.forward, DirectionToCamera) < Threshhold)
         {
             // Debug.LogError("In threshold! Angle: " + Vector3.Angle(Forward.forward, DirectionToCamera));
@@ -54,21 +54,33 @@ public class MenuWristUI : MonoBehaviour
         }
     }
 
+    public void UpdateColledImagesRecursive(List<GameObject> addImage)
+    {
+        images.Clear();
+        foreach (var image in addImage)
+        {
+            images.Add(image.GetComponent<Image>());
+        }
+        CollectImagesRecursive(transform);
+    }
+
+    public void UpdateColledImagesRecursive()
+    {
+        images.Clear();
+        CollectImagesRecursive(transform);
+    }
+
     void CollectImagesRecursive(Transform parent)
     {
-        visitedObjects.Add(parent);
         for (int i = 0; i < parent.childCount; i++)
         {
             Transform child = parent.GetChild(i);
-            if (!visitedObjects.Contains(child))
+            Image imageComponent = child.GetComponent<Image>();
+            if (imageComponent != null)
             {
-                Image imageComponent = child.GetComponent<Image>();
-                if (imageComponent != null)
-                {
-                    images.Add(imageComponent);
-                }
-                CollectImagesRecursive(child);
+                images.Add(imageComponent);
             }
+            CollectImagesRecursive(child);
         }
     }
 }

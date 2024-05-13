@@ -143,10 +143,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7113425682641119867}
-  - component: {fileID: 7810143651824385183}
   - component: {fileID: 2746779235296806563}
   - component: {fileID: 2449344065414411927}
   - component: {fileID: 1574364878632199298}
+  - component: {fileID: 730879647338331200}
   m_Layer: 5
   m_Name: LobbyInfo
   m_TagString: Untagged
@@ -174,19 +174,6 @@ RectTransform:
   m_AnchoredPosition: {x: -54.15442, y: -169.17609}
   m_SizeDelta: {x: -715.6429, y: -751.0423}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7810143651824385183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100633132377838180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c4ca50b2495c34ab08b1db7334a3eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyNameText: {fileID: 8540272042542992279}
 --- !u!222 &2746779235296806563
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -239,3 +226,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 25
   image: {fileID: 2449344065414411927}
+--- !u!114 &730879647338331200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100633132377838180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15b2d0bb7b2d934bae3cab6f961fd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyNameText: {fileID: 8540272042542992279}
