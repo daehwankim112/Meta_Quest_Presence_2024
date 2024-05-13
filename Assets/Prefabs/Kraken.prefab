@@ -371,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 04edfc814cc755f45a6dacc9ab81dd79,
         type: 3}
       propertyPath: m_Name
-      value: Kraken_Host
+      value: Kraken
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 04edfc814cc755f45a6dacc9ab81dd79,
         type: 3}
@@ -425,6 +425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: 04edfc814cc755f45a6dacc9ab81dd79,
         type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: 04edfc814cc755f45a6dacc9ab81dd79,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0eb903ee6d0ac942854ac7f67367d3e, type: 2}
@@ -437,6 +442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234352931384609395, guid: 04edfc814cc755f45a6dacc9ab81dd79,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2234352931384609395, guid: 04edfc814cc755f45a6dacc9ab81dd79,
         type: 3}
@@ -10419,7 +10429,7 @@ MonoBehaviour:
   head:
     vrTarget: {fileID: 0}
     ikTarget: {fileID: 6627144330773566913}
-    trackingPositionOffset: {x: 0, y: -10, z: 0}
+    trackingPositionOffset: {x: 0, y: -20, z: 0}
     trackingRotationOffset: {x: 0, y: 0, z: 0}
   leftHand:
     vrTarget: {fileID: 0}
@@ -10432,7 +10442,7 @@ MonoBehaviour:
     trackingPositionOffset: {x: 0, y: 0, z: 0}
     trackingRotationOffset: {x: 90, y: 0, z: 0}
   rb: {fileID: 8004776417845836436}
-  headBodyPositionOffset: {x: 0, y: -10, z: 0}
+  headBodyPositionOffset: {x: 0, y: -5, z: 0}
 --- !u!1 &7766229203343333282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 920003090384335058, guid: 04edfc814cc755f45a6dacc9ab81dd79,
