@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NuiN.NExtensions;
 using Unity.Netcode;
 using Unity.Services.Core;
 using Unity.Services.Vivox;
+using Unity.Services.Vivox.AudioTaps;
 using UnityEngine;
 
 public class VoiceChat : NetworkBehaviour
@@ -12,8 +14,7 @@ public class VoiceChat : NetworkBehaviour
     
     SimpleTimer _updateInterval = new(0.3f);
     string _channelName;
-
-    bool _initialized;
+    string _name;
 
     public override void OnNetworkSpawn()
     {
@@ -32,9 +33,13 @@ public class VoiceChat : NetworkBehaviour
 
     async void Initialize()
     {
+        while (NetworkConnect.CurrentLobbyCode == string.Empty)
+        {
+            await Task.Yield();
+        }
+        
         await VivoxService.Instance.InitializeAsync();
         Debug.LogError("Vivox Initialized!");
-        _initialized = true;
 
         VivoxService.Instance.LoggedIn += LoggedInHandler;
         VivoxService.Instance.LoggedOut += LoggedOutHandler;
@@ -59,9 +64,10 @@ public class VoiceChat : NetworkBehaviour
 
     async void LoginAsync()
     {
+        _name = "Client_" + OwnerClientId;
         LoginOptions options = new LoginOptions
         {
-            DisplayName = "Client_" + OwnerClientId
+            DisplayName = _name
         };
         await VivoxService.Instance.LoginAsync(options);
         
@@ -81,13 +87,14 @@ public class VoiceChat : NetworkBehaviour
     void UpdatePlayer3DPosition()
     {
         VivoxService.Instance.Set3DPosition(headPos.gameObject, _channelName);
-        Debug.LogError("Transmitting Voice!");
+        Debug.LogError("Transmitting Voice! | " + _channelName);
     }
 
     async void Join3DChannelAsync()
     {
+        Debug.LogError("Vivox Channel: " + _channelName);
         _channelName = NetworkConnect.CurrentLobbyCode;
-
+        
         int audibleDistance = IsHost ? 480 : 32;
         int conversationalDistance = IsHost ? 15 : 1;
         float audioFadeIntensityByDistanceaudio = 1.0f;

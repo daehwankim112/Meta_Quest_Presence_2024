@@ -74,6 +74,7 @@ public class NetworkConnect : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Debug.Log("newJoinCode" + joinCode);
             DebugConsole.Log("newJoinCode" + joinCode);
+            CurrentLobbyCode = joinCode;
             
             DataObject joinCodeDataObj = new DataObject(DataObject.VisibilityOptions.Public, joinCode);
             lobbyOptions.Data.Add("joinCode", joinCodeDataObj);
@@ -82,7 +83,6 @@ public class NetworkConnect : MonoBehaviour
             lobbyOptions.Data.Add("lobbyName", lobbyNameDataObj);
 
             instance.CurrentLobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
-            CurrentLobbyCode = joinCode;
             
             NetworkManager.Singleton.StartHost();
 
