@@ -32,6 +32,7 @@ public class NetworkConnect : MonoBehaviour
     [SerializeField] UnityTransport transport;
 
     public Lobby CurrentLobby { get; private set; }
+    public static string CurrentLobbyCode { get; private set; } 
 
     async void Awake()
     {
@@ -81,6 +82,7 @@ public class NetworkConnect : MonoBehaviour
             lobbyOptions.Data.Add("lobbyName", lobbyNameDataObj);
 
             instance.CurrentLobby = await Lobbies.Instance.CreateLobbyAsync("Lobby Name", instance.maxConnections, lobbyOptions);
+            CurrentLobbyCode = joinCode;
             
             NetworkManager.Singleton.StartHost();
 
@@ -113,6 +115,8 @@ public class NetworkConnect : MonoBehaviour
                 DebugConsole.Success("Client - Connected to the server.");
                 
                 GameEvents.InvokeLobbyJoined();
+                
+                CurrentLobbyCode = relayJoinCode;
             }
         }
         catch (RelayServiceException e)
