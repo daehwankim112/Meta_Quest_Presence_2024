@@ -11,6 +11,7 @@ Library: S:\Unity\GitHub\Meta_Quest_Presence_2024\Temp\BurstOutput\tempburstlibs
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=com.nuin.scriptableharmony;
+--assembly-defines=com.nuin.spleentween;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
@@ -94,6 +95,7 @@ Library: S:\Unity\GitHub\Meta_Quest_Presence_2024\Temp\BurstOutput\tempburstlibs
 --target-framework=NetFramework
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=com.nuin.scriptableharmony;
+--assembly-defines=com.nuin.spleentween;
 --assembly-defines=Meta.XR.Audio;
 --assembly-defines=Meta.XR.BuildingBlocks;
 --assembly-defines=meta.xr.mrutilitykit;
