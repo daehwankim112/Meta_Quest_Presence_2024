@@ -157,8 +157,11 @@
       "version": "https://github.com/NuiN99/Scriptable-Harmony-Package.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "87526dd08a8f9076dace25e004f15995bf6d6416"
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.8",
+        "com.unity.inputsystem": "1.7.0"
+      },
+      "hash": "47c7931c4dab7aa25bb9d6e7111c3ba1dea80dfd"
     },
     "com.nuin.spleentween": {
       "version": "https://github.com/NuiN99/SpleenTween.git",
@@ -474,8 +477,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.6",
-      "depth": 0,
+      "version": "3.0.8",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.ugui": "1.0.0"

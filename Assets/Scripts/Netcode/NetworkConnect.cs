@@ -11,9 +11,10 @@ using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
-using TMPro;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.Services.Vivox;
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using NuiN.ScriptableHarmony.Sound;
@@ -50,6 +51,7 @@ public class NetworkConnect : MonoBehaviour
             DebugConsole.Success("Signed In" + AuthenticationService.Instance.PlayerId);
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        await VivoxService.Instance.InitializeAsync();
     }
 
     public static async void Create(string lobbyName)
