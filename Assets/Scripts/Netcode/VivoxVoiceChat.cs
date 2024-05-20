@@ -18,22 +18,22 @@ public class VivoxVoiceChat : NetworkBehaviour
     ulong clientID;
     string channelName;
 
-    public override void OnNetworkSpawn()
+    void OnEnable()
     {
-        base.OnNetworkSpawn();
         if (IsOwner)
         {
             channel3DProperties = new Channel3DProperties();
-            JoinPositionalChannelAsync();
+            GameEvents.OnLobbyHosted += JoinPositionalChannelAsync;
+            GameEvents.OnLobbyJoined += JoinPositionalChannelAsync;
         }
     }
 
-    public override void OnNetworkDespawn()
+    private void OnDisable()
     {
-        base.OnNetworkDespawn();
         if (IsOwner)
         {
-            LogoutOfVivoxAsync();
+            GameEvents.OnLobbyHosted -= JoinPositionalChannelAsync;
+            GameEvents.OnLobbyJoined -= JoinPositionalChannelAsync;
         }
     }
 
