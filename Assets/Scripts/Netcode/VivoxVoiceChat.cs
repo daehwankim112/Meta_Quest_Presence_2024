@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -54,14 +55,14 @@ public class VivoxVoiceChat : NetworkBehaviour
 
     public async void JoinEchoChannelAsync()
     {
-        channelName = NetworkConnect.instance.CurrentLobby.Name;
+        channelName = NetworkConnect.instance.lobbyCode;
         await VivoxService.Instance.JoinEchoChannelAsync(channelName, ChatCapability.AudioOnly);
         Debug.LogError("VivoxService.Instance.IsLoggedIn: " + VivoxService.Instance.IsLoggedIn);
     }
 
     public async void JoinPositionalChannelAsync()
     {
-        channelName = NetworkConnect.instance.CurrentLobby.Name;
+        channelName = NetworkConnect.instance.lobbyCode;
         Debug.LogError("channel to join: " + channelName.Trim().Replace(" ", ""));
         await VivoxService.Instance.JoinPositionalChannelAsync(channelName.Trim().Replace(" ", ""), ChatCapability.AudioOnly, channel3DProperties);
         Debug.LogError("VivoxService.Instance.IsLoggedIn: " + VivoxService.Instance.IsLoggedIn);
@@ -70,7 +71,7 @@ public class VivoxVoiceChat : NetworkBehaviour
 
     public async void LogoutOfVivoxAsync()
     {
-        channelName = NetworkConnect.instance.CurrentLobby.Name;
+        channelName = NetworkConnect.instance.lobbyCode;
         await VivoxService.Instance.LeaveChannelAsync(channelName.Trim().Replace(" ", ""));
         await VivoxService.Instance.LogoutAsync();
         Debug.LogError("VivoxService signed out: " + channelName);

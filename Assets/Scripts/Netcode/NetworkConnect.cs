@@ -32,6 +32,8 @@ public class NetworkConnect : MonoBehaviour
     [SerializeField] int maxConnections = 20;
     [SerializeField] UnityTransport transport;
 
+    public string lobbyCode;
+
     public Lobby CurrentLobby { get; private set; }
 
     async void Awake()
@@ -88,6 +90,8 @@ public class NetworkConnect : MonoBehaviour
 
             instance.StartCoroutine(UpdateLobby());
 
+            instance.lobbyCode = joinCode;
+
             GameEvents.InvokeLobbyHosted();
         }
         catch (RelayServiceException e)
@@ -113,6 +117,8 @@ public class NetworkConnect : MonoBehaviour
             {
                 Debug.Log("Client - Connected to the server.");
                 DebugConsole.Success("Client - Connected to the server.");
+
+                instance.lobbyCode = relayJoinCode;
                 
                 GameEvents.InvokeLobbyJoined();
             }
